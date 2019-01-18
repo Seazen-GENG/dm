@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.txu.ClassMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.txu.Class">
+        <id column="I_ClassId" property="iClassid" jdbcType="BIGINT"/>
+        <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+        <result column="C_Code" property="cCode" jdbcType="VARCHAR"/>
+        <result column="C_STName" property="cStname" jdbcType="VARCHAR"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_GradeId" property="iGradeid" jdbcType="BIGINT"/>
+        <result column="I_XGradeId" property="iXgradeid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_YearId" property="iYearid" jdbcType="BIGINT"/>
+        <result column="I_StudentNum" property="iStudentnum" jdbcType="INTEGER"/>
+        <result column="I_OrderNo" property="iOrderno" jdbcType="INTEGER"/>
+        <result column="I_RoomId" property="iRoomid" jdbcType="BIGINT"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="I_HeadId" property="iHeadId" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_ClassId, C_Name, C_Code, C_STName, I_SchoolId, I_GradeId, I_XGradeId, I_Type, I_YearId, 
+    I_StudentNum, I_OrderNo, I_RoomId, T_CTime, I_CUserId, T_UTime, I_UUserId, C_Remark, 
+    I_Status
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_xu_class
+        where I_ClassId = #{iClassid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_xu_class
+    where I_ClassId = #{iClassid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.txu.Class">
+    insert into t_xu_class (I_ClassId, C_Name, C_Code, 
+      C_STName, I_SchoolId, I_GradeId, 
+      I_XGradeId, I_Type, I_YearId, 
+      I_StudentNum, I_OrderNo, I_RoomId, 
+      T_CTime, I_CUserId, T_UTime, 
+      I_UUserId, C_Remark, I_Status
+      )
+    values (#{iClassid,jdbcType=BIGINT}, #{cName,jdbcType=VARCHAR}, #{cCode,jdbcType=VARCHAR}, 
+      #{cStname,jdbcType=VARCHAR}, #{iSchoolid,jdbcType=BIGINT}, #{iGradeid,jdbcType=BIGINT}, 
+      #{iXgradeid,jdbcType=BIGINT}, #{iType,jdbcType=TINYINT}, #{iYearid,jdbcType=BIGINT}, 
+      #{iStudentnum,jdbcType=INTEGER}, #{iOrderno,jdbcType=INTEGER}, #{iRoomid,jdbcType=BIGINT}, 
+      #{tCtime,jdbcType=TIMESTAMP}, #{iCuserid,jdbcType=BIGINT}, #{tUtime,jdbcType=TIMESTAMP}, 
+      #{iUuserid,jdbcType=BIGINT}, #{cRemark,jdbcType=VARCHAR}, #{iStatus,jdbcType=TINYINT}
+      )
+  </insert>
+    <insert id="add" parameterType="com.fuhui.entity.txu.Class">
+        insert into t_xu_class
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iClassid != null">
+                I_ClassId,
+            </if>
+            <if test="cName != null">
+                C_Name,
+            </if>
+            <if test="cCode != null">
+                C_Code,
+            </if>
+            <if test="cStname != null">
+                C_STName,
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId,
+            </if>
+            <if test="iGradeid != null">
+                I_GradeId,
+            </if>
+            <if test="iXgradeid != null">
+                I_XGradeId,
+            </if>
+            <if test="iType != null">
+                I_Type,
+            </if>
+            <if test="iYearid != null">
+                I_YearId,
+            </if>
+            <if test="iStudentnum != null">
+                I_StudentNum,
+            </if>
+            <if test="iOrderno != null">
+                I_OrderNo,
+            </if>
+            <if test="iRoomid != null">
+                I_RoomId,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId,
+            </if>
+            <if test="tUtime != null">
+                T_UTime,
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId,
+            </if>
+            <if test="cRemark != null">
+                C_Remark,
+            </if>
+            <if test="iStatus != null">
+                I_Status,
+            </if>
+            <if test="iHeadId != null">
+                I_HeadId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iClassid != null">
+                #{iClassid,jdbcType=BIGINT},
+            </if>
+            <if test="cName != null">
+                #{cName,jdbcType=VARCHAR},
+            </if>
+            <if test="cCode != null">
+                #{cCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cStname != null">
+                #{cStname,jdbcType=VARCHAR},
+            </if>
+            <if test="iSchoolid != null">
+                #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iGradeid != null">
+                #{iGradeid,jdbcType=BIGINT},
+            </if>
+            <if test="iXgradeid != null">
+                #{iXgradeid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="iYearid != null">
+                #{iYearid,jdbcType=BIGINT},
+            </if>
+            <if test="iStudentnum != null">
+                #{iStudentnum,jdbcType=INTEGER},
+            </if>
+            <if test="iOrderno != null">
+                #{iOrderno,jdbcType=INTEGER},
+            </if>
+            <if test="iRoomid != null">
+                #{iRoomid,jdbcType=BIGINT},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="tUtime != null">
+                #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                #{iUuserid,jdbcType=BIGINT},
+            </if>
+            <if test="cRemark != null">
+                #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="iHeadId != null">
+                #{iHeadId,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.fuhui.entity.txu.Class">
+        update t_xu_class
+        <set>
+            <if test="cName != null">
+                C_Name = #{cName,jdbcType=VARCHAR},
+            </if>
+            <if test="cCode != null">
+                C_Code = #{cCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cStname != null">
+                C_STName = #{cStname,jdbcType=VARCHAR},
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iGradeid != null">
+                I_GradeId = #{iGradeid,jdbcType=BIGINT},
+            </if>
+            <if test="iXgradeid != null">
+                I_XGradeId = #{iXgradeid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                I_Type = #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="iYearid != null">
+                I_YearId = #{iYearid,jdbcType=BIGINT},
+            </if>
+            <if test="iStudentnum != null">
+                I_StudentNum = #{iStudentnum,jdbcType=INTEGER},
+            </if>
+            <if test="iOrderno != null">
+                I_OrderNo = #{iOrderno,jdbcType=INTEGER},
+            </if>
+            <if test="iRoomid != null">
+                I_RoomId = #{iRoomid,jdbcType=BIGINT},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId = #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="tUtime != null">
+                T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId = #{iUuserid,jdbcType=BIGINT},
+            </if>
+            <if test="cRemark != null">
+                C_Remark = #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                I_Status = #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="iHeadId != null">
+                I_HeadId = #{iHeadId,jdbcType=TINYINT},
+            </if>
+        </set>
+        where I_ClassId = #{iClassid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.txu.Class">
+    update t_xu_class
+    set C_Name = #{cName,jdbcType=VARCHAR},
+      C_Code = #{cCode,jdbcType=VARCHAR},
+      C_STName = #{cStname,jdbcType=VARCHAR},
+      I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+      I_GradeId = #{iGradeid,jdbcType=BIGINT},
+      I_XGradeId = #{iXgradeid,jdbcType=BIGINT},
+      I_Type = #{iType,jdbcType=TINYINT},
+      I_YearId = #{iYearid,jdbcType=BIGINT},
+      I_StudentNum = #{iStudentnum,jdbcType=INTEGER},
+      I_OrderNo = #{iOrderno,jdbcType=INTEGER},
+      I_RoomId = #{iRoomid,jdbcType=BIGINT},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      C_Remark = #{cRemark,jdbcType=VARCHAR},
+      I_Status = #{iStatus,jdbcType=TINYINT}
+    where I_ClassId = #{iClassid,jdbcType=BIGINT}
+  </update>
+
+    <resultMap id="ResultMap" type="com.fuhui.entity.txu.Class">
+        <id column="I_ClassId" property="iClassid" jdbcType="BIGINT"/>
+        <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+        <result column="I_GradeId" property="iGradeid" jdbcType="BIGINT"/>
+        <result column="T_CTime" property="tCtime" jdbcType="BIGINT"/>
+        <result column="I_XGradeId" property="iXgradeid" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <select id="findByschoolidAndRangIds" resultMap="ResultMap">
+        SELECT I_XGradeId,C_Name,I_GradeId,I_ClassId,T_CTime
+        FROM t_xu_class
+        WHERE 1=1
+        <if test="shoolId != -1">
+            AND I_SchoolId=#{shoolId}
+        </if>
+        <if test="rangIds != null">
+            AND FIND_IN_SET(I_XGradeId , #{rangIds})
+        </if>
+    </select>
+
+    <resultMap id="listMap" type="com.fuhui.entity.txu.Class">
+        <id column="I_ClassId" property="iClassid" jdbcType="BIGINT"/>
+        <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+        <result column="C_Code" property="cCode" jdbcType="VARCHAR"/>
+        <result column="C_STName" property="cStname" jdbcType="VARCHAR"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_GradeId" property="iGradeid" jdbcType="BIGINT"/>
+        <result column="I_XGradeId" property="iXgradeid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_YearId" property="iYearid" jdbcType="BIGINT"/>
+        <result column="I_StudentNum" property="iStudentnum" jdbcType="INTEGER"/>
+        <result column="I_OrderNo" property="iOrderno" jdbcType="INTEGER"/>
+        <result column="I_RoomId" property="iRoomid" jdbcType="BIGINT"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="I_HeadId" property="iHeadId" jdbcType="BIGINT"/>
+        <collection property="grade" javaType="com.fuhui.entity.txu.Grade">
+            <id column="I_XGradeId" property="iXgradeid" jdbcType="BIGINT"/>
+            <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="year" javaType="com.fuhui.entity.txu.Year">
+            <id column="I_YearId" property="iYearid" jdbcType="BIGINT" />
+            <result column="C_Name" property="cName" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+
+    <select id="selectClassList" resultMap="listMap">
+        SELECT a.*,b.C_Name,c.C_Name FROM t_xu_class a,t_xu_grade b,t_xu_year c
+        WHERE 1=1
+        AND a.I_XGradeId = b.I_xGradeId
+        AND a.I_SchoolId = b.I_SchoolId
+        AND a.I_YearId = c.I_YearId
+        AND a.I_SchoolId = c.I_SchoolId
+        <if test="schoolIds != null">
+            AND FIND_IN_SET(a.I_SchoolId,'${schoolIds}')
+        </if>
+        <if test="name != null">
+            AND a.C_Name LIKE '%${name}%'
+        </if>
+        <if test="code != null">
+            AND a.C_Code LIKE '%${code}%'
+        </if>
+        <if test="status != null">
+            AND FIND_IN_SET(a.I_Status,'${status}')
+        </if>
+        <if test="gradeId != null">
+            AND FIND_IN_SET(a.I_GradeId,'${gradeId}')
+        </if>
+        <if test="xGradeId != null">
+            AND FIND_IN_SET(a.I_XGradeId,'${xGradeId}')
+        </if>
+        <if test="yearId != null">
+            AND FIND_IN_SET(a.I_YearId,'${yearId}')
+        </if>
+        <if test="headId != null">
+            AND FIND_IN_SET(a.I_HeadId,'${headId}')
+        </if>
+        <if test="sCTime != null">
+            AND a.T_CTime BETWEEN '${sCTime}'
+        </if>
+        <if test="eCTime != null">
+            AND '${sCTime}'
+        </if>
+        <if test="isPage == 1">
+            LIMIT #{pNum},#{pLine}
+        </if>
+    </select>
+</mapper>

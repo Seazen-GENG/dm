@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.trj.AppRjMapper" >
+  <resultMap id="BaseResultMap" type="com.fuhui.entity.trj.AppRj" >
+    <id column="I_AppId" property="iAppid" jdbcType="BIGINT" />
+    <result column="I_ProductId" property="iProductid" jdbcType="BIGINT" />
+    <result column="C_Name" property="cName" jdbcType="VARCHAR" />
+    <result column="C_Package" property="cPackage" jdbcType="VARCHAR" />
+    <result column="I_Place" property="iPlace" jdbcType="TINYINT" />
+    <result column="C_PlaceRemark" property="cPlaceremark" jdbcType="VARCHAR" />
+    <result column="I_Type" property="iType" jdbcType="TINYINT" />
+    <result column="I_IsFree" property="iIsfree" jdbcType="TINYINT" />
+    <result column="N_Price" property="nPrice" jdbcType="DECIMAL" />
+    <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT" />
+    <result column="T_FRTime" property="tFrtime" jdbcType="TIMESTAMP" />
+    <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP" />
+    <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT" />
+    <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP" />
+    <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT" />
+    <result column="C_Desc" property="cDesc" jdbcType="VARCHAR" />
+    <result column="C_Remark" property="cRemark" jdbcType="VARCHAR" />
+    <result column="I_Status" property="iStatus" jdbcType="TINYINT" />
+    <result column="C_ImgPath" property="cImgpath" jdbcType="VARCHAR" />
+    <result column="I_IsShare" property="iIsshare" jdbcType="TINYINT" />
+    <result column="I_Sort" property="iSort" jdbcType="TINYINT" />
+    <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT" />
+    <result column="C_ShortDesc" property="cShortdesc" jdbcType="VARCHAR" />
+    <result column="I_UserType" property="iUserType" jdbcType="TINYINT" />
+    <!--//-->
+  </resultMap>
+  <sql id="Base_Column_List" >
+    I_AppId, I_ProductId, C_Name, C_Package, I_Place, C_PlaceRemark, I_Type, I_IsFree, 
+    N_Price, I_VersionId, T_FRTime, T_CTime, I_CUserId, T_UTime, I_UUserId, C_Desc, C_Remark, 
+    I_Status, C_ImgPath, I_IsShare, I_Sort, I_SchoolId, C_ShortDesc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_rj_app
+    where I_AppId = #{iAppid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_rj_app
+    where I_AppId = #{iAppid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuhui.entity.trj.AppRj" >
+    insert into t_rj_app (I_AppId, I_ProductId, C_Name, 
+      C_Package, I_Place, C_PlaceRemark, 
+      I_Type, I_IsFree, N_Price, 
+      I_VersionId, T_FRTime, T_CTime, 
+      I_CUserId, T_UTime, I_UUserId, 
+      C_Desc, C_Remark, I_Status, 
+      C_ImgPath, I_IsShare, I_Sort, 
+      I_SchoolId, C_ShortDesc)
+    values (#{iAppid,jdbcType=BIGINT}, #{iProductid,jdbcType=BIGINT}, #{cName,jdbcType=VARCHAR}, 
+      #{cPackage,jdbcType=VARCHAR}, #{iPlace,jdbcType=TINYINT}, #{cPlaceremark,jdbcType=VARCHAR}, 
+      #{iType,jdbcType=TINYINT}, #{iIsfree,jdbcType=TINYINT}, #{nPrice,jdbcType=DECIMAL}, 
+      #{iVersionid,jdbcType=BIGINT}, #{tFrtime,jdbcType=TIMESTAMP}, #{tCtime,jdbcType=TIMESTAMP}, 
+      #{iCuserid,jdbcType=BIGINT}, #{tUtime,jdbcType=TIMESTAMP}, #{iUuserid,jdbcType=BIGINT}, 
+      #{cDesc,jdbcType=VARCHAR}, #{cRemark,jdbcType=VARCHAR}, #{iStatus,jdbcType=TINYINT}, 
+      #{cImgpath,jdbcType=VARCHAR}, #{iIsshare,jdbcType=TINYINT}, #{iSort,jdbcType=TINYINT}, 
+      #{iSchoolid,jdbcType=BIGINT}, #{cShortdesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhui.entity.trj.AppRj" >
+    insert into t_rj_app
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iAppid != null" >
+        I_AppId,
+      </if>
+      <if test="iProductid != null" >
+        I_ProductId,
+      </if>
+      <if test="cName != null" >
+        C_Name,
+      </if>
+      <if test="cPackage != null" >
+        C_Package,
+      </if>
+      <if test="iPlace != null" >
+        I_Place,
+      </if>
+      <if test="cPlaceremark != null" >
+        C_PlaceRemark,
+      </if>
+      <if test="iType != null" >
+        I_Type,
+      </if>
+      <if test="iIsfree != null" >
+        I_IsFree,
+      </if>
+      <if test="nPrice != null" >
+        N_Price,
+      </if>
+      <if test="iVersionid != null" >
+        I_VersionId,
+      </if>
+      <if test="tFrtime != null" >
+        T_FRTime,
+      </if>
+      <if test="tCtime != null" >
+        T_CTime,
+      </if>
+      <if test="iCuserid != null" >
+        I_CUserId,
+      </if>
+      <if test="tUtime != null" >
+        T_UTime,
+      </if>
+      <if test="iUuserid != null" >
+        I_UUserId,
+      </if>
+      <if test="cDesc != null" >
+        C_Desc,
+      </if>
+      <if test="cRemark != null" >
+        C_Remark,
+      </if>
+      <if test="iStatus != null" >
+        I_Status,
+      </if>
+      <if test="cImgpath != null" >
+        C_ImgPath,
+      </if>
+      <if test="iIsshare != null" >
+        I_IsShare,
+      </if>
+      <if test="iSort != null" >
+        I_Sort,
+      </if>
+      <if test="iSchoolid != null" >
+        I_SchoolId,
+      </if>
+      <if test="cShortdesc != null" >
+        C_ShortDesc,
+      </if>
+      <if test="iUserType != null" >
+        I_UserType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iAppid != null" >
+        #{iAppid,jdbcType=BIGINT},
+      </if>
+      <if test="iProductid != null" >
+        #{iProductid,jdbcType=BIGINT},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cPackage != null" >
+        #{cPackage,jdbcType=VARCHAR},
+      </if>
+      <if test="iPlace != null" >
+        #{iPlace,jdbcType=TINYINT},
+      </if>
+      <if test="cPlaceremark != null" >
+        #{cPlaceremark,jdbcType=VARCHAR},
+      </if>
+      <if test="iType != null" >
+        #{iType,jdbcType=TINYINT},
+      </if>
+      <if test="iIsfree != null" >
+        #{iIsfree,jdbcType=TINYINT},
+      </if>
+      <if test="nPrice != null" >
+        #{nPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="iVersionid != null" >
+        #{iVersionid,jdbcType=BIGINT},
+      </if>
+      <if test="tFrtime != null" >
+        #{tFrtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCtime != null" >
+        #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iCuserid != null" >
+        #{iCuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tUtime != null" >
+        #{tUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iUuserid != null" >
+        #{iUuserid,jdbcType=BIGINT},
+      </if>
+      <if test="cDesc != null" >
+        #{cDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cRemark != null" >
+        #{cRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="iStatus != null" >
+        #{iStatus,jdbcType=TINYINT},
+      </if>
+      <if test="cImgpath != null" >
+        #{cImgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="iIsshare != null" >
+        #{iIsshare,jdbcType=TINYINT},
+      </if>
+      <if test="iSort != null" >
+        #{iSort,jdbcType=TINYINT},
+      </if>
+      <if test="iSchoolid != null" >
+        #{iSchoolid,jdbcType=BIGINT},
+      </if>
+      <if test="cShortdesc != null" >
+        #{cShortdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="iUserType != null" >
+        #{iUserType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.trj.AppRj" >
+    update t_rj_app
+    <set >
+      <if test="iProductid != null" >
+        I_ProductId = #{iProductid,jdbcType=BIGINT},
+      </if>
+      <if test="cName != null" >
+        C_Name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cPackage != null" >
+        C_Package = #{cPackage,jdbcType=VARCHAR},
+      </if>
+      <if test="iPlace != null" >
+        I_Place = #{iPlace,jdbcType=TINYINT},
+      </if>
+      <if test="cPlaceremark != null" >
+        C_PlaceRemark = #{cPlaceremark,jdbcType=VARCHAR},
+      </if>
+      <if test="iType != null" >
+        I_Type = #{iType,jdbcType=TINYINT},
+      </if>
+      <if test="iIsfree != null" >
+        I_IsFree = #{iIsfree,jdbcType=TINYINT},
+      </if>
+      <if test="nPrice != null" >
+        N_Price = #{nPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="iVersionid != null" >
+        I_VersionId = #{iVersionid,jdbcType=BIGINT},
+      </if>
+      <if test="tFrtime != null" >
+        T_FRTime = #{tFrtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCtime != null" >
+        T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iCuserid != null" >
+        I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tUtime != null" >
+        T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iUuserid != null" >
+        I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      </if>
+      <if test="cDesc != null" >
+        C_Desc = #{cDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cRemark != null" >
+        C_Remark = #{cRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="iStatus != null" >
+        I_Status = #{iStatus,jdbcType=TINYINT},
+      </if>
+      <if test="cImgpath != null" >
+        C_ImgPath = #{cImgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="iIsshare != null" >
+        I_IsShare = #{iIsshare,jdbcType=TINYINT},
+      </if>
+      <if test="iSort != null" >
+        I_Sort = #{iSort,jdbcType=TINYINT},
+      </if>
+      <if test="iSchoolid != null" >
+        I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+      </if>
+      <if test="cShortdesc != null" >
+        C_ShortDesc = #{cShortdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where I_AppId = #{iAppid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.trj.AppRj" >
+    update t_rj_app
+    set I_ProductId = #{iProductid,jdbcType=BIGINT},
+      C_Name = #{cName,jdbcType=VARCHAR},
+      C_Package = #{cPackage,jdbcType=VARCHAR},
+      I_Place = #{iPlace,jdbcType=TINYINT},
+      C_PlaceRemark = #{cPlaceremark,jdbcType=VARCHAR},
+      I_Type = #{iType,jdbcType=TINYINT},
+      I_IsFree = #{iIsfree,jdbcType=TINYINT},
+      N_Price = #{nPrice,jdbcType=DECIMAL},
+      I_VersionId = #{iVersionid,jdbcType=BIGINT},
+      T_FRTime = #{tFrtime,jdbcType=TIMESTAMP},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      C_Desc = #{cDesc,jdbcType=VARCHAR},
+      C_Remark = #{cRemark,jdbcType=VARCHAR},
+      I_Status = #{iStatus,jdbcType=TINYINT},
+      C_ImgPath = #{cImgpath,jdbcType=VARCHAR},
+      I_IsShare = #{iIsshare,jdbcType=TINYINT},
+      I_Sort = #{iSort,jdbcType=TINYINT},
+      I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+      C_ShortDesc = #{cShortdesc,jdbcType=VARCHAR}
+    where I_AppId = #{iAppid,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAllapp" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_rj_app
+  </select>
+
+
+  <resultMap id="queryResultMap" type="com.fuhui.entity.trj.AppRj" >
+    <id column="I_AppId" property="iAppid" jdbcType="BIGINT" />
+    <result column="I_ProductId" property="iProductid" jdbcType="BIGINT" />
+    <result column="C_Name" property="cName" jdbcType="VARCHAR" />
+    <result column="C_Package" property="cPackage" jdbcType="VARCHAR" />
+    <result column="I_Place" property="iPlace" jdbcType="TINYINT" />
+    <result column="C_PlaceRemark" property="cPlaceremark" jdbcType="VARCHAR" />
+    <result column="I_Type" property="iType" jdbcType="TINYINT" />
+    <result column="I_IsFree" property="iIsfree" jdbcType="TINYINT" />
+    <result column="N_Price" property="nPrice" jdbcType="DECIMAL" />
+    <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT" />
+    <result column="T_FRTime" property="tFrtime" jdbcType="TIMESTAMP" />
+    <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP" />
+    <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT" />
+    <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP" />
+    <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT" />
+    <result column="C_Desc" property="cDesc" jdbcType="VARCHAR" />
+    <result column="C_Remark" property="cRemark" jdbcType="VARCHAR" />
+    <result column="I_Status" property="iStatus" jdbcType="TINYINT" />
+    <result column="C_ImgPath" property="cImgpath" jdbcType="VARCHAR" />
+    <result column="I_IsShare" property="iIsshare" jdbcType="TINYINT" />
+    <result column="I_Sort" property="iSort" jdbcType="TINYINT" />
+    <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT" />
+    <result column="C_ShortDesc" property="cShortdesc" jdbcType="VARCHAR" />
+    <result column="schoolNum" property="schoolNum"  />
+  </resultMap>
+
+  <sql id="query">
+    a.I_AppId,a.C_Name,a.C_Package,a.I_Place,a.I_Type,a.C_Desc,a.I_ProductId,a.C_Remark,a.T_CTime,a.T_UTime,
+    a.I_UUserId,a.I_Status,COUNT(b.I_SchoolId) schoolNum
+  </sql>
+
+  <select id="queryAppList" resultMap="queryResultMap">
+    select
+    <include refid="query"/>
+    FROM t_rj_app a LEFT JOIN t_xu_app b ON a.I_AppId = b.I_AppId WHERE 1=1
+    <if test="appIds != null">
+      AND a.I_AppId = #{appIds}
+    </if>
+    <if test="name != null">
+      AND a.C_Name LIKE '%${name}%'
+    </if>
+    <if test="type != null">
+      AND a.I_Type = #{type}
+    </if>
+    <if test="place != null">
+      AND a.I_Place = #{place}
+    </if>
+    <if test="schoolId != null">
+      AND b.I_SchoolId = #{schoolId}
+    </if>
+    <if test="productId != null">
+      AND a.I_ProductId = #{productId}
+    </if>
+    <if test="sort != null">
+      AND a.I_Sort = #{sort}
+    </if>
+    <if test="sCTime != null">
+      AND a.T_CTime BETWEEN #{sCTime}
+    </if>
+    <if test="eCTime != null">
+      AND #{eCTime}
+    </if>
+     GROUP BY a.I_AppId
+    <if test="isPage == 1">
+      LIMIT #{pNum},#{pLine}
+    </if>
+  </select>
+
+</mapper>

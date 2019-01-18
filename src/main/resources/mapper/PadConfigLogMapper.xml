@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tpd.PadConfigLogMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.tpd.PadConfigLog">
+        <id column="I_LogId" property="iLogid" jdbcType="BIGINT"/>
+        <result column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+        <result column="I_ConfigId" property="iConfigid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="C_Config" property="cConfig" jdbcType="VARCHAR"/>
+        <result column="C_Extend1" property="cExtend1" jdbcType="VARCHAR"/>
+        <result column="T_Time" property="tTime" jdbcType="TIMESTAMP"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_LogId, I_PadId, I_ConfigId, C_Config, C_Extend1, T_Time, T_CTime ,I_Type
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_pd_configlog
+        where I_LogId = #{iLogid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_pd_configlog
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.tpd.PadConfigLog">
+    insert into t_pd_configlog (I_LogId, I_PadId, I_ConfigId, 
+      C_Config, C_Extend1, T_Time, 
+      T_CTime,I_Type)
+    values (#{iLogid,jdbcType=BIGINT}, #{iPadid,jdbcType=BIGINT}, #{iConfigid,jdbcType=BIGINT}, 
+      #{cConfig,jdbcType=VARCHAR}, #{cExtend1,jdbcType=VARCHAR}, #{tTime,jdbcType=TIMESTAMP},
+      #{tCtime,jdbcType=TIMESTAMP},#{iType,jdbcType=TINYINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.tpd.PadConfigLog">
+        insert into t_pd_configlog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iLogid != null">
+                I_LogId,
+            </if>
+            <if test="iPadid != null">
+                I_PadId,
+            </if>
+            <if test="iConfigid != null">
+                I_ConfigId,
+            </if>
+            <if test="cConfig != null">
+                C_Config,
+            </if>
+            <if test="cExtend1 != null">
+                C_Extend1,
+            </if>
+            <if test="tTime != null">
+                T_Time,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+            <if test="iType != null">
+                I_Type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iLogid != null">
+                #{iLogid,jdbcType=BIGINT},
+            </if>
+            <if test="iPadid != null">
+                #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="iConfigid != null">
+                #{iConfigid,jdbcType=BIGINT},
+            </if>
+            <if test="cConfig != null">
+                #{cConfig,jdbcType=VARCHAR},
+            </if>
+            <if test="cExtend1 != null">
+                #{cExtend1,jdbcType=VARCHAR},
+            </if>
+            <if test="tTime != null">
+                #{tTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iType != null">
+                #{iType,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tpd.PadConfigLog">
+        update t_pd_configlog
+        <set>
+            <if test="iPadid != null">
+                I_PadId = #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="iConfigid != null">
+                I_ConfigId = #{iConfigid,jdbcType=BIGINT},
+            </if>
+            <if test="cConfig != null">
+                C_Config = #{cConfig,jdbcType=VARCHAR},
+            </if>
+            <if test="cExtend1 != null">
+                C_Extend1 = #{cExtend1,jdbcType=VARCHAR},
+            </if>
+            <if test="tTime != null">
+                T_Time = #{tTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iType != null">
+                I_Type = #{iType,jdbcType=TINYINT},
+            </if>
+        </set>
+        where I_LogId = #{iLogid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tpd.PadConfigLog">
+    update t_pd_configlog
+    set I_PadId = #{iPadid,jdbcType=BIGINT},
+      I_ConfigId = #{iConfigid,jdbcType=BIGINT},
+      C_Config = #{cConfig,jdbcType=VARCHAR},
+      C_Extend1 = #{cExtend1,jdbcType=VARCHAR},
+      T_Time = #{tTime,jdbcType=TIMESTAMP},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_Type = #{iType,jdbcType=TINYINT}
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </update>
+</mapper>

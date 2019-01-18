@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <context id="prod">
+        <!-- RowBounds pagination -->
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/ZhihuiCloudExtend" userId="root" password="root"/>
+
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://172.16.1.100:3306/TeachingPlatform" userId="root"
+                        password="routon"/>-->
+
+        <javaModelGenerator targetPackage="com.fuhui.entity.twj" targetProject="src/main/java">
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--<sqlMapGenerator targetPackage="cluster" targetProject="src/main/resources/mapper/"/>-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources/"/>
+        <javaClientGenerator targetPackage="com.fuhui.dao.twj" targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <table schema="general" tableName="t_wj_file" domainObjectName="WjFile"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+        </table>
+
+        <table schema="general" tableName="t_wj_userfile" domainObjectName="WjUserFile"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+        </table>
+
+    </context>
+</generatorConfiguration>

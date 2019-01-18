@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tpd.PadBangDingLogMapper" >
+  <resultMap id="BaseResultMap" type="com.fuhui.entity.tpd.PadBangDingLog" >
+    <id column="I_LogId" property="iLogid" jdbcType="BIGINT" />
+    <result column="I_PadId" property="iPadid" jdbcType="BIGINT" />
+    <result column="I_Type" property="iType" jdbcType="TINYINT" />
+    <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT" />
+    <result column="I_UType" property="iUtype" jdbcType="TINYINT" />
+    <result column="I_UserId" property="iUserid" jdbcType="BIGINT" />
+    <result column="I_GradeId" property="iGradeid" jdbcType="BIGINT" />
+    <result column="I_ClassId" property="iClassid" jdbcType="BIGINT" />
+    <result column="I_UPlace" property="iUplace" jdbcType="TINYINT" />
+    <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT" />
+    <result column="T_Time" property="tTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    I_LogId, I_PadId, I_Type, I_SchoolId, I_UType, I_UserId, I_GradeId, I_ClassId, I_UPlace, 
+    I_UUserId, T_Time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_pd_bingdinglog
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_pd_bingdinglog
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuhui.entity.tpd.PadBangDingLog" >
+    insert into t_pd_bingdinglog (I_LogId, I_PadId, I_Type, 
+      I_SchoolId, I_UType, I_UserId, 
+      I_GradeId, I_ClassId, I_UPlace, 
+      I_UUserId, T_Time)
+    values (#{iLogid,jdbcType=BIGINT}, #{iPadid,jdbcType=BIGINT}, #{iType,jdbcType=TINYINT}, 
+      #{iSchoolid,jdbcType=BIGINT}, #{iUtype,jdbcType=TINYINT}, #{iUserid,jdbcType=BIGINT}, 
+      #{iGradeid,jdbcType=BIGINT}, #{iClassid,jdbcType=BIGINT}, #{iUplace,jdbcType=TINYINT}, 
+      #{iUuserid,jdbcType=BIGINT}, #{tTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhui.entity.tpd.PadBangDingLog" >
+    insert into t_pd_bingdinglog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iLogid != null" >
+        I_LogId,
+      </if>
+      <if test="iPadid != null" >
+        I_PadId,
+      </if>
+      <if test="iType != null" >
+        I_Type,
+      </if>
+      <if test="iSchoolid != null" >
+        I_SchoolId,
+      </if>
+      <if test="iUtype != null" >
+        I_UType,
+      </if>
+      <if test="iUserid != null" >
+        I_UserId,
+      </if>
+      <if test="iGradeid != null" >
+        I_GradeId,
+      </if>
+      <if test="iClassid != null" >
+        I_ClassId,
+      </if>
+      <if test="iUplace != null" >
+        I_UPlace,
+      </if>
+      <if test="iUuserid != null" >
+        I_UUserId,
+      </if>
+      <if test="tTime != null" >
+        T_Time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iLogid != null" >
+        #{iLogid,jdbcType=BIGINT},
+      </if>
+      <if test="iPadid != null" >
+        #{iPadid,jdbcType=BIGINT},
+      </if>
+      <if test="iType != null" >
+        #{iType,jdbcType=TINYINT},
+      </if>
+      <if test="iSchoolid != null" >
+        #{iSchoolid,jdbcType=BIGINT},
+      </if>
+      <if test="iUtype != null" >
+        #{iUtype,jdbcType=TINYINT},
+      </if>
+      <if test="iUserid != null" >
+        #{iUserid,jdbcType=BIGINT},
+      </if>
+      <if test="iGradeid != null" >
+        #{iGradeid,jdbcType=BIGINT},
+      </if>
+      <if test="iClassid != null" >
+        #{iClassid,jdbcType=BIGINT},
+      </if>
+      <if test="iUplace != null" >
+        #{iUplace,jdbcType=TINYINT},
+      </if>
+      <if test="iUuserid != null" >
+        #{iUuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tTime != null" >
+        #{tTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tpd.PadBangDingLog" >
+    update t_pd_bingdinglog
+    <set >
+      <if test="iPadid != null" >
+        I_PadId = #{iPadid,jdbcType=BIGINT},
+      </if>
+      <if test="iType != null" >
+        I_Type = #{iType,jdbcType=TINYINT},
+      </if>
+      <if test="iSchoolid != null" >
+        I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+      </if>
+      <if test="iUtype != null" >
+        I_UType = #{iUtype,jdbcType=TINYINT},
+      </if>
+      <if test="iUserid != null" >
+        I_UserId = #{iUserid,jdbcType=BIGINT},
+      </if>
+      <if test="iGradeid != null" >
+        I_GradeId = #{iGradeid,jdbcType=BIGINT},
+      </if>
+      <if test="iClassid != null" >
+        I_ClassId = #{iClassid,jdbcType=BIGINT},
+      </if>
+      <if test="iUplace != null" >
+        I_UPlace = #{iUplace,jdbcType=TINYINT},
+      </if>
+      <if test="iUuserid != null" >
+        I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tTime != null" >
+        T_Time = #{tTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tpd.PadBangDingLog" >
+    update t_pd_bingdinglog
+    set I_PadId = #{iPadid,jdbcType=BIGINT},
+      I_Type = #{iType,jdbcType=TINYINT},
+      I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+      I_UType = #{iUtype,jdbcType=TINYINT},
+      I_UserId = #{iUserid,jdbcType=BIGINT},
+      I_GradeId = #{iGradeid,jdbcType=BIGINT},
+      I_ClassId = #{iClassid,jdbcType=BIGINT},
+      I_UPlace = #{iUplace,jdbcType=TINYINT},
+      I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      T_Time = #{tTime,jdbcType=TIMESTAMP}
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </update>
+
+  <insert id="insertList" parameterType="java.util.List">
+      insert into t_pd_bingdinglog (I_LogId, I_PadId, I_Type,
+      I_SchoolId, I_UType, I_UserId,
+      I_GradeId, I_ClassId, I_UPlace,
+      I_UUserId, T_Time)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.iLogid,jdbcType=BIGINT}, #{item.iPadid,jdbcType=BIGINT}, #{item.iType,jdbcType=TINYINT},
+      #{item.iSchoolid,jdbcType=BIGINT}, #{item.iUtype,jdbcType=TINYINT}, #{item.iUserid,jdbcType=BIGINT},
+      #{item.iGradeid,jdbcType=BIGINT}, #{item.iClassid,jdbcType=BIGINT}, #{item.iUplace,jdbcType=TINYINT},
+      #{item.iUuserid,jdbcType=BIGINT}, #{item.tTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+</mapper>

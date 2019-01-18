@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.twj.WjFileMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.twj.WjFile">
+        <id column="I_FileId" property="iFileid" jdbcType="BIGINT"/>
+        <result column="C_Type" property="cType" jdbcType="CHAR"/>
+        <result column="C_Path" property="cPath" jdbcType="VARCHAR"/>
+        <result column="C_MD5" property="cMd5" jdbcType="CHAR"/>
+        <result column="I_Size" property="iSize" jdbcType="BIGINT"/>
+        <result column="C_ImgPath" property="cImgpath" jdbcType="VARCHAR"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CPlace" property="iCplace" jdbcType="TINYINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_FileId, C_Type, C_Path, C_MD5, I_Size, C_ImgPath, T_CTime, I_CPlace, C_Remark, 
+    I_Status
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_wj_file
+        where I_FileId = #{iFileid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_wj_file
+    where I_FileId = #{iFileid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.twj.WjFile">
+    insert into t_wj_file (I_FileId, C_Type, C_Path, 
+      C_MD5, I_Size, C_ImgPath, 
+      T_CTime, I_CPlace, C_Remark, 
+      I_Status)
+    values (#{iFileid,jdbcType=BIGINT}, #{cType,jdbcType=CHAR}, #{cPath,jdbcType=VARCHAR}, 
+      #{cMd5,jdbcType=CHAR}, #{iSize,jdbcType=BIGINT}, #{cImgpath,jdbcType=VARCHAR}, 
+      #{tCtime,jdbcType=TIMESTAMP}, #{iCplace,jdbcType=TINYINT}, #{cRemark,jdbcType=VARCHAR}, 
+      #{iStatus,jdbcType=TINYINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.twj.WjFile">
+        insert into t_wj_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iFileid != null">
+                I_FileId,
+            </if>
+            <if test="cType != null">
+                C_Type,
+            </if>
+            <if test="cPath != null">
+                C_Path,
+            </if>
+            <if test="cMd5 != null">
+                C_MD5,
+            </if>
+            <if test="iSize != null">
+                I_Size,
+            </if>
+            <if test="cImgpath != null">
+                C_ImgPath,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+            <if test="iCplace != null">
+                I_CPlace,
+            </if>
+            <if test="cRemark != null">
+                C_Remark,
+            </if>
+            <if test="iStatus != null">
+                I_Status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iFileid != null">
+                #{iFileid,jdbcType=BIGINT},
+            </if>
+            <if test="cType != null">
+                #{cType,jdbcType=CHAR},
+            </if>
+            <if test="cPath != null">
+                #{cPath,jdbcType=VARCHAR},
+            </if>
+            <if test="cMd5 != null">
+                #{cMd5,jdbcType=CHAR},
+            </if>
+            <if test="iSize != null">
+                #{iSize,jdbcType=BIGINT},
+            </if>
+            <if test="cImgpath != null">
+                #{cImgpath,jdbcType=VARCHAR},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCplace != null">
+                #{iCplace,jdbcType=TINYINT},
+            </if>
+            <if test="cRemark != null">
+                #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                #{iStatus,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.twj.WjFile">
+        update t_wj_file
+        <set>
+            <if test="cType != null">
+                C_Type = #{cType,jdbcType=CHAR},
+            </if>
+            <if test="cPath != null">
+                C_Path = #{cPath,jdbcType=VARCHAR},
+            </if>
+            <if test="cMd5 != null">
+                C_MD5 = #{cMd5,jdbcType=CHAR},
+            </if>
+            <if test="iSize != null">
+                I_Size = #{iSize,jdbcType=BIGINT},
+            </if>
+            <if test="cImgpath != null">
+                C_ImgPath = #{cImgpath,jdbcType=VARCHAR},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCplace != null">
+                I_CPlace = #{iCplace,jdbcType=TINYINT},
+            </if>
+            <if test="cRemark != null">
+                C_Remark = #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                I_Status = #{iStatus,jdbcType=TINYINT},
+            </if>
+        </set>
+        where I_FileId = #{iFileid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.twj.WjFile">
+    update t_wj_file
+    set C_Type = #{cType,jdbcType=CHAR},
+      C_Path = #{cPath,jdbcType=VARCHAR},
+      C_MD5 = #{cMd5,jdbcType=CHAR},
+      I_Size = #{iSize,jdbcType=BIGINT},
+      C_ImgPath = #{cImgpath,jdbcType=VARCHAR},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_CPlace = #{iCplace,jdbcType=TINYINT},
+      C_Remark = #{cRemark,jdbcType=VARCHAR},
+      I_Status = #{iStatus,jdbcType=TINYINT}
+    where I_FileId = #{iFileid,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectFileByMd5" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        FROM t_wj_file
+        WHERE C_MD5=#{md5}
+    </select>
+</mapper>

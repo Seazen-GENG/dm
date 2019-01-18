@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tcs.FversionReleaseMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.tcs.FversionRelease">
+        <id column="I_ReleaseId" property="iReleaseid" jdbcType="BIGINT"/>
+        <result column="I_FDeviceId" property="iFdeviceid" jdbcType="BIGINT"/>
+        <result column="I_FVersionId" property="iFversionid" jdbcType="BIGINT"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_Range" property="iRange" jdbcType="TINYINT"/>
+        <result column="C_RangeIds" property="cRangeids" jdbcType="VARCHAR"/>
+        <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+        <result column="T_ReleaseTime" property="tReleasetime" jdbcType="TIMESTAMP"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_ReleaseId, I_FDeviceId, I_FVersionId, I_SchoolId, I_Range, C_RangeIds, C_DownUrl, 
+    T_ReleaseTime, T_CTime, I_CUserId, C_Remark, I_Status
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_cs_fversionrelease
+        where I_ReleaseId = #{iReleaseid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_cs_fversionrelease
+    where I_ReleaseId = #{iReleaseid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.tcs.FversionRelease">
+    insert into t_cs_fversionrelease (I_ReleaseId, I_FDeviceId, I_FVersionId, 
+      I_SchoolId, I_Range, C_RangeIds, 
+      C_DownUrl, T_ReleaseTime, T_CTime, 
+      I_CUserId, C_Remark, I_Status
+      )
+    values (#{iReleaseid,jdbcType=BIGINT}, #{iFdeviceid,jdbcType=BIGINT}, #{iFversionid,jdbcType=BIGINT}, 
+      #{iSchoolid,jdbcType=BIGINT}, #{iRange,jdbcType=TINYINT}, #{cRangeids,jdbcType=VARCHAR}, 
+      #{cDownurl,jdbcType=VARCHAR}, #{tReleasetime,jdbcType=TIMESTAMP}, #{tCtime,jdbcType=TIMESTAMP}, 
+      #{iCuserid,jdbcType=BIGINT}, #{cRemark,jdbcType=VARCHAR}, #{iStatus,jdbcType=TINYINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.tcs.FversionRelease">
+        insert into t_cs_fversionrelease
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iReleaseid != null">
+                I_ReleaseId,
+            </if>
+            <if test="iFdeviceid != null">
+                I_FDeviceId,
+            </if>
+            <if test="iFversionid != null">
+                I_FVersionId,
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId,
+            </if>
+            <if test="iRange != null">
+                I_Range,
+            </if>
+            <if test="cRangeids != null">
+                C_RangeIds,
+            </if>
+            <if test="cDownurl != null">
+                C_DownUrl,
+            </if>
+            <if test="tReleasetime != null">
+                T_ReleaseTime,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId,
+            </if>
+            <if test="cRemark != null">
+                C_Remark,
+            </if>
+            <if test="iStatus != null">
+                I_Status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iReleaseid != null">
+                #{iReleaseid,jdbcType=BIGINT},
+            </if>
+            <if test="iFdeviceid != null">
+                #{iFdeviceid,jdbcType=BIGINT},
+            </if>
+            <if test="iFversionid != null">
+                #{iFversionid,jdbcType=BIGINT},
+            </if>
+            <if test="iSchoolid != null">
+                #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iRange != null">
+                #{iRange,jdbcType=TINYINT},
+            </if>
+            <if test="cRangeids != null">
+                #{cRangeids,jdbcType=VARCHAR},
+            </if>
+            <if test="cDownurl != null">
+                #{cDownurl,jdbcType=VARCHAR},
+            </if>
+            <if test="tReleasetime != null">
+                #{tReleasetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="cRemark != null">
+                #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                #{iStatus,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tcs.FversionRelease">
+        update t_cs_fversionrelease
+        <set>
+            <if test="iFdeviceid != null">
+                I_FDeviceId = #{iFdeviceid,jdbcType=BIGINT},
+            </if>
+            <if test="iFversionid != null">
+                I_FVersionId = #{iFversionid,jdbcType=BIGINT},
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iRange != null">
+                I_Range = #{iRange,jdbcType=TINYINT},
+            </if>
+            <if test="cRangeids != null">
+                C_RangeIds = #{cRangeids,jdbcType=VARCHAR},
+            </if>
+            <if test="cDownurl != null">
+                C_DownUrl = #{cDownurl,jdbcType=VARCHAR},
+            </if>
+            <if test="tReleasetime != null">
+                T_ReleaseTime = #{tReleasetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId = #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="cRemark != null">
+                C_Remark = #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                I_Status = #{iStatus,jdbcType=TINYINT},
+            </if>
+        </set>
+        where I_ReleaseId = #{iReleaseid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tcs.FversionRelease">
+    update t_cs_fversionrelease
+    set I_FDeviceId = #{iFdeviceid,jdbcType=BIGINT},
+      I_FVersionId = #{iFversionid,jdbcType=BIGINT},
+      I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+      I_Range = #{iRange,jdbcType=TINYINT},
+      C_RangeIds = #{cRangeids,jdbcType=VARCHAR},
+      C_DownUrl = #{cDownurl,jdbcType=VARCHAR},
+      T_ReleaseTime = #{tReleasetime,jdbcType=TIMESTAMP},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      C_Remark = #{cRemark,jdbcType=VARCHAR},
+      I_Status = #{iStatus,jdbcType=TINYINT}
+    where I_ReleaseId = #{iReleaseid,jdbcType=BIGINT}
+  </update>
+
+    <insert id="insertList" parameterType="java.util.List">
+        insert into t_cs_fversionrelease (I_ReleaseId, I_FDeviceId, I_FVersionId,
+        I_SchoolId, I_Range, C_RangeIds,
+        C_DownUrl, T_ReleaseTime, T_CTime,
+        I_CUserId, C_Remark, I_Status
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{iReleaseid,jdbcType=BIGINT}, #{iFdeviceid,jdbcType=BIGINT}, #{iFversionid,jdbcType=BIGINT},
+            #{iSchoolid,jdbcType=BIGINT}, #{iRange,jdbcType=TINYINT}, #{cRangeids,jdbcType=VARCHAR},
+            #{cDownurl,jdbcType=VARCHAR}, #{tReleasetime,jdbcType=TIMESTAMP}, #{tCtime,jdbcType=TIMESTAMP},
+            #{iCuserid,jdbcType=BIGINT}, #{cRemark,jdbcType=VARCHAR}, #{iStatus,jdbcType=TINYINT}
+            )
+        </foreach>
+    </insert>
+</mapper>

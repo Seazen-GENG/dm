@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.model.DeviceListMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.model.DeviceList">
+        <result column="devId" property="devId" jdbcType="BIGINT"/>
+        <result column="releaseId" property="releaseId" jdbcType="BIGINT"/>
+        <result column="factoryId" property="factoryId" jdbcType="BIGINT"/>
+        <result column="versionId" property="versionId" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="verName" property="verName" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="model" property="model" jdbcType="VARCHAR"/>
+        <result column="version" property="version" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="releaseTime" property="releaseTime" jdbcType="TIMESTAMP"/>
+        <result column="spec" property="spec" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="baseSql">
+        a.I_FDeviceId devId,b.I_ReleaseId releaseId,c.I_FactoryId factoryId,d.I_FVersionId versionId,a.C_Name name,
+        c.C_Name verName,a.I_DType type,a.C_Model model,d.C_Version version,DATE_FORMAT(d.T_ReleaseTime,'%Y-%m-%d %H:%i:%s') releaseTime,a.I_Status status,
+        a.C_Spec spec
+    </sql>
+
+    <select id="selectListByParam" resultMap="BaseResultMap">
+        SELECT
+        <include refid="baseSql"/>
+        FROM t_cs_device a
+        LEFT JOIN (
+        SELECT t.* FROM t_cs_fversionrelease t,t_cs_device t1
+        WHERE t.I_FDeviceId = t1.I_FDeviceId
+        ORDER BY t.T_ReleaseTime DESC
+        LIMIT 0,1
+        ) b
+        ON a.I_FDeviceId = b.I_FDeviceId
+        LEFT JOIN t_cs_factory c
+        ON a.I_FactoryId = c.I_FactoryId
+        LEFT JOIN t_cs_device_fversion  d
+        ON a.I_FVersionId = d.I_FVersionId
+        WHERE 1=1
+        <if test="schoolId != null">
+            AND b.I_SchoolId = #{schoolId}
+        </if>
+        <if test="factoryIds != null">
+            AND FIND_IN_SET(c.I_FactoryId,'${factoryIds}')
+        </if>
+        <if test="name != null">
+            AND a.C_Name = '%${name}%'
+        </if>
+        <if test="model != null">
+            AND a.C_Model = '%${model}%'
+        </if>
+        <if test="deviceType != null">
+            AND FIND_IN_SET(a.I_DType,'${deviceType}')
+        </if>
+        <if test="status != null">
+            AND a.I_Status = #{status}
+        </if>
+        ORDER BY a.T_UTime DESC
+        <if test="isPage == 1">
+            LIMIT #{pNum},#{pLine}
+        </if>
+    </select>
+
+    <select id="selectListByParamCount" resultType="String">
+        SELECT
+        COUNT(*)
+        FROM t_cs_device a
+        LEFT JOIN (
+        SELECT t.* FROM t_cs_fversionrelease t,t_cs_device t1
+        WHERE t.I_FDeviceId = t1.I_FDeviceId
+        ORDER BY t.T_ReleaseTime DESC
+        LIMIT 0,1
+        ) b
+        ON a.I_FDeviceId = b.I_FDeviceId
+        LEFT JOIN t_cs_factory c
+        ON a.I_FactoryId = c.I_FactoryId
+        LEFT JOIN t_cs_device_fversion d
+        ON a.I_FVersionId = d.I_FVersionId
+        WHERE 1=1
+        <if test="schoolId != null">
+            AND b.I_SchoolId = #{schoolId}
+        </if>
+        <if test="factoryIds != null">
+            AND FIND_IN_SET(c.I_FactoryId,'${factoryIds}')
+        </if>
+        <if test="name != null">
+            AND a.C_Name = '%${name}%'
+        </if>
+        <if test="model != null">
+            AND a.C_Model = '%${model}%'
+        </if>
+        <if test="deviceType != null">
+            AND FIND_IN_SET(a.I_DType,'${deviceType}')
+        </if>
+        <if test="status != null">
+            AND a.I_Status = #{status}
+        </if>
+    </select>
+
+</mapper>

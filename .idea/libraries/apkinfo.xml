@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="apkinfo">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/apkinfo.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

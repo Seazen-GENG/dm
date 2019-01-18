@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fast_dfs文件上传</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        .table > tbody > tr > td {
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .content {
+            padding-bottom: 0px;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header" id="headerDiv">
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" id="leftMenu">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                应用管理
+                <small>管理学生平板应用的安装、卸载</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+                <li><a href="#">平板管理</a></li>
+                <li class="active">应用管理</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header" style="padding-bottom: 0px;">
+                            <!--
+                             <h3 class="box-title">Hover Data Table</h3>
+                             -->
+                            <div class="box-header with-border">
+                                <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;"
+                                        onclick="uploadFile()"
+                                        id="butts">
+                                    启用
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form id="from" class="form-horizontal"><!--method="POST" enctype="multipart/form-data"-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">选择文件</label>
+                                    <div class="col-sm-10">
+                                        <input type="file" name="file" id="file" onchange="fileSelected()"/>
+                                        <div id="fileName"></div>
+                                        <div id="fileSize"></div>
+                                        <div id="fileType"></div>
+                                        <div>上传进度：<span id="progressNumber">未开始</span></div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">回传地址</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control  input-lg" id="path"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">apk包名</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control  input-lg" id="package"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">apk版本号</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control  input-lg" id="versionName"
+                                               readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">apk版本编号</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control  input-lg" id="versionCode"
+                                               readonly>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" id="footerDiv">
+    </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+    $(function () {
+        $('#leftMenu').load("leftMenu.html");
+        $('#headerDiv').load("header.html");
+        $('#footerDiv').load("footer.html");
+
+    });
+
+    function fileSelected() {
+        var file = document.getElementById('file').files[0];
+        if (file) {
+            var fileSize = 0;
+            if (file.size > 1024 * 1024) {
+                fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+            } else {
+                fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+            }
+            document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
+            document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
+            document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
+        }
+    }
+
+    function uploadFile() {
+        var fd = new FormData();
+        fd.append("file", document.getElementById('file').files[0]);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", uploadProgress, false);
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.addEventListener("error", uploadFailed, false);
+        xhr.addEventListener("abort", uploadCanceled, false);
+        xhr.open("POST", "/file/upload");
+        xhr.send(fd);
+    }
+
+    function uploadProgress(evt) {
+        if (evt.lengthComputable) {
+            var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+            document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
+        }
+        else {
+            document.getElementById('progressNumber').innerHTML = '无法计算';
+        }
+    }
+
+    function uploadComplete(evt) {
+        /* 当服务器响应后，这个事件就会被触发 */
+        //alert(evt.target.responseText);
+        console.log("回调==" + evt.target.responseText);
+        var result = JSON.parse(evt.target.responseText);
+        if (result.status == 1) {
+            $("#package").val(result.data.package);
+            $("#versionName").val(result.data.versionName);
+            $("#versionCode").val(result.data.versionCode);
+            $("#path").val(result.data.filePath);
+            alert("上传成功!");
+            document.getElementById('progressNumber').innerHTML = "已完成！";
+        } else {
+            alert("上传失败!");
+            document.getElementById('progressNumber').innerHTML = "上传失败！";
+        }
+    }
+
+    function uploadFailed(evt) {
+        alert("上传文件发生了错误尝试");
+    }
+
+    function uploadCanceled(evt) {
+        alert("上传被用户取消或者浏览器断开连接");
+    }
+</script>
+</body>
+</html>

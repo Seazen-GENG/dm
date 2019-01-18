@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.trj.AppVersionMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.trj.AppVersion">
+        <id column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="C_Version" property="cVersion" jdbcType="VARCHAR"/>
+        <result column="C_VersionRemark" property="cVersionremark" jdbcType="VARCHAR"/>
+        <result column="I_IsCompel" property="iIscompel" jdbcType="TINYINT"/>
+        <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+        <result column="T_ReleaseTime" property="tReleasetime" jdbcType="TIMESTAMP"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_RTime" property="tRtime" jdbcType="TIMESTAMP"/>
+        <result column="I_RUserId" property="iRuserid" jdbcType="BIGINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="C_VersionCode" property="cVersionCode" jdbcType="VARCHAR"/>
+        <result column="I_IsReview" property="isReview" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_VersionId, I_AppId, C_Version, C_VersionRemark, I_IsCompel, C_DownUrl, T_ReleaseTime, 
+    T_CTime, I_CUserId, T_RTime, I_RUserId, C_Remark, I_Status,C_VersionCode,I_IsReview
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_rj_app_version
+        where I_VersionId = #{iVersionid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_rj_app_version
+    where I_VersionId = #{iVersionid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.trj.AppVersion">
+    insert into t_rj_app_version (I_VersionId, I_AppId, C_Version, 
+      C_VersionRemark, I_IsCompel, C_DownUrl, 
+      T_ReleaseTime, T_CTime, I_CUserId, 
+      T_RTime, I_RUserId, C_Remark, 
+      I_Status,C_VersionCode,I_IsReview)
+    values (#{iVersionid,jdbcType=BIGINT}, #{iAppid,jdbcType=BIGINT}, #{cVersion,jdbcType=VARCHAR}, 
+      #{cVersionremark,jdbcType=VARCHAR}, #{iIscompel,jdbcType=TINYINT}, #{cDownurl,jdbcType=VARCHAR}, 
+      #{tReleasetime,jdbcType=TIMESTAMP}, #{tCtime,jdbcType=TIMESTAMP}, #{iCuserid,jdbcType=BIGINT}, 
+      #{tRtime,jdbcType=TIMESTAMP}, #{iRuserid,jdbcType=BIGINT}, #{cRemark,jdbcType=VARCHAR}, 
+      #{iStatus,jdbcType=TINYINT},#{cVersionCode,jdbcType=VARCHAR},#{isReview,jdbcType=TINYINT)
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.trj.AppVersion">
+        insert into t_rj_app_version
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iVersionid != null">
+                I_VersionId,
+            </if>
+            <if test="iAppid != null">
+                I_AppId,
+            </if>
+            <if test="cVersion != null">
+                C_Version,
+            </if>
+            <if test="cVersionremark != null">
+                C_VersionRemark,
+            </if>
+            <if test="iIscompel != null">
+                I_IsCompel,
+            </if>
+            <if test="cDownurl != null">
+                C_DownUrl,
+            </if>
+            <if test="tReleasetime != null">
+                T_ReleaseTime,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId,
+            </if>
+            <if test="tRtime != null">
+                T_RTime,
+            </if>
+            <if test="iRuserid != null">
+                I_RUserId,
+            </if>
+            <if test="cRemark != null">
+                C_Remark,
+            </if>
+            <if test="iStatus != null">
+                I_Status,
+            </if>
+            <if test="cVersionCode != null">
+                C_VersionCode,
+            </if>
+            <if test="isReview != null">
+                I_IsReview,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iVersionid != null">
+                #{iVersionid,jdbcType=BIGINT},
+            </if>
+            <if test="iAppid != null">
+                #{iAppid,jdbcType=BIGINT},
+            </if>
+            <if test="cVersion != null">
+                #{cVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="cVersionremark != null">
+                #{cVersionremark,jdbcType=VARCHAR},
+            </if>
+            <if test="iIscompel != null">
+                #{iIscompel,jdbcType=TINYINT},
+            </if>
+            <if test="cDownurl != null">
+                #{cDownurl,jdbcType=VARCHAR},
+            </if>
+            <if test="tReleasetime != null">
+                #{tReleasetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="tRtime != null">
+                #{tRtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iRuserid != null">
+                #{iRuserid,jdbcType=BIGINT},
+            </if>
+            <if test="cRemark != null">
+                #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="cVersionCode != null">
+                #{cVersionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="isReview != null">
+                #{isReview,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.trj.AppVersion">
+        update t_rj_app_version
+        <set>
+            <if test="iAppid != null">
+                I_AppId = #{iAppid,jdbcType=BIGINT},
+            </if>
+            <if test="cVersion != null">
+                C_Version = #{cVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="cVersionremark != null">
+                C_VersionRemark = #{cVersionremark,jdbcType=VARCHAR},
+            </if>
+            <if test="iIscompel != null">
+                I_IsCompel = #{iIscompel,jdbcType=TINYINT},
+            </if>
+            <if test="cDownurl != null">
+                C_DownUrl = #{cDownurl,jdbcType=VARCHAR},
+            </if>
+            <if test="tReleasetime != null">
+                T_ReleaseTime = #{tReleasetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId = #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="tRtime != null">
+                T_RTime = #{tRtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iRuserid != null">
+                I_RUserId = #{iRuserid,jdbcType=BIGINT},
+            </if>
+            <if test="cRemark != null">
+                C_Remark = #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                I_Status = #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="cVersionCode != null">
+                C_VersionCode = #{cVersionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="isReview != null">
+                I_IsReview = #{isReview,jdbcType=TINYINT},
+            </if>
+        </set>
+        where I_VersionId = #{iVersionid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.trj.AppVersion">
+    update t_rj_app_version
+    set I_AppId = #{iAppid,jdbcType=BIGINT},
+      C_Version = #{cVersion,jdbcType=VARCHAR},
+      C_VersionRemark = #{cVersionremark,jdbcType=VARCHAR},
+      I_IsCompel = #{iIscompel,jdbcType=TINYINT},
+      C_DownUrl = #{cDownurl,jdbcType=VARCHAR},
+      T_ReleaseTime = #{tReleasetime,jdbcType=TIMESTAMP},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      T_RTime = #{tRtime,jdbcType=TIMESTAMP},
+      I_RUserId = #{iRuserid,jdbcType=BIGINT},
+      C_Remark = #{cRemark,jdbcType=VARCHAR},
+      I_Status = #{iStatus,jdbcType=TINYINT}，
+      C_VersionCode = #{cVersionCode,jdbcType=VARCHAR},
+      I_IsReview = #{isReview,jdbcType=TINYINT}
+    where I_VersionId = #{iVersionid,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_rj_app_version
+        WHERE 1=1
+        <if test="appId != null">
+            AND I_AppId = #{appId}
+        </if>
+        <if test="version != null">
+            AND C_Version= #{version}
+        </if>
+        <if test="versionCode != null">
+            AND C_VersionCode = #{versionCode}
+        </if>
+    </select>
+
+    <sql id="query">
+           b.I_VersionId, b.I_AppId, b.C_Version, b.C_VersionRemark, b.I_IsCompel, b.C_DownUrl, b.T_ReleaseTime,
+            b.T_CTime, b.I_CUserId, b.T_RTime, b.I_RUserId, b.C_Remark, b.I_Status,b.C_VersionCode,b.I_IsReview
+    </sql>
+
+    <select id="selectByAppId" resultMap="BaseResultMap">
+        select
+        <include refid="query"/>
+        from t_rj_app a, t_rj_app_version b
+        where a.I_AppId=b.I_AppId AND a.I_VersionId=b.I_VersionId
+        AND b.I_Status=1
+        <if test="appId != null">
+            AND a.I_AppId = #{appId}
+        </if>
+        <if test="versionCode != null">
+            AND b.C_VersionCode = #{versionCode}
+        </if>
+    </select>
+
+    <select id="selectByAppIdAndSchoolId" resultMap="BaseResultMap">
+        select
+        <include refid="query"/>
+        from t_xu_app c1,t_rj_app_version b
+        where c1.I_AppId=b.I_AppId
+        and c1.I_VersionId=b.I_VersionId
+        and b.I_Status=1
+        <if test="appId != null">
+            AND c1.I_AppId = #{appId}
+        </if>
+        <if test="schoolId != null">
+            and c1.I_SchoolId=#{schoolId}
+        </if>
+        <if test="versionCode != null">
+            AND b.C_VersionCode = #{versionCode}
+        </if>
+    </select>
+
+    <select id="selectByAppIdMax" resultMap="BaseResultMap">
+        select
+        <include refid="query"/>
+        from t_rj_app a, t_rj_app_version b
+        where a.I_AppId=b.I_AppId AND a.I_VersionId=b.I_VersionId
+        AND b.I_Status=1
+        <if test="appId != null">
+            AND a.I_AppId = #{appId}
+        </if>
+        <if test="versionCode != null">
+            AND b.C_VersionCode > #{versionCode}
+        </if>
+        ORDER BY b.T_CTime
+        LIMIT 0,1
+    </select>
+
+    <select id="selectByAppIdAndSchoolIdMax" resultMap="BaseResultMap">
+        select
+        <include refid="query"/>
+        from t_xu_app c1,t_rj_app_version b
+        where c1.I_AppId=b.I_AppId
+        and c1.I_VersionId=b.I_VersionId
+        and b.I_Status=1
+        <if test="appId != null">
+            AND c1.I_AppId = #{appId}
+        </if>
+        <if test="schoolId != null">
+            and c1.I_SchoolId=#{schoolId}
+        </if>
+        <if test="versionCode != null">
+            AND b.C_VersionCode > #{versionCode}
+        </if>
+        ORDER BY b.T_CTime
+        LIMIT 0,1
+    </select>
+
+    <select id="queryByAppIdAndVersionId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_rj_app_version
+        where C_VersionCode = #{versionCode}
+        AND I_AppId = #{appId}
+    </select>
+
+    <sql id="queryVersion">
+        a.I_VersionId, a.I_appId, a.C_Version, a.C_VersionRemark, a.I_IsCompel, a.C_DownUrl, a.T_ReleaseTime,
+        a.T_CTime, a.I_CUserId, a.T_RTime, a.I_RUserId, a.C_Remark, a.I_Status,a.C_VersionCode,a.I_IsReview
+    </sql>
+
+    <resultMap id="queryResultMap" type="com.fuhui.entity.trj.AppVersion">
+        <id column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="C_Version" property="cVersion" jdbcType="VARCHAR"/>
+        <result column="C_VersionRemark" property="cVersionremark" jdbcType="VARCHAR"/>
+        <result column="I_IsCompel" property="iIscompel" jdbcType="TINYINT"/>
+        <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+        <result column="T_ReleaseTime" property="tReleasetime" jdbcType="TIMESTAMP"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_RTime" property="tRtime" jdbcType="TIMESTAMP"/>
+        <result column="I_RUserId" property="iRuserid" jdbcType="BIGINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="C_VersionCode" property="cVersionCode" jdbcType="VARCHAR"/>
+        <result column="I_IsReview" property="isReview" jdbcType="TINYINT"/>
+        <result column="isNew" property="isNew"/>
+        <result column="newVersionId" property="newVersionId"/>
+    </resultMap>
+
+    <select id="selectByAppIdAndVersionId" resultMap="queryResultMap">
+        select
+        <include refid="queryVersion"/>
+        ,IF(
+        IFNULL(a.c_versioncode,"")>=IFNULL(b.c_versioncode,"")
+        ,1,0) isNew
+        ,IF(IFNULL(a.c_versioncode,"")>=IFNULL(b.c_versioncode,"")
+        ,NULL,b.I_VersionId) newVersionId
+        from t_rj_app_version a
+        left join (
+        select b2.I_AppId,b2.c_versioncode,b2.I_VersionId from t_rj_app b1,t_rj_app_version b2
+        where b1.I_AppId=b2.I_AppId
+        and b1.I_VersionId=b2.I_VersionId
+        and b1.I_AppId=#{appId}
+        )b
+        on a.I_AppId=b.I_AppId
+        where 1=1 AND a.I_AppId= #{appId}
+        and a.C_VersionCode=#{versionCode}
+    </select>
+
+    <select id="selectByAppIdAndVersionIdAndSchoolId" resultMap="queryResultMap">
+        select
+        <include refid="queryVersion"/>
+        ,IF(
+        IFNULL(a.c_versioncode,"")>=IFNULL(b.c_versioncode,"")
+        ,1,0) isNew
+        ,IF(IFNULL(a.c_versioncode,"")>=IFNULL(b.c_versioncode,"")
+        ,NULL,b.I_VersionId) newVersionId
+        from t_rj_app_version a
+        left join (
+        select b2.I_AppId,b2.c_versioncode,b2.I_VersionId from t_xu_app b1,t_rj_app_version b2
+        where b1.I_AppId=b2.I_AppId and b1.I_VersionId=b2.I_VersionId
+        and b1.I_SchoolId=#{schoolId}
+        and b1.I_AppId=#{appId}
+        )b
+        on a.I_AppId=b.I_AppId
+        where 1=1 AND a.I_AppId= #{appId}
+        and a.C_VersionCode=#{versionCode}
+    </select>
+
+    <resultMap id="queryByAppIdMap" type="com.fuhui.entity.trj.AppVersion">
+        <id column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="C_Version" property="cVersion" jdbcType="VARCHAR"/>
+        <result column="C_VersionRemark" property="cVersionremark" jdbcType="VARCHAR"/>
+        <result column="I_IsCompel" property="iIscompel" jdbcType="TINYINT"/>
+        <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+        <result column="T_ReleaseTime" property="tReleasetime" jdbcType="TIMESTAMP"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_RTime" property="tRtime" jdbcType="TIMESTAMP"/>
+        <result column="I_RUserId" property="iRuserid" jdbcType="BIGINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="C_VersionCode" property="cVersionCode" jdbcType="VARCHAR"/>
+        <result column="I_IsReview" property="isReview" jdbcType="TINYINT"/>
+        <collection property="appRj" ofType="com.fuhui.entity.trj.AppRj">
+            <id column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+            <result column="I_ProductId" property="iProductid" jdbcType="BIGINT"/>
+            <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+            <result column="C_Package" property="cPackage" jdbcType="VARCHAR"/>
+            <result column="I_Place" property="iPlace" jdbcType="TINYINT"/>
+            <result column="C_PlaceRemark" property="cPlaceremark" jdbcType="VARCHAR"/>
+            <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+            <result column="I_IsFree" property="iIsfree" jdbcType="TINYINT"/>
+            <result column="N_Price" property="nPrice" jdbcType="DECIMAL"/>
+            <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+            <result column="T_FRTime" property="tFrtime" jdbcType="TIMESTAMP"/>
+            <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+            <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+            <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+            <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+            <result column="C_Desc" property="cDesc" jdbcType="VARCHAR"/>
+            <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+            <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+            <result column="C_ImgPath" property="cImgpath" jdbcType="VARCHAR"/>
+            <result column="I_IsShare" property="iIsshare" jdbcType="TINYINT"/>
+            <result column="I_Sort" property="iSort" jdbcType="TINYINT"/>
+            <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+            <result column="C_ShortDesc" property="cShortdesc" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryByAppId" resultMap="queryByAppIdMap">
+        SELECT b.I_AppId,a.C_Name,b.C_Version,b.C_VersionCode,b.C_DownUrl,b.I_VersionId,b.T_CTime,b.I_Status
+        FROM t_rj_app a LEFT JOIN t_rj_app_version b
+        ON a.I_AppId = b.I_AppId
+        WHERE 1=1
+        <if test="appId != null">
+            AND a.I_AppId = #{appId}
+        </if>
+        ORDER BY b.T_CTime DESC
+    </select>
+
+    <select id="selectThisVersion" resultMap="BaseResultMap">
+        SELECT a.T_UTime T_CTime,b.C_Version,b.I_VersionId FROM t_rj_app a,t_rj_app_version b
+        WHERE a.I_VersionId = b.I_VersionId
+        AND a.I_AppId = #{appId}
+    </select>
+
+</mapper>

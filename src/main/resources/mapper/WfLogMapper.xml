@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.twf.WfLogMapper" >
+  <resultMap id="BaseResultMap" type="com.fuhui.entity.twf.WfLog" >
+    <id column="I_LogId" property="iLogid" jdbcType="BIGINT" />
+    <result column="C_DMac" property="cDmac" jdbcType="VARCHAR" />
+    <result column="C_SMac" property="cSmac" jdbcType="VARCHAR" />
+    <result column="C_GMac" property="cGmac" jdbcType="VARCHAR" />
+    <result column="I_Strong" property="iStrong" jdbcType="INTEGER" />
+    <result column="C_Type" property="cType" jdbcType="CHAR" />
+    <result column="T_Time" property="tTime" jdbcType="TIMESTAMP" />
+    <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    I_LogId, C_DMac, C_SMac, C_GMac, I_Strong, C_Type, T_Time, T_CTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_wf_log
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_wf_log
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuhui.entity.twf.WfLog" >
+    insert into t_wf_log (I_LogId, C_DMac, C_SMac, 
+      C_GMac, I_Strong, C_Type, 
+      T_Time, T_CTime)
+    values (#{iLogid,jdbcType=BIGINT}, #{cDmac,jdbcType=VARCHAR}, #{cSmac,jdbcType=VARCHAR}, 
+      #{cGmac,jdbcType=VARCHAR}, #{iStrong,jdbcType=INTEGER}, #{cType,jdbcType=CHAR}, 
+      #{tTime,jdbcType=TIMESTAMP}, #{tCtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhui.entity.twf.WfLog" >
+    insert into t_wf_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iLogid != null" >
+        I_LogId,
+      </if>
+      <if test="cDmac != null" >
+        C_DMac,
+      </if>
+      <if test="cSmac != null" >
+        C_SMac,
+      </if>
+      <if test="cGmac != null" >
+        C_GMac,
+      </if>
+      <if test="iStrong != null" >
+        I_Strong,
+      </if>
+      <if test="cType != null" >
+        C_Type,
+      </if>
+      <if test="tTime != null" >
+        T_Time,
+      </if>
+      <if test="tCtime != null" >
+        T_CTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iLogid != null" >
+        #{iLogid,jdbcType=BIGINT},
+      </if>
+      <if test="cDmac != null" >
+        #{cDmac,jdbcType=VARCHAR},
+      </if>
+      <if test="cSmac != null" >
+        #{cSmac,jdbcType=VARCHAR},
+      </if>
+      <if test="cGmac != null" >
+        #{cGmac,jdbcType=VARCHAR},
+      </if>
+      <if test="iStrong != null" >
+        #{iStrong,jdbcType=INTEGER},
+      </if>
+      <if test="cType != null" >
+        #{cType,jdbcType=CHAR},
+      </if>
+      <if test="tTime != null" >
+        #{tTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCtime != null" >
+        #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.twf.WfLog" >
+    update t_wf_log
+    <set >
+      <if test="cDmac != null" >
+        C_DMac = #{cDmac,jdbcType=VARCHAR},
+      </if>
+      <if test="cSmac != null" >
+        C_SMac = #{cSmac,jdbcType=VARCHAR},
+      </if>
+      <if test="cGmac != null" >
+        C_GMac = #{cGmac,jdbcType=VARCHAR},
+      </if>
+      <if test="iStrong != null" >
+        I_Strong = #{iStrong,jdbcType=INTEGER},
+      </if>
+      <if test="cType != null" >
+        C_Type = #{cType,jdbcType=CHAR},
+      </if>
+      <if test="tTime != null" >
+        T_Time = #{tTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tCtime != null" >
+        T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.twf.WfLog" >
+    update t_wf_log
+    set C_DMac = #{cDmac,jdbcType=VARCHAR},
+      C_SMac = #{cSmac,jdbcType=VARCHAR},
+      C_GMac = #{cGmac,jdbcType=VARCHAR},
+      I_Strong = #{iStrong,jdbcType=INTEGER},
+      C_Type = #{cType,jdbcType=CHAR},
+      T_Time = #{tTime,jdbcType=TIMESTAMP},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP}
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </update>
+</mapper>

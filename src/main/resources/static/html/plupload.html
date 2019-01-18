@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>plupload</title>
+    <!-- 配置界面上的css -->
+    <link rel="stylesheet" type="text/css" href="../plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css">
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../plupload/js/plupload.full.min.js"></script>
+    <script type="text/javascript" src="../plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+    <!-- 国际化中文支持 -->
+    <script type="text/javascript" src="../plupload/js/i18n/zh_CN.js"></script>
+</head>
+<body>
+
+<div style="width:750px; margin:0px auto;">
+    <div id="uploader">
+    </div>
+    <button id="toStop">暂停一下</button>
+    <button id="toStart">再次开始</button>
+    <input value="继续上传" id="Reload" type="button">
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        function plupload() {
+            $("#uploader").pluploadQueue({
+                runtimes: 'flash,html5,gears,browserplus,silverlight,html4',
+                url: "/plupload/upload",
+                //unique_names: true,
+                chunk_size: '1mb',
+                //rename : true,
+                dragdrop: true,
+                filters: {
+                    max_file_size: '10000mb',
+                    mime_types: [
+                        // {title: "Image files", extensions: "jpg,gif,png"},
+                        {title: "Zip files", extensions: "zip"}
+                    ]
+                },
+                resize: {
+                    width: 200,
+                    height: 200,
+                    quality: 90,
+                    crop: true
+                    // crop to exact dimensions
+                },             // Flash settings
+                flash_swf_url: '../plupload/js/Moxie.swf',
+                // Silverlight settings
+                silverlight_xap_url: '../plupload/js/Moxie.xap',
+                // 参数
+                multipart_params: {'user': 'Rocky', 'time': '2012-06-12'}
+            });
+        }
+        plupload();
+        $('#Reload').click(function () {
+            plupload();
+        });
+        $('#toStop').click(function () {
+            $("#uploader").pluploadQueue().stop();
+        });
+        $('#toStart').click(function () {
+            $("#uploader").pluploadQueue().start();
+        });
+    });
+
+</script>

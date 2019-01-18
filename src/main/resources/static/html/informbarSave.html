@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>知会设备管控平台</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../plugins/iCheck/all.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        .col-md-3 {
+            width: 220px;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header" id="headerDiv">
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" id="leftMenu">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                通知栏配置
+                <small>保存通知栏配置信息</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+                <li><a href="#">平板管理</a></li>
+                <li class="active">通知栏配置管理</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Horizontal Form -->
+            <div class="" id="bodyBox">
+                <div class="box-header with-border">
+                    <button type="button" class="btn btn-default" onclick="cancelSave();">取消</button>
+                    <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;" onclick="submit()" id="butts">
+                        启用
+                    </button>
+                    <button type="submit" class="btn btn-default pull-right" onclick="save()" id="butts1">暂存</button>
+                </div>
+                <!-- form start -->
+                <form class="form-horizontal" id="form">
+                    <div class="box-body">
+                        <div class="form-group" id="schoolId">
+                            <label class="col-sm-2 control-label">学校名称</label>
+                            <div class="col-sm-10">
+                                <select id="nation" class="form-control" name="schoolId"></select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="schoolName">
+                            <label class="col-sm-2 control-label">学校名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control  input-lg" id="schName"
+                                       readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">配置名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control  input-lg" name="name" id="conName"
+                                       placeholder="配置名称" maxlength="50">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">通知栏状态</label>
+                            <div class="col-sm-10" style="margin-top: 7px;" id="buStuts">
+                                <label style="margin-right: 10px;">
+                                    <input name="contentList" type="radio" class="flat-red" checked value="1">
+                                    <span>开启</span>
+                                </label>
+                                <label style="margin-right: 10px;">
+                                    <input name="contentList" type="radio" class="flat-red" value="0">
+                                    <span>关闭</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">应用范围</label>
+                        <div class="col-sm-10" style="margin-top: 7px;" id="radios">
+                            <label style="margin-right: 10px;">
+                                <input name="range" type="radio" class="flat-red" checked value="0">
+                                <span>全校</span>
+                            </label>
+                          <!--  <label style="margin-right: 10px;">
+                                <input name="range" type="radio" class="flat-red" value="1">
+                                <span>指定年级</span>
+                            </label>
+                            <label style="margin-right: 10px;">
+                                <input name="range" type="radio" class="flat-red" value="2">
+                                <span>指定班级</span>
+                            </label>
+                            <label style="margin-right: 10px;">
+                                <input name="range" type="radio" class="flat-red" value="3">
+                                <span>指定分组</span>
+                            </label>
+                            <label style="margin-right: 10px;">
+                                <input name="range" type="radio" class="flat-red" value="4">
+                                <span>指定设备</span>
+                            </label>-->
+                        </div>
+                        <input name="configId" id="configId" type="hidden"><!--//隐藏列-->
+                        <input name="type" id="type" type="hidden" value="10"><!--//隐藏列-->
+                    </div>
+                    <!-- /.box-body -->
+                </form>
+            </div>
+            <!-- /.box -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" id="footerDiv">
+    </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<!-- iCheck -->
+<script src="../plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(function () {
+        $('#leftMenu').load("leftMenu.html", function () {
+            $("#informbar").addClass("active");
+        });
+        $('#headerDiv').load("header.html");
+        $('#footerDiv').load("footer.html");
+        $('input[type="checkbox"].flat-red,input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+        });
+        createSelect('------请选择------');
+        getParam();
+    });
+
+    function createSelect(name) {
+        var _select = document.getElementById("nation");
+        var firstOption = document.createElement("option");
+        firstOption.value = "0";
+        firstOption.text = "------请选择------";
+        _select.appendChild(firstOption);
+        var searchUrl = "/schService/getSchoolList";
+        $.ajax({
+            type: "Post",
+            url: searchUrl,
+            dataType: "json",
+            success: function (data) {
+                var res = data['data']['schoolList'];
+                console.log(res)
+                for (i = 0; i < res.length; i++) {
+                    var _option = document.createElement("option");
+                    _option.value = res[i].schoolId;
+                    _option.text = res[i].name;
+                    if (name == res[i].name) {
+                        _option.selected = "true";
+                    }
+                    _select.appendChild(_option);
+                }
+            }
+        });
+        return _select;
+    }
+
+    function getParam() {
+        var url = location.search;
+        var Request = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1)　//去掉?号
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                Request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+        }
+        if (!$.isEmptyObject(Request)) {
+            var configName = Request["name"];
+            var configId = Request["id"];
+            var site = Request["site"];
+            var schoolName = Request["schoolName"];
+            //赋值
+            $("#configId").val(configId);
+            $("#schoolId").hide();
+            $("#schName").val(schoolName)
+            $("#schoolName").show();
+            $("#conName").val(configName);
+            var query = Request["query"];
+            if (query.valueOf() != "undefined") {
+                $("#butts").hide();
+                $("#butts1").hide();
+                $("#conName").attr("readonly", "readonly");
+                if (site.valueOf() != "undefined" && site.valueOf() != "") {
+                    $("#site").val(site);
+                    $("#site").attr("readonly", "readonly");
+                }
+                var status = Request["status"];
+                if (status.valueOf() == "1"){
+                    $("#buStuts").html("开启状态!")
+                }else {
+                    $("#buStuts").html("关闭状态!")
+                }
+            } else {
+                $("#site").val(site);
+            }
+        } else {
+            $("#schoolId").show();
+            $("#schoolName").hide();
+        }
+
+    }
+
+    function cancelSave() {
+        window.location.href = "informbar.html";
+    }
+
+    function submit() {
+        var url = "/padService/padSaveConfig";
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: url,//url
+            data: $('#form').serialize(),
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                if (result.status == true) {
+                    window.location.href = "informbar.html";
+                } else {
+                    alert(result.errorInfo);
+                }
+            },
+            error: function () {
+                alert("提交异常！");
+            }
+        });
+    }
+
+    function save() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/appConfigService/saveConfig",//url
+            data: $('#form').serialize(),
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                if (result.status == true) {
+                    alert("暂存成功！");
+                    console.log(result.data.configId);
+                    $("#configId").val(result.data.configId);
+                } else {
+                    alert(result.errorInfo);
+                }
+            },
+            error: function () {
+                alert("提交异常！");
+            }
+        });
+    }
+</script>
+</body>
+</html>

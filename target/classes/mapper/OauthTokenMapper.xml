@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tut.OauthTokenMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.tut.OauthToken">
+        <id column="I_Id" property="iId" jdbcType="BIGINT"/>
+        <result column="C_Token" property="cToken" jdbcType="VARCHAR"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+        <result column="C_Mac" property="cMac" jdbcType="VARCHAR"/>
+        <result column="I_UserId" property="iUserid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_GradeId" property="iGradeid" jdbcType="BIGINT"/>
+        <result column="I_XGradeId" property="iXgradeid" jdbcType="BIGINT"/>
+        <result column="I_ClassId" property="iClassid" jdbcType="BIGINT"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_Id, C_Token, I_AppId, I_PadId, C_Mac, I_UserId, I_Type, I_GradeId, I_XGradeId, 
+    I_ClassId, I_SchoolId, T_CTime, T_UTime
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_ut_token
+        where I_Id = #{iId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_ut_token
+    where I_Id = #{iId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.tut.OauthToken">
+    insert into t_ut_token (I_Id, C_Token, I_AppId, 
+      I_PadId, C_Mac, I_UserId, 
+      I_Type, I_GradeId, I_XGradeId, 
+      I_ClassId, I_SchoolId, T_CTime, 
+      T_UTime)
+    values (#{iId,jdbcType=BIGINT}, #{cToken,jdbcType=VARCHAR}, #{iAppid,jdbcType=BIGINT}, 
+      #{iPadid,jdbcType=BIGINT}, #{cMac,jdbcType=VARCHAR}, #{iUserid,jdbcType=BIGINT}, 
+      #{iType,jdbcType=TINYINT}, #{iGradeid,jdbcType=BIGINT}, #{iXgradeid,jdbcType=BIGINT}, 
+      #{iClassid,jdbcType=BIGINT}, #{iSchoolid,jdbcType=BIGINT}, #{tCtime,jdbcType=TIMESTAMP}, 
+      #{tUtime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.tut.OauthToken">
+        insert into t_ut_token
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iId != null">
+                I_Id,
+            </if>
+            <if test="cToken != null">
+                C_Token,
+            </if>
+            <if test="iAppid != null">
+                I_AppId,
+            </if>
+            <if test="iPadid != null">
+                I_PadId,
+            </if>
+            <if test="cMac != null">
+                C_Mac,
+            </if>
+            <if test="iUserid != null">
+                I_UserId,
+            </if>
+            <if test="iType != null">
+                I_Type,
+            </if>
+            <if test="iGradeid != null">
+                I_GradeId,
+            </if>
+            <if test="iXgradeid != null">
+                I_XGradeId,
+            </if>
+            <if test="iClassid != null">
+                I_ClassId,
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+            <if test="tUtime != null">
+                T_UTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iId != null">
+                #{iId,jdbcType=BIGINT},
+            </if>
+            <if test="cToken != null">
+                #{cToken,jdbcType=VARCHAR},
+            </if>
+            <if test="iAppid != null">
+                #{iAppid,jdbcType=BIGINT},
+            </if>
+            <if test="iPadid != null">
+                #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="cMac != null">
+                #{cMac,jdbcType=VARCHAR},
+            </if>
+            <if test="iUserid != null">
+                #{iUserid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="iGradeid != null">
+                #{iGradeid,jdbcType=BIGINT},
+            </if>
+            <if test="iXgradeid != null">
+                #{iXgradeid,jdbcType=BIGINT},
+            </if>
+            <if test="iClassid != null">
+                #{iClassid,jdbcType=BIGINT},
+            </if>
+            <if test="iSchoolid != null">
+                #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tUtime != null">
+                #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tut.OauthToken">
+        update t_ut_token
+        <set>
+            <if test="cToken != null">
+                C_Token = #{cToken,jdbcType=VARCHAR},
+            </if>
+            <if test="iAppid != null">
+                I_AppId = #{iAppid,jdbcType=BIGINT},
+            </if>
+            <if test="iPadid != null">
+                I_PadId = #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="cMac != null">
+                C_Mac = #{cMac,jdbcType=VARCHAR},
+            </if>
+            <if test="iUserid != null">
+                I_UserId = #{iUserid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                I_Type = #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="iGradeid != null">
+                I_GradeId = #{iGradeid,jdbcType=BIGINT},
+            </if>
+            <if test="iXgradeid != null">
+                I_XGradeId = #{iXgradeid,jdbcType=BIGINT},
+            </if>
+            <if test="iClassid != null">
+                I_ClassId = #{iClassid,jdbcType=BIGINT},
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tUtime != null">
+                T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where I_Id = #{iId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tut.OauthToken">
+    update t_ut_token
+    set C_Token = #{cToken,jdbcType=VARCHAR},
+      I_AppId = #{iAppid,jdbcType=BIGINT},
+      I_PadId = #{iPadid,jdbcType=BIGINT},
+      C_Mac = #{cMac,jdbcType=VARCHAR},
+      I_UserId = #{iUserid,jdbcType=BIGINT},
+      I_Type = #{iType,jdbcType=TINYINT},
+      I_GradeId = #{iGradeid,jdbcType=BIGINT},
+      I_XGradeId = #{iXgradeid,jdbcType=BIGINT},
+      I_ClassId = #{iClassid,jdbcType=BIGINT},
+      I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP}
+    where I_Id = #{iId,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByPadId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_ut_token
+        where I_PadId = #{I_PadId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByToken" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_ut_token
+        where C_Token = #{token,jdbcType=BIGINT}
+    </select>
+
+</mapper>

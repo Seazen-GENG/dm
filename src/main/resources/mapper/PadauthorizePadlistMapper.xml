@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.taz.PadauthorizePadlistMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.taz.PadauthorizePadlist">
+        <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+        <result column="I_AUZId" property="iAuzid" jdbcType="BIGINT"/>
+        <result column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+        <result column="T_FTime" property="tFtime" jdbcType="TIMESTAMP"/>
+        <result column="C_Mac" property="cMac" jdbcType="VARCHAR"/>
+        <result column="C_Ip" property="cIp" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_IDX, I_AUZId, I_PadId, T_FTime ,C_Mac ,C_Ip
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_az_authorize_padlist
+        where I_IDX = #{iIdx,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_az_authorize_padlist
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.taz.PadauthorizePadlist">
+    insert into t_az_authorize_padlist (I_IDX, I_AUZId, I_PadId, 
+      T_FTime ,C_Mac ,C_Ip)
+    values (#{iIdx,jdbcType=BIGINT}, #{iAuzid,jdbcType=BIGINT}, #{iPadid,jdbcType=BIGINT}, 
+      #{tFtime,jdbcType=TIMESTAMP},#{cMac,jdbcType=VARCHAR},#{cIp,jdbcType=VARCHAR})
+  </insert>
+    <insert id="add" parameterType="com.fuhui.entity.taz.PadauthorizePadlist">
+        insert into t_az_authorize_padlist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                I_IDX,
+            </if>
+            <if test="iAuzid != null">
+                I_AUZId,
+            </if>
+            <if test="iPadid != null">
+                I_PadId,
+            </if>
+            <if test="tFtime != null">
+                T_FTime,
+            </if>
+            <if test="cMac != null">
+                C_Mac,
+            </if>
+            <if test="cIp != null">
+                C_Ip,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                #{iIdx,jdbcType=BIGINT},
+            </if>
+            <if test="iAuzid != null">
+                #{iAuzid,jdbcType=BIGINT},
+            </if>
+            <if test="iPadid != null">
+                #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="tFtime != null">
+                #{tFtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cMac != null">
+                #{cMac,jdbcType=VARCHAR},
+            </if>
+            <if test="cIp != null">
+                #{cIp,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.fuhui.entity.taz.PadauthorizePadlist">
+        update t_az_authorize_padlist
+        <set>
+            <if test="iAuzid != null">
+                I_AUZId = #{iAuzid,jdbcType=BIGINT},
+            </if>
+            <if test="iPadid != null">
+                I_PadId = #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="tFtime != null">
+                T_FTime = #{tFtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cMac != null">
+                #{cMac,jdbcType=VARCHAR},
+            </if>
+            <if test="cIp != null">
+                #{cIp,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where I_IDX = #{iIdx,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.taz.PadauthorizePadlist">
+    update t_az_authorize_padlist
+    set I_AUZId = #{iAuzid,jdbcType=BIGINT},
+      I_PadId = #{iPadid,jdbcType=BIGINT},
+      T_FTime = #{tFtime,jdbcType=TIMESTAMP},
+      C_Mac = #{cMac,jdbcType=VARCHAR},
+      C_Ip = #{cIp,jdbcType=VARCHAR}
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectBySerialNoAndPadId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_az_authorize_padlist
+        where 1=1
+        <if test="auzId != -1">
+            AND I_AUZId = #{auzId}
+        </if>
+        <if test="padId != -1">
+            AND I_PadId =#{padId}
+        </if>
+    </select>
+</mapper>

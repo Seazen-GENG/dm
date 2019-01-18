@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.txm.PadConfigconfigListMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.txm.PadConfigconfigList">
+        <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+        <result column="I_ConfigId" property="iConfigid" jdbcType="BIGINT"/>
+        <result column="C_Extend1" property="cExtend1" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.fuhui.entity.txm.PadConfigconfigList" extends="BaseResultMap">
+        <result column="C_Config" property="cConfig" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_IDX, I_ConfigId, C_Extend1
+  </sql>
+    <sql id="Blob_Column_List">
+    C_Config
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_xm_padconfig_configlist
+        where I_IDX = #{iIdx,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_xm_padconfig_configlist
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.txm.PadConfigconfigList">
+    insert into t_xm_padconfig_configlist (I_IDX, I_ConfigId, C_Extend1, 
+      C_Config)
+    values (#{iIdx,jdbcType=BIGINT}, #{iConfigid,jdbcType=BIGINT}, #{cExtend1,jdbcType=VARCHAR}, 
+      #{cConfig,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.txm.PadConfigconfigList">
+        insert into t_xm_padconfig_configlist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                I_IDX,
+            </if>
+            <if test="iConfigid != null">
+                I_ConfigId,
+            </if>
+            <if test="cExtend1 != null">
+                C_Extend1,
+            </if>
+            <if test="cConfig != null">
+                C_Config,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                #{iIdx,jdbcType=BIGINT},
+            </if>
+            <if test="iConfigid != null">
+                #{iConfigid,jdbcType=BIGINT},
+            </if>
+            <if test="cExtend1 != null">
+                #{cExtend1,jdbcType=VARCHAR},
+            </if>
+            <if test="cConfig != null">
+                #{cConfig,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.txm.PadConfigconfigList">
+        update t_xm_padconfig_configlist
+        <set>
+            <if test="iConfigid != null">
+                I_ConfigId = #{iConfigid,jdbcType=BIGINT},
+            </if>
+            <if test="cExtend1 != null">
+                C_Extend1 = #{cExtend1,jdbcType=VARCHAR},
+            </if>
+            <if test="cConfig != null">
+                C_Config = #{cConfig,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where I_IDX = #{iIdx,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fuhui.entity.txm.PadConfigconfigList">
+    update t_xm_padconfig_configlist
+    set I_ConfigId = #{iConfigid,jdbcType=BIGINT},
+      C_Extend1 = #{cExtend1,jdbcType=VARCHAR},
+      C_Config = #{cConfig,jdbcType=LONGVARCHAR}
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.txm.PadConfigconfigList">
+    update t_xm_padconfig_configlist
+    set I_ConfigId = #{iConfigid,jdbcType=BIGINT},
+      C_Extend1 = #{cExtend1,jdbcType=VARCHAR}
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </update>
+
+    <resultMap id="ResultMap" type="com.fuhui.entity.txm.PadConfigconfigList">
+        <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+        <result column="C_Config" property="cConfig" jdbcType="LONGVARCHAR"/>
+        <result column="C_Extend1" property="cExtend1" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectByConfigId" resultMap="ResultMap">
+        select
+        I_IDX, C_Config, C_Extend1
+        from t_xm_padconfig_configlist
+        where 1=1
+        <if test=" config!= -1 ">
+            AND I_ConfigId = #{config,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <select id="selectByConfig" resultMap="ResultMap">
+        select
+        I_IDX, C_Config, C_Extend1
+        from t_xm_padconfig_configlist
+        where 1=1
+        <if test=" config!= -1 ">
+            AND I_ConfigId = #{config,jdbcType=BIGINT}
+        </if>
+    </select>
+
+
+    <update id="updateFinaly" parameterType="com.fuhui.entity.txm.PadConfigconfigList">
+        update t_xm_padconfig_configlist
+        <set>
+            <if test="cExtend1 != null">
+                C_Extend1 = #{cExtend1,jdbcType=VARCHAR},
+            </if>
+            <if test="cConfig != null">
+                C_Config = #{cConfig,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where 1=1
+        <if test="iConfigid != null">
+            AND I_ConfigId = #{iConfigid,jdbcType=BIGINT}
+        </if>
+    </update>
+</mapper>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>知会设备管控平台</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../plugins/iCheck/all.css">
+    <link rel="stylesheet" type="text/css" href="../plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css">
+    <!-- 国际化中文支持 -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        .col-md-3 {
+            width: 230px;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header" id="headerDiv">
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" id="leftMenu">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                编辑厂商设备
+                <small>编辑厂商设备信息</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+
+                <li><a href="#">厂商设备管理</a></li>
+                <li class="active">设备管理</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <!-- /.box -->
+            <div id="appVersion" class="form-horizontal" style="margin-top: 30px;">
+                <div class="box-header with-border">
+                    <button type="button" class="btn btn-default" onclick="cancelVersionSave()">取消</button>
+                    <button type="button" class="btn btn-default pull-right" onclick="announce()" id="butts3">保存
+                    </button>
+                </div>
+                <form id="versionFrom" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">版本号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control  input-lg" name="version"
+                                   placeholder="版本号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">版本编号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control  input-lg" name="versionCode"
+                                   placeholder="版本编号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">版本说明</label>
+                        <div class="col-sm-10">
+                        <textarea class="form-control  input-lg" name="vRemark"
+                                  placeholder="版本说明"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">下载地址</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control  input-lg" name="downUrl" id="downUrl"
+                                   placeholder="下载地址">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">是否审核</label>
+
+                        <div class="col-sm-10" style="margin-top: 7px;">
+                            <label style="margin-right: 10px;">
+                                <input name="isReview" type="radio" class="flat-red" value="0" checked>
+                                <span>不审核</span>
+                            </label>
+                            <label>
+                                <input name="isReview" type="radio" class="flat-red" value="1">
+                                <span>审核</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">状态</label>
+                        <div class="col-sm-10" style="margin-top: 7px;">
+                            <label style="margin-right: 10px;">
+                                <input name="status" type="radio" class="flat-red" value="1" checked>
+                                <span>可发布</span>
+                            </label>
+                            <label style="margin-right: 10px;">
+                                <input name="status" type="radio" class="flat-red" value="2">
+                                <span>待发布</span>
+                            </label>
+                            <label style="margin-right: 10px;">
+                                <input name="status" type="radio" class="flat-red" value="3">
+                                <span>审核中</span>
+                            </label>
+                            <label style="margin-right: 10px;">
+                                <input name="status" type="radio" class="flat-red" value="4">
+                                <span>审核中</span>
+                            </label>
+                            <label>
+                                <input name="status" type="radio" class="flat-red" value="0">
+                                <span>停用</span>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="hidden" id="md5" name="md5"/>
+                    <input type="hidden" id="deviceId" name="deviceId"/>
+                    <input type="hidden" id="factoryId" name="factoryId"/>
+                </form>
+                <!--//是否强制升级-->
+                <!--<div class="box-header" style="padding-bottom: 0px;" id="buttss">
+                    <div class="box-header with-border">
+                        <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;"
+                                onclick="uploadFile()">
+                            开始上传
+                        </button>
+                    </div>
+                </div>
+                &lt;!&ndash; /.box-header &ndash;&gt;
+                <form id="from" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">上传固件</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="file" id="file" onchange="fileSelected()"/>
+                            <div id="fileName"></div>
+                            <div id="fileSize"></div>
+                            <div id="fileType"></div>
+                            <div>上传进度：<span id="progressNumber">未开始</span></div>
+                        </div>
+                    </div>
+                </form>-->
+                <div style="width:750px; margin:0px auto;">
+                    <div id="uploader">
+                        <button id="browse">选择文件</button>
+                        <button id="start_upload">开始上传</button>
+                    </div>
+                    <button id="toStop">暂停一下</button>
+                    <button id="toStart">再次开始</button>
+                    <input value="继续上传" id="Reload" type="button">
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" id="footerDiv">
+    </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../plupload/js/moxie.js"></script>
+<script src="../plupload/js/plupload.full.min.js"></script>
+<script src="../plupload/js/plupload.dev.js"></script>
+<script src="../plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script src="../plupload/js/i18n/zh_CN.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<!-- iCheck -->
+<script src="../plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(function () {
+        $('#leftMenu').load("leftMenu.html", function () {
+            $("#factoryDevi").addClass("active");
+        });
+        $('#headerDiv').load("header.html");
+        $('#footerDiv').load("footer.html");
+        $('input[type="checkbox"].flat-red,input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+        });
+        getDeviceInfo();
+//////////////////////////////////////////////
+        $('#Reload').click(function () {
+            plupload();
+        });
+        $('#toStop').click(function () {
+            $("#uploader").pluploadQueue().stop();
+        });
+        $('#toStart').click(function () {
+            $("#uploader").pluploadQueue().start();
+        });
+        var uploader = $("#uploader").pluploadQueue({
+            browse_button: 'uploader_browse',//开启文件上传的按钮id
+            runtimes: 'flash,html5,gears,browserplus,silverlight,html4',
+            url: "/file/zip",
+            chunk_size: '1mb',
+            dragdrop: true,
+            resize: {
+                width: 200,
+                height: 200,
+                quality: 90,
+                crop: true
+            },
+            max_file_size: '10000mb',
+            flash_swf_url: '../plupload/js/Moxie.swf',
+            silverlight_xap_url: '../plupload/js/Moxie.xap',
+            filters: {
+                mime_types: [
+                    {title: "Zip files", extensions: "zip"}
+                ]
+            },
+            preinit: {
+                UploadComplete: function () {
+                    console.log("Complete_success")
+                },
+                FileUploaded:function (uploader,files,info) {
+                    var response = $.parseJSON(info.response);
+                    console.log("response==" + response);
+                    if (response.status) {
+                        $("#downUrl").val(response.data.filePath);
+                        $("#md5").val(response.data.md5);
+                    }
+                }
+            }
+        });
+        uploader.init(
+            console.log("init_success")
+        );
+    });
+
+    function getDeviceInfo() {
+        var deviceInfo = localStorage["deviceInfo"];
+        var devObj = JSON.parse(deviceInfo);
+        //console.log("devObj==" + deviceInfo);
+        $("#deviceId").val(devObj.devId);
+        $("#factoryId").val(devObj.factoryId);
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function announce() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/deviceService/saveDeviceVersion",//url
+            data: $('#versionFrom').serialize(),
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                if (result.status == true) {
+                    window.location.href = "factoryDevi.html";
+                } else {
+                    alert(result.errorInfo);
+                }
+            },
+            error: function () {
+                alert("提交异常！");
+            }
+        });
+    }
+
+    /////////////////////////////////文件上传/////////////////////////////////////////////////////////////////////////////////////
+    function pluploads() {
+        $("#uploader").pluploadQueue({
+            runtimes: 'flash,html5,gears,browserplus,silverlight,html4',
+            url: "/file/zip",
+            chunk_size: '1mb',
+            dragdrop: true,
+            resize: {
+                width: 200,
+                height: 200,
+                quality: 90,
+                crop: true
+            },
+            max_file_size: '10000mb',
+            flash_swf_url: '../plupload/js/Moxie.swf',
+            silverlight_xap_url: '../plupload/js/Moxie.xap',
+            filters: {
+                mime_types: [
+                    {title: "Zip files", extensions: "zip"}
+                ]
+            },
+        });
+    }
+</script>
+</body>
+</html>

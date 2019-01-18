@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.txm.AppConfigconPadListMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.txm.AppConfigconPadList">
+        <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+        <result column="I_ConfigId" property="iConfigid" jdbcType="BIGINT"/>
+        <result column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_IDX, I_ConfigId, I_PadId, T_CTime
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_xm_appconfig_padlist
+        where I_IDX = #{iIdx,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_xm_appconfig_padlist
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.txm.AppConfigconPadList">
+    insert into t_xm_appconfig_padlist (I_IDX, I_ConfigId, I_PadId, 
+      T_CTime)
+    values (#{iIdx,jdbcType=BIGINT}, #{iConfigid,jdbcType=BIGINT}, #{iPadid,jdbcType=BIGINT}, 
+      #{tCtime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.txm.AppConfigconPadList">
+        insert into t_xm_appconfig_padlist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                I_IDX,
+            </if>
+            <if test="iConfigid != null">
+                I_ConfigId,
+            </if>
+            <if test="iPadid != null">
+                I_PadId,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                #{iIdx,jdbcType=BIGINT},
+            </if>
+            <if test="iConfigid != null">
+                #{iConfigid,jdbcType=BIGINT},
+            </if>
+            <if test="iPadid != null">
+                #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.txm.AppConfigconPadList">
+        update t_xm_appconfig_padlist
+        <set>
+            <if test="iConfigid != null">
+                I_ConfigId = #{iConfigid,jdbcType=BIGINT},
+            </if>
+            <if test="iPadid != null">
+                I_PadId = #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where I_IDX = #{iIdx,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.txm.AppConfigconPadList">
+    update t_xm_appconfig_padlist
+    set I_ConfigId = #{iConfigid,jdbcType=BIGINT},
+      I_PadId = #{iPadid,jdbcType=BIGINT},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP}
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByPadId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_xm_appconfig_padlist
+        where I_PadId = #{padId}
+    </select>
+</mapper>

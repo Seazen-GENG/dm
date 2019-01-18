@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.cluster.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.cluster.UserInfo">
+        <id column="UserID" property="userid" jdbcType="INTEGER"/>
+        <result column="UserCode" property="usercode" jdbcType="VARCHAR"/>
+        <result column="UserName" property="username" jdbcType="VARCHAR"/>
+        <result column="UserPwd" property="userpwd" jdbcType="CHAR"/>
+        <result column="IdentityCard" property="identitycard" jdbcType="CHAR"/>
+        <result column="Birthday" property="birthday" jdbcType="VARCHAR"/>
+        <result column="Email" property="email" jdbcType="VARCHAR"/>
+        <result column="Telephone" property="telephone" jdbcType="VARCHAR"/>
+        <result column="JobTitle" property="jobtitle" jdbcType="TINYINT"/>
+        <result column="FileID" property="fileid" jdbcType="BIGINT"/>
+        <result column="Gender" property="gender" jdbcType="TINYINT"/>
+        <result column="SchoolID" property="schoolid" jdbcType="INTEGER"/>
+        <result column="CreateBy" property="createby" jdbcType="INTEGER"/>
+        <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP"/>
+        <result column="UpdateBy" property="updateby" jdbcType="INTEGER"/>
+        <result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP"/>
+        <result column="AccessPlatform" property="accessplatform" jdbcType="VARCHAR"/>
+        <result column="LinkAddress" property="linkaddress" jdbcType="VARCHAR"/>
+        <result column="QQ" property="qq" jdbcType="VARCHAR"/>
+        <result column="UserTypeCode" property="usertypecode" jdbcType="VARCHAR"/>
+        <result column="UseStatus" property="usestatus" jdbcType="TINYINT"/>
+        <result column="UserTypeID" property="usertypeid" jdbcType="BIGINT"/>
+        <result column="SubjectID" property="subjectid" jdbcType="BIGINT"/>
+        <result column="ClassID" property="classid" jdbcType="BIGINT"/>
+        <result column="StudentNumber" property="studentnumber" jdbcType="VARCHAR"/>
+        <result column="ClassCode" property="classcode" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.fuhui.entity.cluster.UserInfo" extends="BaseResultMap">
+        <result column="Remark" property="remark" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    UserID, UserCode, UserName, UserPwd, IdentityCard, Birthday, Email, Telephone, JobTitle, 
+    FileID, Gender, SchoolID, CreateBy, DATE_FORMAT(CreateTime,'%Y-%m-%d %H:%i:%s') CreateTime, UpdateBy, DATE_FORMAT(UpdateTime,'%Y-%m-%d %H:%i:%s') UpdateTime, AccessPlatform,
+    LinkAddress, QQ, UserTypeCode, UseStatus, UserTypeID, SubjectID, ClassID, StudentNumber, 
+    ClassCode
+  </sql>
+    <sql id="Blob_Column_List">
+    Remark
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from UserInfo
+        where UserID = #{userid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from UserInfo
+    where UserID = #{userid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.cluster.UserInfo">
+    insert into UserInfo (UserID, UserCode, UserName, 
+      UserPwd, IdentityCard, Birthday, 
+      Email, Telephone, JobTitle, 
+      FileID, Gender, SchoolID, 
+      CreateBy, CreateTime, UpdateBy, 
+      UpdateTime, AccessPlatform, LinkAddress, 
+      QQ, UserTypeCode, UseStatus, 
+      UserTypeID, SubjectID, ClassID, 
+      StudentNumber, ClassCode, Remark
+      )
+    values (#{userid,jdbcType=INTEGER}, #{usercode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userpwd,jdbcType=CHAR}, #{identitycard,jdbcType=CHAR}, #{birthday,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{jobtitle,jdbcType=TINYINT}, 
+      #{fileid,jdbcType=BIGINT}, #{gender,jdbcType=TINYINT}, #{schoolid,jdbcType=INTEGER}, 
+      #{createby,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updateby,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{accessplatform,jdbcType=VARCHAR}, #{linkaddress,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{usertypecode,jdbcType=VARCHAR}, #{usestatus,jdbcType=TINYINT}, 
+      #{usertypeid,jdbcType=BIGINT}, #{subjectid,jdbcType=BIGINT}, #{classid,jdbcType=BIGINT}, 
+      #{studentnumber,jdbcType=VARCHAR}, #{classcode,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.cluster.UserInfo">
+        insert into UserInfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                UserID,
+            </if>
+            <if test="usercode != null">
+                UserCode,
+            </if>
+            <if test="username != null">
+                UserName,
+            </if>
+            <if test="userpwd != null">
+                UserPwd,
+            </if>
+            <if test="identitycard != null">
+                IdentityCard,
+            </if>
+            <if test="birthday != null">
+                Birthday,
+            </if>
+            <if test="email != null">
+                Email,
+            </if>
+            <if test="telephone != null">
+                Telephone,
+            </if>
+            <if test="jobtitle != null">
+                JobTitle,
+            </if>
+            <if test="fileid != null">
+                FileID,
+            </if>
+            <if test="gender != null">
+                Gender,
+            </if>
+            <if test="schoolid != null">
+                SchoolID,
+            </if>
+            <if test="createby != null">
+                CreateBy,
+            </if>
+            <if test="createtime != null">
+                CreateTime,
+            </if>
+            <if test="updateby != null">
+                UpdateBy,
+            </if>
+            <if test="updatetime != null">
+                UpdateTime,
+            </if>
+            <if test="accessplatform != null">
+                AccessPlatform,
+            </if>
+            <if test="linkaddress != null">
+                LinkAddress,
+            </if>
+            <if test="qq != null">
+                QQ,
+            </if>
+            <if test="usertypecode != null">
+                UserTypeCode,
+            </if>
+            <if test="usestatus != null">
+                UseStatus,
+            </if>
+            <if test="usertypeid != null">
+                UserTypeID,
+            </if>
+            <if test="subjectid != null">
+                SubjectID,
+            </if>
+            <if test="classid != null">
+                ClassID,
+            </if>
+            <if test="studentnumber != null">
+                StudentNumber,
+            </if>
+            <if test="classcode != null">
+                ClassCode,
+            </if>
+            <if test="remark != null">
+                Remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="usercode != null">
+                #{usercode,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userpwd != null">
+                #{userpwd,jdbcType=CHAR},
+            </if>
+            <if test="identitycard != null">
+                #{identitycard,jdbcType=CHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="jobtitle != null">
+                #{jobtitle,jdbcType=TINYINT},
+            </if>
+            <if test="fileid != null">
+                #{fileid,jdbcType=BIGINT},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=TINYINT},
+            </if>
+            <if test="schoolid != null">
+                #{schoolid,jdbcType=INTEGER},
+            </if>
+            <if test="createby != null">
+                #{createby,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateby != null">
+                #{updateby,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="accessplatform != null">
+                #{accessplatform,jdbcType=VARCHAR},
+            </if>
+            <if test="linkaddress != null">
+                #{linkaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="usertypecode != null">
+                #{usertypecode,jdbcType=VARCHAR},
+            </if>
+            <if test="usestatus != null">
+                #{usestatus,jdbcType=TINYINT},
+            </if>
+            <if test="usertypeid != null">
+                #{usertypeid,jdbcType=BIGINT},
+            </if>
+            <if test="subjectid != null">
+                #{subjectid,jdbcType=BIGINT},
+            </if>
+            <if test="classid != null">
+                #{classid,jdbcType=BIGINT},
+            </if>
+            <if test="studentnumber != null">
+                #{studentnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="classcode != null">
+                #{classcode,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.cluster.UserInfo">
+        update UserInfo
+        <set>
+            <if test="usercode != null">
+                UserCode = #{usercode,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                UserName = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="userpwd != null">
+                UserPwd = #{userpwd,jdbcType=CHAR},
+            </if>
+            <if test="identitycard != null">
+                IdentityCard = #{identitycard,jdbcType=CHAR},
+            </if>
+            <if test="birthday != null">
+                Birthday = #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                Email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                Telephone = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="jobtitle != null">
+                JobTitle = #{jobtitle,jdbcType=TINYINT},
+            </if>
+            <if test="fileid != null">
+                FileID = #{fileid,jdbcType=BIGINT},
+            </if>
+            <if test="gender != null">
+                Gender = #{gender,jdbcType=TINYINT},
+            </if>
+            <if test="schoolid != null">
+                SchoolID = #{schoolid,jdbcType=INTEGER},
+            </if>
+            <if test="createby != null">
+                CreateBy = #{createby,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null">
+                CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateby != null">
+                UpdateBy = #{updateby,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null">
+                UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="accessplatform != null">
+                AccessPlatform = #{accessplatform,jdbcType=VARCHAR},
+            </if>
+            <if test="linkaddress != null">
+                LinkAddress = #{linkaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                QQ = #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="usertypecode != null">
+                UserTypeCode = #{usertypecode,jdbcType=VARCHAR},
+            </if>
+            <if test="usestatus != null">
+                UseStatus = #{usestatus,jdbcType=TINYINT},
+            </if>
+            <if test="usertypeid != null">
+                UserTypeID = #{usertypeid,jdbcType=BIGINT},
+            </if>
+            <if test="subjectid != null">
+                SubjectID = #{subjectid,jdbcType=BIGINT},
+            </if>
+            <if test="classid != null">
+                ClassID = #{classid,jdbcType=BIGINT},
+            </if>
+            <if test="studentnumber != null">
+                StudentNumber = #{studentnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="classcode != null">
+                ClassCode = #{classcode,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                Remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where UserID = #{userid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fuhui.entity.cluster.UserInfo">
+    update UserInfo
+    set UserCode = #{usercode,jdbcType=VARCHAR},
+      UserName = #{username,jdbcType=VARCHAR},
+      UserPwd = #{userpwd,jdbcType=CHAR},
+      IdentityCard = #{identitycard,jdbcType=CHAR},
+      Birthday = #{birthday,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Telephone = #{telephone,jdbcType=VARCHAR},
+      JobTitle = #{jobtitle,jdbcType=TINYINT},
+      FileID = #{fileid,jdbcType=BIGINT},
+      Gender = #{gender,jdbcType=TINYINT},
+      SchoolID = #{schoolid,jdbcType=INTEGER},
+      CreateBy = #{createby,jdbcType=INTEGER},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      UpdateBy = #{updateby,jdbcType=INTEGER},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      AccessPlatform = #{accessplatform,jdbcType=VARCHAR},
+      LinkAddress = #{linkaddress,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      UserTypeCode = #{usertypecode,jdbcType=VARCHAR},
+      UseStatus = #{usestatus,jdbcType=TINYINT},
+      UserTypeID = #{usertypeid,jdbcType=BIGINT},
+      SubjectID = #{subjectid,jdbcType=BIGINT},
+      ClassID = #{classid,jdbcType=BIGINT},
+      StudentNumber = #{studentnumber,jdbcType=VARCHAR},
+      ClassCode = #{classcode,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=LONGVARCHAR}
+    where UserID = #{userid,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.cluster.UserInfo">
+    update UserInfo
+    set UserCode = #{usercode,jdbcType=VARCHAR},
+      UserName = #{username,jdbcType=VARCHAR},
+      UserPwd = #{userpwd,jdbcType=CHAR},
+      IdentityCard = #{identitycard,jdbcType=CHAR},
+      Birthday = #{birthday,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Telephone = #{telephone,jdbcType=VARCHAR},
+      JobTitle = #{jobtitle,jdbcType=TINYINT},
+      FileID = #{fileid,jdbcType=BIGINT},
+      Gender = #{gender,jdbcType=TINYINT},
+      SchoolID = #{schoolid,jdbcType=INTEGER},
+      CreateBy = #{createby,jdbcType=INTEGER},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      UpdateBy = #{updateby,jdbcType=INTEGER},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      AccessPlatform = #{accessplatform,jdbcType=VARCHAR},
+      LinkAddress = #{linkaddress,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      UserTypeCode = #{usertypecode,jdbcType=VARCHAR},
+      UseStatus = #{usestatus,jdbcType=TINYINT},
+      UserTypeID = #{usertypeid,jdbcType=BIGINT},
+      SubjectID = #{subjectid,jdbcType=BIGINT},
+      ClassID = #{classid,jdbcType=BIGINT},
+      StudentNumber = #{studentnumber,jdbcType=VARCHAR},
+      ClassCode = #{classcode,jdbcType=VARCHAR}
+    where UserID = #{userid,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectByParam" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from UserInfo
+        where 1=1
+        <if test="userCode != null">
+            AND UserCode = #{userCode}
+        </if>
+    </select>
+</mapper>

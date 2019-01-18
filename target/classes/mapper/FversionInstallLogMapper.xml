@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tcs.FversionInstallLogMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.tcs.FversionInstallLog">
+        <id column="I_LogId" property="iLogid" jdbcType="BIGINT"/>
+        <result column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+        <result column="C_Mac" property="cMac" jdbcType="VARCHAR"/>
+        <result column="I_FDeviceId" property="iFdeviceid" jdbcType="BIGINT"/>
+        <result column="I_FVersionId" property="iFversionid" jdbcType="BIGINT"/>
+        <result column="C_Version" property="cVersion" jdbcType="VARCHAR"/>
+        <result column="I_Way" property="iWay" jdbcType="TINYINT"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="T_Time" property="tTime" jdbcType="TIMESTAMP"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_LogId, I_PadId, C_Mac, I_FDeviceId, I_FVersionId, C_Version, I_Way, I_Status, T_Time, 
+    T_CTime
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_cs_fversioninstalllog
+        where I_LogId = #{iLogid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_cs_fversioninstalllog
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.tcs.FversionInstallLog">
+    insert into t_cs_fversioninstalllog (I_LogId, I_PadId, C_Mac, 
+      I_FDeviceId, I_FVersionId, C_Version, 
+      I_Way, I_Status, T_Time, 
+      T_CTime)
+    values (#{iLogid,jdbcType=BIGINT}, #{iPadid,jdbcType=BIGINT}, #{cMac,jdbcType=VARCHAR}, 
+      #{iFdeviceid,jdbcType=BIGINT}, #{iFversionid,jdbcType=BIGINT}, #{cVersion,jdbcType=VARCHAR}, 
+      #{iWay,jdbcType=TINYINT}, #{iStatus,jdbcType=TINYINT}, #{tTime,jdbcType=TIMESTAMP}, 
+      #{tCtime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.tcs.FversionInstallLog">
+        insert into t_cs_fversioninstalllog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iLogid != null">
+                I_LogId,
+            </if>
+            <if test="iPadid != null">
+                I_PadId,
+            </if>
+            <if test="cMac != null">
+                C_Mac,
+            </if>
+            <if test="iFdeviceid != null">
+                I_FDeviceId,
+            </if>
+            <if test="iFversionid != null">
+                I_FVersionId,
+            </if>
+            <if test="cVersion != null">
+                C_Version,
+            </if>
+            <if test="iWay != null">
+                I_Way,
+            </if>
+            <if test="iStatus != null">
+                I_Status,
+            </if>
+            <if test="tTime != null">
+                T_Time,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iLogid != null">
+                #{iLogid,jdbcType=BIGINT},
+            </if>
+            <if test="iPadid != null">
+                #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="cMac != null">
+                #{cMac,jdbcType=VARCHAR},
+            </if>
+            <if test="iFdeviceid != null">
+                #{iFdeviceid,jdbcType=BIGINT},
+            </if>
+            <if test="iFversionid != null">
+                #{iFversionid,jdbcType=BIGINT},
+            </if>
+            <if test="cVersion != null">
+                #{cVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="iWay != null">
+                #{iWay,jdbcType=TINYINT},
+            </if>
+            <if test="iStatus != null">
+                #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="tTime != null">
+                #{tTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tcs.FversionInstallLog">
+        update t_cs_fversioninstalllog
+        <set>
+            <if test="iPadid != null">
+                I_PadId = #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="cMac != null">
+                C_Mac = #{cMac,jdbcType=VARCHAR},
+            </if>
+            <if test="iFdeviceid != null">
+                I_FDeviceId = #{iFdeviceid,jdbcType=BIGINT},
+            </if>
+            <if test="iFversionid != null">
+                I_FVersionId = #{iFversionid,jdbcType=BIGINT},
+            </if>
+            <if test="cVersion != null">
+                C_Version = #{cVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="iWay != null">
+                I_Way = #{iWay,jdbcType=TINYINT},
+            </if>
+            <if test="iStatus != null">
+                I_Status = #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="tTime != null">
+                T_Time = #{tTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where I_LogId = #{iLogid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tcs.FversionInstallLog">
+    update t_cs_fversioninstalllog
+    set I_PadId = #{iPadid,jdbcType=BIGINT},
+      C_Mac = #{cMac,jdbcType=VARCHAR},
+      I_FDeviceId = #{iFdeviceid,jdbcType=BIGINT},
+      I_FVersionId = #{iFversionid,jdbcType=BIGINT},
+      C_Version = #{cVersion,jdbcType=VARCHAR},
+      I_Way = #{iWay,jdbcType=TINYINT},
+      I_Status = #{iStatus,jdbcType=TINYINT},
+      T_Time = #{tTime,jdbcType=TIMESTAMP},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP}
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </update>
+
+    <sql id="BaseList">
+    a.I_LogId, a.I_PadId, a.C_Mac, a.I_FDeviceId, a.I_FVersionId, a.C_Version, a.I_Way, a.I_Status,DATE_FORMAT(a.T_Time,'%Y-%m-%d %H:%i:%s') T_Time,
+    DATE_FORMAT(a.T_CTime,'%Y-%m-%d %H:%i:%s') T_CTime,c.C_Name schoolName
+  </sql>
+
+    <select id="selectByParam" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseList"/>
+        FROM t_cs_fversioninstalllog a
+        LEFT JOIN t_pd_pad b
+        ON a.C_Mac = b.C_Mac
+        LEFT JOIN t_xu_school c
+        ON b.I_SchoolId = c.I_SchoolId
+        WHERE 1=1
+        <if test="schoolId != null">
+            AND b.I_SchoolId = #{schoolId}
+        </if>
+        <if test="padId != null">
+            AND b.I_PadId = #{padId}
+        </if>
+        <if test="mac != null">
+            AND b.C_Mac = #{mac}
+        </if>
+        <if test="fdeviceId != null">
+            AND a.I_FDeviceId = #{fdeviceId}
+        </if>
+        <if test="fversionId != null">
+            AND a.I_FVersionId = #{fversionId}
+        </if>
+        <if test="version != null">
+            AND a.C_Version = '%${version}%'
+        </if>
+        <if test="sTime != null">
+            AND a.T_Time BETWEEN '${sTime}' AND '${eTime}'
+        </if>
+        ORDER BY a.T_Time DESC
+        <if test="isPage == 1">
+            LIMIT #{pNum},#{pLine}
+        </if>
+    </select>
+
+    <select id="selectByParamCount" resultType="String">
+        SELECT
+        COUNT(*)
+        FROM t_cs_fversioninstalllog a
+        LEFT JOIN t_pd_pad b
+        ON a.C_Mac = b.C_Mac
+        LEFT JOIN t_xu_school c
+        ON b.I_SchoolId = c.I_SchoolId
+        WHERE 1=1
+        <if test="schoolId != null">
+            AND b.I_SchoolId = #{schoolId}
+        </if>
+        <if test="padId != null">
+            AND b.I_PadId = #{padId}
+        </if>
+        <if test="mac != null">
+            AND b.C_Mac = #{mac}
+        </if>
+        <if test="fdeviceId != null">
+            AND a.I_FDeviceId = #{fdeviceId}
+        </if>
+        <if test="fversionId != null">
+            AND a.I_FVersionId = #{fversionId}
+        </if>
+        <if test="version != null">
+            AND a.C_Version = '%${version}%'
+        </if>
+        <if test="sTime != null">
+            AND a.T_Time BETWEEN '${sTime}' AND '${eTime}'
+        </if>
+    </select>
+</mapper>

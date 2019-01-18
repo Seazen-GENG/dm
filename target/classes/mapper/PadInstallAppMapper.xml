@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.model.PadInstallAppMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.model.PadInstallApp">
+        <result column="appId" property="appId"/>
+        <result column="type" property="type"/>
+        <result column="uWay" property="uWay"/>
+        <result column="pgName" property="pgName"/>
+        <result column="appName" property="appName"/>
+        <result column="curTime" property="curTime"/>
+        <result column="curVersionId" property="curVersionId"/>
+        <result column="curVersion" property="curVersion"/>
+        <result column="curVersionCode" property="curVersionCode"/>
+        <result column="newVersion" property="newVersion"/>
+        <result column="newVersionCode" property="newVersionCode"/>
+        <result column="newDownUrl" property="newDownUrl"/>
+        <result column="isNew" property="isNew"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <sql id="querySql">
+        t2.I_AppId appId,t2.I_Type type,t2.I_UWay uWay,IFNULL(t1.C_Package,t2.C_Package) pgName,IF(ISNULL(t2.C_Name),t1.C_AppName,t2.C_Name) appName,t1.T_ETime curTime,t1.I_VersionId curVersionId,t1.C_Version curVersion,t1.C_VersionCode curVersionCode,t2.C_Version newVersion,t2.C_VersionCode newVersionCode,t2.C_DownUrl newDownUrl,IF(t2.I_VersionId=t1.I_VersionId,1,IF(t1.C_VersionCode=t2.C_VersionCode,1,0)) isNew
+    </sql>
+
+    <select id="getPadInstallApp" resultMap="BaseResultMap">
+        select
+        <include refid="querySql"/>
+        from (
+        select I_AppId,I_VersionId,T_ETime,C_Package,C_AppName,C_Version,C_VersionCode from (
+        select I_AppId,I_VersionId,T_ETime,C_Package,C_AppName,C_Version,C_VersionCode from t_rj_app_install a,t_pd_pad
+        b
+        where 1=1
+        and b.I_PadId=#{padId}
+        and a.C_Mac=b.C_Mac
+        ORDER BY a.C_Package,a.T_ETime desc
+        )t
+        group by C_Package
+        )t1
+        left join (
+        select a.I_AppId,a.C_Name,a.C_Package,b.I_Type,b.I_UWay,c.I_VersionId,c.C_Version,c.C_VersionCode,c.C_DownUrl
+        from t_rj_app a,t_xu_app b ,t_rj_app_version c,t_pd_pad d
+        where 1=1
+        and d.I_PadId=#{padId}
+        and a.I_AppId=b.I_AppId
+        and b.I_VersionId=c.I_VersionId
+        and b.I_SchoolId=d.I_SchoolId
+        )t2
+        on t1.I_AppId=t2.I_AppId
+    </select>
+
+    <sql id="querySqls">
+        t2.I_AppId appId,t1.I_Type type,t1.I_UWay uWay
+        ,IFNULL(t1.C_Package,t2.C_Package) pgName,IF(ISNULL(t2.C_Name),t1.C_AppName,t2.C_Name) appName
+        ,t2.T_ETime curTime,t1.I_VersionId curVersionId,t1.C_Version curVersion,t1.C_VersionCode curVersionCode
+        ,t2.C_Version newVersion,t2.C_VersionCode newVersionCode,t2.C_DownUrl newDownUrl
+        ,IF(
+          t2.I_VersionId=t1.I_VersionId
+          ,1
+          ,IF(t1.C_VersionCode=t2.C_VersionCode,1,0)
+        ) isNew
+    </sql>
+
+    <select id="getAppInfoBySchool" resultMap="BaseResultMap">
+        SELECT
+        <include refid="querySqls"/>
+        FROM (
+        SELECT a.I_AppId,a.C_Name
+        C_AppName,a.C_Package,b.I_Type,b.I_UWay,c.I_VersionId,c.C_Version,c.C_VersionCode,c.C_DownUrl
+        FROM t_rj_app a,t_xu_app b ,t_rj_app_version c
+        WHERE 1=1
+        AND a.I_AppId=b.I_AppId
+        AND b.I_VersionId=c.I_VersionId
+        AND b.I_SchoolId= #{schoolId}
+        )t1
+        LEFT JOIN (
+        SELECT I_AppId,I_VersionId,T_UTime T_ETime,C_Package,C_Name ,C_Version,C_VersionCode,C_DownUrl FROM (
+        SELECT a.I_AppId,a.I_VersionId,a.T_UTime,a.C_Package,a.C_Name,b.C_Version,b.C_VersionCode,b.C_DownUrl FROM
+        t_rj_app a,t_rj_app_version b
+        WHERE 1=1
+        AND a.I_VersionId=b.I_VersionId
+        ORDER BY a.C_Package,a.T_UTime DESC
+        )t
+        GROUP BY C_Package
+        )t2 ON t1.I_AppId=t2.I_AppId;
+    </select>
+
+
+    <select id="getPadAppList" resultMap="BaseResultMap">
+        select t1.I_AppId appId,t1.I_Type type,t1.I_UWay uWay
+        ,t1.C_Package pgName,t1.C_AppName appName
+        ,t1.I_VersionId curVersionId,t1.C_Version curVersion,t1.C_VersionCode curVersionCode
+        ,t1.T_ETime curTime,t2.C_Version newVersion,t2.C_VersionCode newVersionCode
+        ,IF(IFNULL(t1.C_DownUrl,"")="",t2.C_DownUrl,t1.C_DownUrl)  newDownUrl
+        ,IF(
+          t2.I_VersionId=t1.I_VersionId
+          ,1
+          ,IF(t1.C_VersionCode=t2.C_VersionCode,1,0)
+        ) isNew
+         from (
+          select I_AppId,C_Package,C_AppName,I_Type,I_UWay
+          ,C_Version,C_VersionCode,I_VersionId
+          ,T_ETime,I_Way,I_Status,newVersionId,C_DownUrl
+          from (
+            select
+            IF(ISNULL(c.I_AppId),a.I_AppId,c.I_AppId) I_AppId
+            ,IF(ISNULL(c.C_Package),a.C_Package,c.C_Package) C_Package
+            ,IF(ISNULL(c.C_Name),a.C_AppName,c.C_Name) C_AppName
+            ,d.I_Type,d.I_UWay
+            ,a.I_VersionId,a.T_ETime
+            ,C_Version,C_VersionCode,I_Way,a.I_Status
+            ,d.I_VersionId newVersionId,d.C_DownUrl
+            from t_rj_app_install a
+            left join t_pd_pad b on a.C_Mac=b.C_Mac
+            left join t_rj_app c on a.C_Package=c.C_Package
+            left join t_xu_app d
+                on IFNULL(c.I_AppId,a.I_AppId)=d.I_AppId and d.I_SchoolId=b.I_SchoolId
+            where 1=1
+            and a.C_Mac=#{mac}
+            ORDER BY a.C_Package,a.T_ETime desc
+          )t
+          group by C_Package
+        )t1
+        left join t_rj_app_version t2
+        on t1.I_AppId=t2.I_AppId and t1.newVersionId=t2.I_VersionId;
+    </select>
+
+    <select id="getPadAppLogList" resultMap="BaseResultMap">
+        SELECT b.I_AppId appId,b.C_Name appName,a.C_Package pgName,a.C_Version curVersion,a.C_VersionCode curVersionCode,a.I_Way uWay,DATE_FORMAT(a.T_Time,'%Y-%m-%d %H:%i:%s') curTime,a.I_Status status
+        FROM t_rj_app_installlog a
+        LEFT JOIN t_rj_app b
+        ON a.C_Package = b.C_Package
+        WHERE C_Mac = #{mac}
+        ORDER BY a.T_CTime DESC
+        <if test="isPage != null">
+            LIMIT #{pNum},#{pLine}
+        </if>
+    </select>
+
+    <select id="getPadAppLogListCount" resultType="String">
+        SELECT COUNT(*)
+        FROM t_rj_app_installlog a
+        LEFT JOIN t_rj_app b
+        ON a.C_Package = b.C_Package
+        WHERE C_Mac = #{mac}
+    </select>
+</mapper>

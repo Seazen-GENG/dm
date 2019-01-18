@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tpd.PadSwitchLogMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.tpd.PadSwitchLog">
+        <id column="I_LogId" property="iLogid" jdbcType="BIGINT"/>
+        <result column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="T_Time" property="tTime" jdbcType="TIMESTAMP"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_LogId, I_PadId, I_Type, T_Time, T_CTime
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_pd_switchlog
+        where I_LogId = #{iLogid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_pd_switchlog
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.tpd.PadSwitchLog">
+    insert into t_pd_switchlog (I_LogId, I_PadId, I_Type, 
+      T_Time, T_CTime)
+    values (#{iLogid,jdbcType=BIGINT}, #{iPadid,jdbcType=BIGINT}, #{iType,jdbcType=TINYINT}, 
+      #{tTime,jdbcType=TIMESTAMP}, #{tCtime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.tpd.PadSwitchLog">
+        insert into t_pd_switchlog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iLogid != null">
+                I_LogId,
+            </if>
+            <if test="iPadid != null">
+                I_PadId,
+            </if>
+            <if test="iType != null">
+                I_Type,
+            </if>
+            <if test="tTime != null">
+                T_Time,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iLogid != null">
+                #{iLogid,jdbcType=BIGINT},
+            </if>
+            <if test="iPadid != null">
+                #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="tTime != null">
+                #{tTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tpd.PadSwitchLog">
+        update t_pd_switchlog
+        <set>
+            <if test="iPadid != null">
+                I_PadId = #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                I_Type = #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="tTime != null">
+                T_Time = #{tTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where I_LogId = #{iLogid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tpd.PadSwitchLog">
+    update t_pd_switchlog
+    set I_PadId = #{iPadid,jdbcType=BIGINT},
+      I_Type = #{iType,jdbcType=TINYINT},
+      T_Time = #{tTime,jdbcType=TIMESTAMP},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP}
+    where I_LogId = #{iLogid,jdbcType=BIGINT}
+  </update>
+
+    <sql id="Base_Column_Lists">
+       a.I_LogId, a.I_PadId, a.I_Type, a.T_Time, a.T_CTime
+    </sql>
+
+    <select id="selectByPadMac" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_Lists"/>
+        from t_pd_switchlog a
+        INNER JOIN t_pd_pad b
+        ON a.I_PadId = b.I_PadId
+        WHERE b.C_Mac=#{padMac}
+        ORDER BY a.T_CTime DESC
+        <if test="isPage == 1">
+            Limit #{pNum},#{pLine}
+        </if>
+    </select>
+
+    <select id="selectByMacFinal" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_Lists"/>
+        from t_pd_switchlog a
+        INNER JOIN t_pd_pad b
+        ON a.I_PadId = b.I_PadId
+        WHERE b.C_Mac=#{padMac}
+        ORDER BY a.T_CTime DESC
+        LIMIT 0,1
+    </select>
+
+    <select id="selectCountAll" resultType="String">
+        select
+        COUNT(a.I_LogId) countAll
+        from t_pd_switchlog a
+        INNER JOIN t_pd_pad b
+        ON a.I_PadId = b.I_PadId
+        WHERE b.C_Mac=#{padMac}
+    </select>
+</mapper>

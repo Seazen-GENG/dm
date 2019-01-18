@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.txm.AppconfigApplistMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.txm.AppconfigApplist">
+        <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+        <result column="I_ConfigId" property="iConfigid" jdbcType="BIGINT"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_IDX, I_ConfigId, I_AppId, T_CTime, I_CUserId
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_xm_appconfig_applist
+        where I_IDX = #{iIdx,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_xm_appconfig_applist
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </delete>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.txm.AppconfigApplist">
+    insert into t_xm_appconfig_applist (I_IDX, I_ConfigId, I_AppId, 
+      T_CTime, I_CUserId)
+    values (#{iIdx,jdbcType=BIGINT}, #{iConfigid,jdbcType=BIGINT}, #{iAppid,jdbcType=BIGINT}, 
+      #{tCtime,jdbcType=TIMESTAMP}, #{iCuserid,jdbcType=BIGINT})
+  </insert>
+    <insert id="saveAppList" parameterType="com.fuhui.entity.txm.AppconfigApplist">
+        insert into t_xm_appconfig_applist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                I_IDX,
+            </if>
+            <if test="iConfigid != null">
+                I_ConfigId,
+            </if>
+            <if test="iAppid != null">
+                I_AppId,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                #{iIdx,jdbcType=BIGINT},
+            </if>
+            <if test="iConfigid != null">
+                #{iConfigid,jdbcType=BIGINT},
+            </if>
+            <if test="iAppid != null">
+                #{iAppid,jdbcType=BIGINT},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                #{iCuserid,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.txm.AppconfigApplist">
+        update t_xm_appconfig_applist
+        <set>
+            <if test="iConfigid != null">
+                I_ConfigId = #{iConfigid,jdbcType=BIGINT},
+            </if>
+            <if test="iAppid != null">
+                I_AppId = #{iAppid,jdbcType=BIGINT},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId = #{iCuserid,jdbcType=BIGINT},
+            </if>
+        </set>
+        where I_IDX = #{iIdx,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.txm.AppconfigApplist">
+    update t_xm_appconfig_applist
+    set I_ConfigId = #{iConfigid,jdbcType=BIGINT},
+      I_AppId = #{iAppid,jdbcType=BIGINT},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT}
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </update>
+
+    <delete id="deleteByConfigId" parameterType="java.lang.Long">
+        DELETE FROM t_xm_appconfig_applist
+        WHERE 1=1
+        AND I_ConfigId = #{configId,jdbcType=BIGINT}
+    </delete>
+
+    <resultMap id="map" type="com.fuhui.entity.txm.AppconfigApplist">
+        <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+        <result column="I_ConfigId" property="iConfigid" jdbcType="BIGINT"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <collection property="appRj" javaType="com.fuhui.entity.trj.AppRj">
+            <id column="I_AppId" property="iAppid" jdbcType="BIGINT" />
+            <result column="I_ProductId" property="iProductid" jdbcType="BIGINT" />
+            <result column="C_Name" property="cName" jdbcType="VARCHAR" />
+            <result column="C_Package" property="cPackage" jdbcType="VARCHAR" />
+            <result column="I_Place" property="iPlace" jdbcType="TINYINT" />
+            <result column="C_PlaceRemark" property="cPlaceremark" jdbcType="VARCHAR" />
+            <result column="I_Type" property="iType" jdbcType="TINYINT" />
+            <result column="I_IsFree" property="iIsfree" jdbcType="TINYINT" />
+            <result column="N_Price" property="nPrice" jdbcType="DECIMAL" />
+            <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT" />
+            <result column="T_FRTime" property="tFrtime" jdbcType="TIMESTAMP" />
+            <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP" />
+            <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT" />
+            <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP" />
+            <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT" />
+            <result column="C_Desc" property="cDesc" jdbcType="VARCHAR" />
+            <result column="C_Remark" property="cRemark" jdbcType="VARCHAR" />
+            <result column="I_Status" property="iStatus" jdbcType="TINYINT" />
+            <result column="C_ImgPath" property="cImgPath" jdbcType="VARCHAR" />
+        </collection>
+        <collection property="app" javaType="com.fuhui.entity.txu.App">
+            <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+            <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+            <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+            <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+            <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+            <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+            <result column="I_IsCompel" property="iIscompel" jdbcType="TINYINT"/>
+            <result column="N_Price" property="nPrice" jdbcType="DECIMAL"/>
+            <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+            <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+            <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+            <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+            <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+            <result column="I_UWay" property="iUway" jdbcType="TINYINT"/>
+        </collection>
+        <collection property="appVersion" javaType="com.fuhui.entity.trj.AppVersion">
+            <id column="I_VersionId" property="iVersionid" jdbcType="BIGINT" />
+            <result column="I_AppId" property="iAppid" jdbcType="BIGINT" />
+            <result column="C_Version" property="cVersion" jdbcType="VARCHAR" />
+            <result column="C_VersionRemark" property="cVersionremark" jdbcType="VARCHAR" />
+            <result column="I_IsCompel" property="iIscompel" jdbcType="TINYINT" />
+            <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR" />
+            <result column="T_ReleaseTime" property="tReleasetime" jdbcType="TIMESTAMP" />
+            <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP" />
+            <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT" />
+            <result column="T_RTime" property="tRtime" jdbcType="TIMESTAMP" />
+            <result column="I_RUserId" property="iRuserid" jdbcType="BIGINT" />
+            <result column="C_Remark" property="cRemark" jdbcType="VARCHAR" />
+            <result column="I_Status" property="iStatus" jdbcType="TINYINT" />
+            <result column="C_VersionCode" property="cVersionCode" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+
+    <select id="getInfo" resultMap="map">
+        SELECT b.I_AppId,b.C_Name,b.C_Package,a.I_Type,a.I_UWay,c.C_Version
+        ,IFNULL(a.C_DownUrl,c.C_DownUrl) C_DownUrl,b.C_Desc,d.I_IDX,d.T_CTime,d.I_ConfigId
+        FROM t_rj_app b,t_xu_app a
+        LEFT JOIN t_rj_app_version c ON a.I_AppId=c.I_AppId AND a.I_VersionId=c.I_VersionId
+        LEFT JOIN t_xm_appconfig_applist d ON a.I_AppId=d.I_AppId
+        <if test="configId != null">
+            AND d.I_ConfigId=#{configId}
+        </if>
+        WHERE 1=1
+        AND b.I_Status=1
+        <if test="schoolId != -1">
+            AND a.I_SchoolId=#{schoolId}
+        </if>
+        AND a.I_AppId=b.I_AppId
+        <if test="isShowAppAll == 0">
+            AND ISNULL(d.I_IDX)=0
+        </if>
+    </select>
+
+    <delete id="deleteBySchooId" parameterType="java.lang.Long">
+    delete from t_xm_appconfig_applist
+    where I_SchoolId = #{schoolId}
+  </delete>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.model.padConfigModelMapper">
+
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.model.padConfigModel">
+        <result column="typeName" property="typeName" jdbcType="VARCHAR"/>
+        <result column="curConfig" property="curConfig" jdbcType="VARCHAR"/>
+        <result column="curExtend" property="curExtend" jdbcType="VARCHAR"/>
+        <result column="curTime" property="curTime" jdbcType="VARCHAR"/>
+        <result column="newConfig" property="newConfig" jdbcType="VARCHAR"/>
+        <result column="newExtend" property="newExtend" jdbcType="VARCHAR"/>
+        <result column="isNew" property="isNew" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getPadConfigModel" resultMap="BaseResultMap">
+        select
+        t1.typeName,t2.C_Config curConfig,t2.C_Extend1 curExtend,t2.T_Time curTime,t3.C_Config newConfig
+        ,t3.C_Extend newExtend,IF(t2.I_ConfigId=t3.I_ConfigId
+        ,IF(t2.C_Config=t3.C_Config,1,0),0) isNew
+        from
+        (
+        select 1 type,'网络白名单' typeName
+        UNION all select 2 type,'蓝牙配置' typeName
+        #UNION all select 3 type,'时间安排' typeName
+        UNION all select 4 type,'USB调试' typeName
+        UNION all select 5 type,'USB数据传输' typeName
+        UNION all select 6 type,'恢复出厂设置' typeName
+        UNION all select 7 type,'APP可卸载' typeName
+        UNION all select 8 type,'导航栏显示' typeName
+        UNION all select 9 type,'头部栏显示' typeName
+        UNION all select 10 type,'通知栏显示' typeName
+        UNION all select 11 type,'自定义界面' typeName
+        )t1
+        left join (
+        select * from t_pd_configlog a
+        where 1 > (select count(*) from t_pd_configlog b where b.I_Type = a.I_Type <![CDATA[AND a.T_Time< b.T_Time]]> AND b.I_PadId=
+        #{padId})
+        and a.I_PadId=#{padId}
+        order by a.I_Type,a.T_Time desc
+        )t2 on t1.type=t2.I_Type
+        left join (
+        select a.I_ConfigId,a.I_Type,GROUP_CONCAT(b.C_Config) C_Config,GROUP_CONCAT(b.C_Extend1) C_Extend from t_pd_pad
+        a0,t_xm_padconfig a,t_xm_padconfig_configlist b
+        where 1=1
+        and a0.I_PadId=#{padId}
+        and a0.I_SchoolId= a.I_SchoolId
+        and a.I_ConfigId=b.I_ConfigId
+        group by a.I_ConfigId
+        )t3 on t1.type=t3.I_Type
+    </select>
+</mapper>

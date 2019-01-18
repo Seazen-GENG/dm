@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>知会设备管控平台</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+    <!--<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">-->
+    <link rel="stylesheet" href="../dist/css/responsive.dataTables.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header" id="headerDiv">
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" id="leftMenu">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                设备应用管理
+                <small>管理学生平板应用的安装、卸载</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+                <li><a href="#">平板管理</a></li>
+                <li class="active">设备应用配置管理</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header" style="padding-bottom: 0px;">
+                            <div style="width: 120px;float: left;">
+                                <a class="btn btn-block btn-social btn-bitbucket" onclick="editConfig();">
+                                    <i class="fa fa-plus"></i> 新增配置
+                                </a>
+                            </div>
+                            <div class="form-group" style="float: right;" id="zanshi">
+                                <div class="col-sm-10">
+                                    <select id="nation" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="appConfigList" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th data-priority="1">配置名称</th>
+                                    <th>应用范围</th>
+                                    <th>学校名称</th>
+                                    <th>系统应用个数</th>
+                                    <th>拓展应用个数</th>
+                                    <th>更新时间</th>
+                                    <th>状态</th>
+                                    <th data-priority="2">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>配置名称</th>
+                                    <th>应用范围</th>
+                                    <th>学校名称</th>
+                                    <th>系统应用个数</th>
+                                    <th>拓展应用个数</th>
+                                    <th>更新时间</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" id="footerDiv">
+    </footer>
+    <span id="user" th:text="${userName}" style="display: none"></span>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<script src="../dist/js/dataTables.responsive.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.cookie.js"></script>
+<!--<script type="text/javascript" src="../bower_components/jquery/jquery-jtemplates.js"></script>-->
+<!-- page script -->
+
+<script>
+    $(function () {
+        $('#leftMenu').load("leftMenu.html", function () {
+            $("#appConfig").addClass("active");
+        });
+        $('#headerDiv').load("header.html");
+        $('#footerDiv').load("footer.html");
+        $("#nation").change(function () {
+            //要触发的事件
+            var schoolId = $('#nation option:selected').val();
+            searchdata(schoolId);
+        });
+        reSchoolInfo();
+        if (document.cookie.indexOf("schoolId") > 0) {
+            var cookie = getCookie("schoolId");
+            searchdata(cookie);
+        }
+        if (document.cookie.indexOf("userName") > 0) {
+            var cookie = getCookie("userName");
+            $("#userName").html(cookie);
+        } else {
+            setCookie();
+        }
+        createSelect('--------请选择学校查询---------');
+
+    });
+
+
+    function setCookie() {
+        var userName = $("#user").html();
+        //console.log("user==" + userName)
+        $.cookie('userName', userName);
+        $("#userName").html(userName);
+    }
+
+    function reSchoolInfo() {
+        var url = location.search;
+        var Request = new Object();
+        //判断传入参数是否为空
+        if (url.indexOf("?") != -1) {
+            console.log("urlNum==" + url.indexOf("?"));
+            var str = url.substr(1);　//去掉?号
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                Request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+            var schoolId = Request["schoolId"];
+            searchdata(schoolId);
+        } else {
+            console.log("直接加载全部!");
+            searchdata();
+        }
+    }
+
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            $("#zanshi").hide();
+            c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1) c_end = document.cookie.length
+                return unescape(document.cookie.substring(c_start, c_end))
+            }
+        } else {
+            $("#zanshi").show();
+        }
+        return ""
+    }
+
+    function createSelect(name) {
+        var _select = document.getElementById("nation");
+        var firstOption = document.createElement("option");
+        firstOption.value = "";
+        firstOption.text = "--------请选择学校查询---------";
+        _select.appendChild(firstOption);
+        var searchUrl = "/schService/getSchoolList";
+        $.ajax({
+            type: "Post",
+            url: searchUrl,
+            dataType: "json",
+            success: function (data) {
+                var res = data['data']['schoolList'];
+                //console.log(res)
+                for (i = 0; i < res.length; i++) {
+                    var _option = document.createElement("option");
+                    _option.value = res[i].schoolId;
+                    _option.text = res[i].name;
+                    if (name == res[i].name) {
+                        _option.selected = "true";
+                    }
+                    _select.appendChild(_option);
+                }
+            }
+        });
+        return _select;
+    }
+
+    //搜索列表
+    function searchdata(schoolId) {
+        $('#appConfigList').dataTable().fnClearTable();
+        $('#appConfigList').dataTable().fnDestroy();
+        var searchUrl = "/appConfigService/getAllConfigList";
+        var pageLen = 10;
+        var t = $('#appConfigList').DataTable({
+            'responsive': true,
+            'paging': true,
+            'pageLength': pageLen,
+            'lengthChange': false,
+            "processing": false,
+            'searching': false,
+            'ordering': false,
+            'info': true,
+            'autoWidth': false
+            // AJAX请求
+            , "ajax": {
+                // 定义表格数据结果集
+                dataSrc: function (json) {
+                    return json['data']['list'];
+                },
+                url: searchUrl,
+                type: "POST",
+                data: {
+                    "schoolId": schoolId
+                }
+            }
+            // 定义显示的列
+            , "columns": [
+                {"data": "configId"},
+                {"data": "name"},
+                {"data": "range"},
+                {"data": "schoolName"},
+                {"data": "appCount_sys"},
+                {"data": "appCount_ext"},
+                {"data": "uTime"},
+                {"data": "status"},
+                {"data": "schoolId"}
+            ]
+            // 定义最后一列显示
+            , "columnDefs": [
+                {responsivePriority: 1, targets: 1},
+                {responsivePriority: 2, targets: -1},
+                {
+                    // 定义操作列,######以下是重点########
+                    "targets": 8,//操作按钮目标列
+                    "data": null,
+                    "render": function (data, type, row) {
+                        var id = '"' + row.configId + '"';
+                        var conName = '"' + row.name + '"';
+                        //var status = '"' + row.status + '"';
+                        var range = '"' + row.range + '"';
+                        var schoolName = '"' + row.schoolName + '"';
+                        var schoolId = '"' + row.schoolId + '"';
+                        var html = "<a href='javascript:void(0);'  onclick='editConfig(" + id + "," + conName + "," + range + "," + schoolName + "," + schoolId + "," + 1 + ")' class='up btn btn-default btn-xs'  style='margin-right: 10px;'>查看</a>"
+                        html += "<a href='javascript:void(0);'  onclick='editConfig(" + id + "," + conName + "," + range + "," + schoolName + "," + schoolId + ")' class='up btn btn-default btn-xs'  style='margin-right: 10px;'> 编辑</a>"
+                        // html += "<a href='javascript:void(0);' id='updateBut'  onclick='stopUse(" + id + "," + status + ")'  class='down btn btn-default btn-xs' > 停用</a>"
+                        return html;
+                    }
+                }, {
+                    "data": "range",
+                    "targets": 2,
+                    "render": function (data, type, full, meta) {
+                        if (data == 0) {
+                            data = "全校";
+                        } else {
+                            data = "指定";
+                        }
+                        return data;
+                    }
+                }, {
+                    "data": "status",
+                    "targets": 7,
+                    "render": function (data) {
+                        if (data == 1) {
+                            data = "启用";
+                        } else {
+                            data = "停用";
+                        }
+                        return data;
+                    }
+                }, {
+                    "data": null,
+                    "targets": 0
+                }, {
+                    "data": "schoolId",
+                    "targets": 8
+                }
+            ]
+            // 汉化
+            , "oLanguage": {
+                //"sLoadingRecords": "载入中...",
+                "sSearch": "搜索",
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            }
+            , "fnDrawCallback": function () {
+                var api = this.api();
+                var startIndex = api.context[0]._iDisplayStart;//获取到本页开始的条数
+                api.column(0).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }
+        });
+    }
+
+    //新增跳转
+    function editConfig(id, name, range, schoolName, schoolId, query) {
+        if (id == null) {
+            id = null;
+        }
+        window.location.href = "appConfigSave.html?id=" + id + "&name=" + escape(name) + "&range=" + range + "&schoolName=" + escape(schoolName) + "&schoolId=" + schoolId + "&query=" + query;
+    }
+
+    function stopUse(id, status) {
+        var updateUrl = "/appConfigService/setConfigStatus";
+        var stau;
+        if (status.valueOf() == "1") {
+            stau = 0;
+            $("#updateBut").prop('lastChild').nodeValue = "启用";
+        } else {
+            stau = 1;
+            $("#updateBut").prop('lastChild').nodeValue = "停用";
+        }
+        console.log(stau);
+        $.ajax({
+            type: "POST",
+            url: updateUrl,
+            data: {configId: id, status: stau},
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                if (data.status) {
+                    //alert("操作成功！");
+                } else {
+                    alert(data.errorInfo);
+                }
+            }
+        });
+    }
+
+</script>
+
+<script>
+    var dataObj = {
+        "status": true,
+        "errorNum": 0,
+        "errorInfo": "",
+        "data": {
+            "page": {
+                "pageNum": "1",
+                "pageLine ": "1",
+                "countAll": "2"
+            },
+            "list": [{
+                "configId": "1",
+                "name": "配置名称",
+                "schoolId": "学校ID",
+                "range": "应用范围，0全校，1指定年级，2指定班级，3指定分组，4指定PAD ",
+                "appCount_sys": "5",
+                "appCount_ext": "10",
+                "cTime": "创建时间",
+                "uTime": "2018-07-31 12:23",
+                "status": "0"
+            }]
+        }
+    };
+</script>
+</body>
+</html>

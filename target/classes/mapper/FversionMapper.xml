@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tcs.FversionMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.tcs.Fversion">
+        <id column="I_FVersionId" property="iFversionid" jdbcType="BIGINT"/>
+        <result column="I_FDeviceId" property="iFdeviceid" jdbcType="BIGINT"/>
+        <result column="I_FactoryId" property="iFactoryid" jdbcType="BIGINT"/>
+        <result column="C_Version" property="cVersion" jdbcType="VARCHAR"/>
+        <result column="C_VersionRemark" property="cVersionremark" jdbcType="VARCHAR"/>
+        <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+        <result column="T_ReleaseTime" property="tReleasetime" jdbcType="TIMESTAMP"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="I_IsReview" property="iIsreview" jdbcType="TINYINT"/>
+        <result column="T_RTime" property="tRtime" jdbcType="TIMESTAMP"/>
+        <result column="I_RUserId" property="iRuserid" jdbcType="BIGINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="I_UFId" property="iUFId" jdbcType="BIGINT"/>
+        <result column="C_MD5" property="cMD5" jdbcType="VARCHAR"/>
+        <result column="C_VersionCode" property="cVersionCode" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_FVersionId, I_FDeviceId, I_FactoryId, C_Version, C_VersionRemark, C_DownUrl, T_ReleaseTime, 
+    T_CTime, I_CUserId, T_UTime, I_UUserId, I_IsReview, T_RTime, I_RUserId, C_Remark, 
+    I_Status , I_UFId , C_MD5 , C_VersionCode
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_cs_device_fversion
+        where I_FVersionId = #{iFversionid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_cs_device_fversion
+    where I_FVersionId = #{iFversionid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.tcs.Fversion">
+    insert into t_cs_device_fversion (I_FVersionId, I_FDeviceId, I_FactoryId, 
+      C_Version, C_VersionRemark, C_DownUrl, 
+      T_ReleaseTime, T_CTime, I_CUserId, 
+      T_UTime, I_UUserId, I_IsReview, 
+      T_RTime, I_RUserId, C_Remark, 
+      I_Status , I_UFId , C_MD5 ,C_VersionCode)
+    values (#{iFversionid,jdbcType=BIGINT}, #{iFdeviceid,jdbcType=BIGINT}, #{iFactoryid,jdbcType=BIGINT}, 
+      #{cVersion,jdbcType=VARCHAR}, #{cVersionremark,jdbcType=VARCHAR}, #{cDownurl,jdbcType=VARCHAR}, 
+      #{tReleasetime,jdbcType=TIMESTAMP}, #{tCtime,jdbcType=TIMESTAMP}, #{iCuserid,jdbcType=BIGINT}, 
+      #{tUtime,jdbcType=TIMESTAMP}, #{iUuserid,jdbcType=BIGINT}, #{iIsreview,jdbcType=TINYINT}, 
+      #{tRtime,jdbcType=TIMESTAMP}, #{iRuserid,jdbcType=BIGINT}, #{cRemark,jdbcType=VARCHAR}, 
+      #{iStatus,jdbcType=TINYINT} , #{iUFId,jdbcType=BIGINT} ,#{cMD5,jdbcType=VARCHAR},#{cVersionCode,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.tcs.Fversion">
+        insert into t_cs_device_fversion
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iFversionid != null">
+                I_FVersionId,
+            </if>
+            <if test="iFdeviceid != null">
+                I_FDeviceId,
+            </if>
+            <if test="iFactoryid != null">
+                I_FactoryId,
+            </if>
+            <if test="cVersion != null">
+                C_Version,
+            </if>
+            <if test="cVersionremark != null">
+                C_VersionRemark,
+            </if>
+            <if test="cDownurl != null">
+                C_DownUrl,
+            </if>
+            <if test="tReleasetime != null">
+                T_ReleaseTime,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId,
+            </if>
+            <if test="tUtime != null">
+                T_UTime,
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId,
+            </if>
+            <if test="iIsreview != null">
+                I_IsReview,
+            </if>
+            <if test="tRtime != null">
+                T_RTime,
+            </if>
+            <if test="iRuserid != null">
+                I_RUserId,
+            </if>
+            <if test="cRemark != null">
+                C_Remark,
+            </if>
+            <if test="iStatus != null">
+                I_Status,
+            </if>
+            <if test="iUFId != null">
+                I_UFId,
+            </if>
+            <if test="cMD5 != null">
+                C_MD5,
+            </if>
+            <if test="cVersionCode != null">
+                C_VersionCode,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iFversionid != null">
+                #{iFversionid,jdbcType=BIGINT},
+            </if>
+            <if test="iFdeviceid != null">
+                #{iFdeviceid,jdbcType=BIGINT},
+            </if>
+            <if test="iFactoryid != null">
+                #{iFactoryid,jdbcType=BIGINT},
+            </if>
+            <if test="cVersion != null">
+                #{cVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="cVersionremark != null">
+                #{cVersionremark,jdbcType=VARCHAR},
+            </if>
+            <if test="cDownurl != null">
+                #{cDownurl,jdbcType=VARCHAR},
+            </if>
+            <if test="tReleasetime != null">
+                #{tReleasetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="tUtime != null">
+                #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                #{iUuserid,jdbcType=BIGINT},
+            </if>
+            <if test="iIsreview != null">
+                #{iIsreview,jdbcType=TINYINT},
+            </if>
+            <if test="tRtime != null">
+                #{tRtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iRuserid != null">
+                #{iRuserid,jdbcType=BIGINT},
+            </if>
+            <if test="cRemark != null">
+                #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="iUFId != null">
+                #{iUFId,jdbcType=BIGINT} ,
+            </if>
+            <if test="cMD5 != null">
+                #{cMD5,jdbcType=VARCHAR},
+            </if>
+            <if test="cVersionCode != null">
+                #{cVersionCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tcs.Fversion">
+        update t_cs_device_fversion
+        <set>
+            <if test="iFdeviceid != null">
+                I_FDeviceId = #{iFdeviceid,jdbcType=BIGINT},
+            </if>
+            <if test="iFactoryid != null">
+                I_FactoryId = #{iFactoryid,jdbcType=BIGINT},
+            </if>
+            <if test="cVersion != null">
+                C_Version = #{cVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="cVersionremark != null">
+                C_VersionRemark = #{cVersionremark,jdbcType=VARCHAR},
+            </if>
+            <if test="cDownurl != null">
+                C_DownUrl = #{cDownurl,jdbcType=VARCHAR},
+            </if>
+            <if test="tReleasetime != null">
+                T_ReleaseTime = #{tReleasetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId = #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="tUtime != null">
+                T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId = #{iUuserid,jdbcType=BIGINT},
+            </if>
+            <if test="iIsreview != null">
+                I_IsReview = #{iIsreview,jdbcType=TINYINT},
+            </if>
+            <if test="tRtime != null">
+                T_RTime = #{tRtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iRuserid != null">
+                I_RUserId = #{iRuserid,jdbcType=BIGINT},
+            </if>
+            <if test="cRemark != null">
+                C_Remark = #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                I_Status = #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="iUFId != null">
+                I_UFId = #{iUFId,jdbcType=BIGINT},
+            </if>
+            <if test="cMD5 != null">
+                C_MD5 = #{cMD5,jdbcType=VARCHAR},
+            </if>
+            <if test="cVersionCode != null">
+                C_VersionCode = #{cVersionCode,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        where I_FVersionId = #{iFversionid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tcs.Fversion">
+    update t_cs_device_fversion
+    set I_FDeviceId = #{iFdeviceid,jdbcType=BIGINT},
+      I_FactoryId = #{iFactoryid,jdbcType=BIGINT},
+      C_Version = #{cVersion,jdbcType=VARCHAR},
+      C_VersionRemark = #{cVersionremark,jdbcType=VARCHAR},
+      C_DownUrl = #{cDownurl,jdbcType=VARCHAR},
+      T_ReleaseTime = #{tReleasetime,jdbcType=TIMESTAMP},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      I_IsReview = #{iIsreview,jdbcType=TINYINT},
+      T_RTime = #{tRtime,jdbcType=TIMESTAMP},
+      I_RUserId = #{iRuserid,jdbcType=BIGINT},
+      C_Remark = #{cRemark,jdbcType=VARCHAR},
+      I_Status = #{iStatus,jdbcType=TINYINT},
+      I_UFId = #{iUFId,jdbcType=BIGINT},
+      C_MD5 = #{cMD5,jdbcType=VARCHAR},
+      C_VersionCode = #{cVersionCode,jdbcType=VARCHAR}
+    where I_FVersionId = #{iFversionid,jdbcType=BIGINT}
+  </update>
+
+    <sql id="BaseList">
+    a.I_FVersionId, a.I_FDeviceId, a.I_FactoryId, a.C_Version, a.C_VersionRemark, a.C_DownUrl, a.T_ReleaseTime,
+    a.T_CTime, a.I_CUserId, a.T_UTime, a.I_UUserId, a.I_IsReview, a.T_RTime, a.I_RUserId, a.C_Remark,
+    a.I_Status
+  </sql>
+
+    <select id="selectListByDeviceId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseList"/>
+        FROM t_cs_device_fversion a,t_cs_device b
+        WHERE a.I_FDeviceId = b.I_FDeviceId
+        AND b.I_FDeviceId = #{deviceId}
+        <if test="status != null">
+            AND b.I_Status = #{status}
+        </if>
+        ORDER BY a.T_UTime DESC
+        <if test="isPage == 1">
+            LIMIT #{pNum},#{pLine}
+        </if>
+    </select>
+
+    <select id="selectListByDeviceIdCount" resultType="String">
+        SELECT
+        COUNT(*)
+        FROM t_cs_device_fversion a,t_cs_device b
+        WHERE a.I_FDeviceId = b.I_FDeviceId
+        AND b.I_FDeviceId = #{deviceId}
+        <if test="status != null">
+            AND b.I_Status = #{status}
+        </if>
+    </select>
+
+    <resultMap id="getSchoolListByDeviceIdMap" type="com.fuhui.entity.model.DevSchoolList">
+        <result column="schoolId" property="schoolId"/>
+        <result column="name" property="name"/>
+        <result column="total" property="deviceTotal"/>
+        <result column="fversionId" property="fversionId"/>
+        <result column="fversion" property="fversion"/>
+        <result column="fversionCount" property="fversionCount"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <select id="getSchoolListByDeviceId" resultMap="getSchoolListByDeviceIdMap">
+        select a.I_SchoolId schoolId,a.C_Name name,count(b.I_PadId) total
+        ,d.C_Version fversion,d.I_FVersionId fversionId
+        ,sum(IF(IFNULL(b.C_FVersion,'')=d.C_Version,1,0)) fversionCount,a.I_Status status
+        from t_xu_school a,t_pd_pad b,t_cs_device c
+        left join t_cs_device_fversion d on c.I_FVersionId=d.I_FVersionId
+        where 1=1
+        <if test="deviceId != null">
+            and c.I_FDeviceId=#{deviceId}
+        </if>
+        <if test="deviceType != null">
+            and c.I_DType = #{deviceType}
+        </if>
+        <if test="schoolStatus != null">
+            and a.I_Status = #{schoolStatus}
+        </if>
+        and a.I_SchoolId=b.I_SchoolId
+        and b.C_Model=c.C_Model
+        group by a.I_SchoolId
+        <if test="isPage == 1">
+            LIMIT #{pNum},#{pLine}
+        </if>
+    </select>
+
+    <select id="getSchoolListByDeviceIdCount" resultType="String">
+        select COUNT(*)
+        from t_xu_school a,t_pd_pad b,t_cs_device c
+        left join t_cs_device_fversion d on c.I_FVersionId=d.I_FVersionId
+        where 1=1
+        <if test="deviceId != null">
+            and c.I_FDeviceId=#{deviceId}
+        </if>
+        <if test="deviceType != null">
+            and c.I_DType = #{deviceType}
+        </if>
+        <if test="schoolStatus != null">
+            and a.I_Status = #{schoolStatus}
+        </if>
+        and a.I_SchoolId=b.I_SchoolId
+        and b.C_Model=c.C_Model
+        group by a.I_SchoolId
+    </select>
+
+    <resultMap id="getNewVersionByMacMap" type="com.fuhui.entity.tcs.Fversion">
+        <id column="I_FVersionId" property="iFversionid" jdbcType="BIGINT"/>
+        <result column="I_FDeviceId" property="iFdeviceid" jdbcType="BIGINT"/>
+        <result column="I_FactoryId" property="iFactoryid" jdbcType="BIGINT"/>
+        <result column="C_Version" property="cVersion" jdbcType="VARCHAR"/>
+        <result column="C_VersionRemark" property="cVersionremark" jdbcType="VARCHAR"/>
+        <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+        <result column="T_ReleaseTime" property="tReleasetime" jdbcType="TIMESTAMP"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="I_IsReview" property="iIsreview" jdbcType="TINYINT"/>
+        <result column="T_RTime" property="tRtime" jdbcType="TIMESTAMP"/>
+        <result column="I_RUserId" property="iRuserid" jdbcType="BIGINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="I_UFId" property="iUFId" jdbcType="BIGINT"/>
+        <result column="C_MD5" property="cMD5" jdbcType="VARCHAR"/>
+        <result column="schoolId" property="schoolId" jdbcType="BIGINT"/>
+        <result column="C_VersionCode" property="cVersionCode" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getNewVersionByMac" resultMap="getNewVersionByMacMap">
+        select x1.I_PadId,x1.I_SchoolId schoolId,x1.I_ClassId,x1.I_UserId
+        ,x1.I_ReleaseId,x1.T_ReleaseTime,x1.I_FVersionId,x1.I_FDeviceId
+        ,x2.C_DownUrl,x2.C_MD5,x2.C_Version,x2.C_VersionRemark
+        ,x2.I_FDeviceId deviceId,x2.I_FactoryId,x2.C_VersionCode
+        from (
+        SELECT DISTINCT a.I_PadId,a.I_SchoolId,a.I_ClassId,a.I_UserId
+        ,IFNULL(b.I_ReleaseId,d.I_ReleaseId) I_ReleaseId
+        ,IF(ISNULL(b.I_ReleaseId),d.T_ReleaseTime,b.T_ReleaseTime) T_ReleaseTime
+        ,IF(ISNULL(b.I_ReleaseId),d.I_FVersionId,b.I_FVersionId) I_FVersionId
+        ,IF(ISNULL(b.I_ReleaseId),d.I_FDeviceId,b.I_FDeviceId) I_FDeviceId
+        FROM t_pd_pad a
+        LEFT JOIN (
+        select t1.I_ReleaseId,t1.T_ReleaseTime,t1.I_SchoolId
+        ,t2.I_DeviceId I_PadId,t1.I_FVersionId,t1.I_FDeviceId
+        from t_cs_fversionrelease t1,t_cs_fversionrelease_padlist t2,t_pd_pad t3 ,t_cs_device t4
+        WHERE t1.I_Range<![CDATA[<>]]>0 and t1.I_Status=1
+        and t3.C_Mac=#{mac}
+        and t1.I_ReleaseId=t2.I_ReleaseId
+        and t2.I_DeviceId=t3.I_PadId
+        and t1.I_FDeviceId=t4.I_FDeviceId
+        and t4.C_Model=t3.C_Model
+        ORDER BY t1.T_ReleaseTime DESC LIMIT 0,1
+        ) b
+        on a.I_PadId=b.I_PadId and a.I_SchoolId=b.I_SchoolId
+        LEFT JOIN (
+        select t1.I_ReleaseId,t1.T_ReleaseTime,t1.I_SchoolId
+        ,t1.I_FVersionId,t1.I_FDeviceId
+        from t_cs_fversionrelease t1 ,t_cs_device t2,t_pd_pad t3
+        WHERE t1.I_Range=0 and t1.I_Status=1
+        and t3.C_Mac=#{mac}
+        and t1.I_FDeviceId=t2.I_FDeviceId
+        and t2.C_Model=t3.C_Model
+        ORDER BY t1.T_ReleaseTime DESC
+        LIMIT 0,1
+        ) d
+        on a.I_SchoolId=d.I_SchoolId
+        where 1=1
+        and a.C_Mac=#{mac}
+        )x1,t_cs_device_fversion x2
+        where 1=1
+        and x1.I_FVersionId=x2.I_FVersionId
+        and x1.I_FDeviceId=x2.I_FDeviceId
+    </select>
+
+    <select id="selectRepeatVersion" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_cs_device_fversion
+        WHERE I_FDeviceId= #{deviceId}
+        AND C_VersionCode = #{versionCode}
+    </select>
+
+    <sql id="Base_List">
+        a.I_FVersionId, a.I_FDeviceId, a.I_FactoryId, a.C_Version, a.C_VersionRemark, a.C_DownUrl, a.T_ReleaseTime,
+        a.T_CTime, a.I_CUserId, a.T_UTime, a.I_UUserId, a.I_IsReview, a.T_RTime, a.I_RUserId, a.C_Remark,
+        a.I_Status , a.I_UFId , a.C_MD5 , a.C_VersionCode
+    </sql>
+
+    <select id="queryFactoryAndDevice" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_cs_device_fversion
+        WHERE  C_VersionCode = #{versionCode}
+    </select>
+
+    <select id="queryFactoryAndDeviceByCodeAndSchoolId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_List"/>
+        FROM t_cs_device_fversion a,t_cs_fversionrelease b
+        WHERE 1= 1
+        AND a.I_FVersionId = b.I_FVersionId
+        AND a.C_VersionCode = #{versionCode}
+        AND b.I_SchoolId = #{schoolId}
+    </select>
+
+</mapper>

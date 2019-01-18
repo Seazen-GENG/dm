@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.twj.WjUserFileMapper" >
+  <resultMap id="BaseResultMap" type="com.fuhui.entity.twj.WjUserFile" >
+    <id column="I_UFId" property="iUfid" jdbcType="BIGINT" />
+    <result column="I_FileId" property="iFileid" jdbcType="BIGINT" />
+    <result column="C_Name" property="cName" jdbcType="VARCHAR" />
+    <result column="C_Type" property="cType" jdbcType="CHAR" />
+    <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP" />
+    <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT" />
+    <result column="I_CPlace" property="iCplace" jdbcType="TINYINT" />
+    <result column="I_RelationId" property="iRelationid" jdbcType="BIGINT" />
+    <result column="C_Remark" property="cRemark" jdbcType="VARCHAR" />
+    <result column="I_Status" property="iStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    I_UFId, I_FileId, C_Name, C_Type, T_CTime, I_CUserId, I_CPlace, I_RelationId, C_Remark, 
+    I_Status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_wj_userfile
+    where I_UFId = #{iUfid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_wj_userfile
+    where I_UFId = #{iUfid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuhui.entity.twj.WjUserFile" >
+    insert into t_wj_userfile (I_UFId, I_FileId, C_Name, 
+      C_Type, T_CTime, I_CUserId, 
+      I_CPlace, I_RelationId, C_Remark, 
+      I_Status)
+    values (#{iUfid,jdbcType=BIGINT}, #{iFileid,jdbcType=BIGINT}, #{cName,jdbcType=VARCHAR}, 
+      #{cType,jdbcType=CHAR}, #{tCtime,jdbcType=TIMESTAMP}, #{iCuserid,jdbcType=BIGINT}, 
+      #{iCplace,jdbcType=TINYINT}, #{iRelationid,jdbcType=BIGINT}, #{cRemark,jdbcType=VARCHAR}, 
+      #{iStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhui.entity.twj.WjUserFile" >
+    insert into t_wj_userfile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iUfid != null" >
+        I_UFId,
+      </if>
+      <if test="iFileid != null" >
+        I_FileId,
+      </if>
+      <if test="cName != null" >
+        C_Name,
+      </if>
+      <if test="cType != null" >
+        C_Type,
+      </if>
+      <if test="tCtime != null" >
+        T_CTime,
+      </if>
+      <if test="iCuserid != null" >
+        I_CUserId,
+      </if>
+      <if test="iCplace != null" >
+        I_CPlace,
+      </if>
+      <if test="iRelationid != null" >
+        I_RelationId,
+      </if>
+      <if test="cRemark != null" >
+        C_Remark,
+      </if>
+      <if test="iStatus != null" >
+        I_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iUfid != null" >
+        #{iUfid,jdbcType=BIGINT},
+      </if>
+      <if test="iFileid != null" >
+        #{iFileid,jdbcType=BIGINT},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null" >
+        #{cType,jdbcType=CHAR},
+      </if>
+      <if test="tCtime != null" >
+        #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iCuserid != null" >
+        #{iCuserid,jdbcType=BIGINT},
+      </if>
+      <if test="iCplace != null" >
+        #{iCplace,jdbcType=TINYINT},
+      </if>
+      <if test="iRelationid != null" >
+        #{iRelationid,jdbcType=BIGINT},
+      </if>
+      <if test="cRemark != null" >
+        #{cRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="iStatus != null" >
+        #{iStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.twj.WjUserFile" >
+    update t_wj_userfile
+    <set >
+      <if test="iFileid != null" >
+        I_FileId = #{iFileid,jdbcType=BIGINT},
+      </if>
+      <if test="cName != null" >
+        C_Name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cType != null" >
+        C_Type = #{cType,jdbcType=CHAR},
+      </if>
+      <if test="tCtime != null" >
+        T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iCuserid != null" >
+        I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      </if>
+      <if test="iCplace != null" >
+        I_CPlace = #{iCplace,jdbcType=TINYINT},
+      </if>
+      <if test="iRelationid != null" >
+        I_RelationId = #{iRelationid,jdbcType=BIGINT},
+      </if>
+      <if test="cRemark != null" >
+        C_Remark = #{cRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="iStatus != null" >
+        I_Status = #{iStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where I_UFId = #{iUfid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.twj.WjUserFile" >
+    update t_wj_userfile
+    set I_FileId = #{iFileid,jdbcType=BIGINT},
+      C_Name = #{cName,jdbcType=VARCHAR},
+      C_Type = #{cType,jdbcType=CHAR},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      I_CPlace = #{iCplace,jdbcType=TINYINT},
+      I_RelationId = #{iRelationid,jdbcType=BIGINT},
+      C_Remark = #{cRemark,jdbcType=VARCHAR},
+      I_Status = #{iStatus,jdbcType=TINYINT}
+    where I_UFId = #{iUfid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tpd.JPushMapper" >
+  <resultMap id="BaseResultMap" type="com.fuhui.entity.tpd.JPush" >
+    <id column="I_JPushId" property="iJpushid" jdbcType="BIGINT" />
+    <result column="I_PadId" property="iPadid" jdbcType="BIGINT" />
+    <result column="C_RegistrationId" property="cRegistrationid" jdbcType="VARCHAR" />
+    <result column="C_Alias" property="cAlias" jdbcType="VARCHAR" />
+    <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP" />
+    <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.fuhui.entity.tpd.JPush" extends="BaseResultMap" >
+    <result column="C_Tags" property="cTags" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    I_JPushId, I_PadId, C_RegistrationId, C_Alias, T_CTime, T_UTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    C_Tags
+  </sql>
+  <select id="getPadJPushInfo" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_pd_jpush
+    where I_JPushId = #{iJpushid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_pd_jpush
+    where I_JPushId = #{iJpushid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuhui.entity.tpd.JPush" >
+    insert into t_pd_jpush (I_JPushId, I_PadId, C_RegistrationId, 
+      C_Alias, T_CTime, T_UTime, 
+      C_Tags)
+    values (#{iJpushid,jdbcType=BIGINT}, #{iPadid,jdbcType=BIGINT}, #{cRegistrationid,jdbcType=VARCHAR}, 
+      #{cAlias,jdbcType=VARCHAR}, #{tCtime,jdbcType=TIMESTAMP}, #{tUtime,jdbcType=TIMESTAMP}, 
+      #{cTags,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="savePadJPush" parameterType="com.fuhui.entity.tpd.JPush" >
+    insert into t_pd_jpush
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iJpushid != null" >
+        I_JPushId,
+      </if>
+      <if test="iPadid != null" >
+        I_PadId,
+      </if>
+      <if test="cRegistrationid != null" >
+        C_RegistrationId,
+      </if>
+      <if test="cAlias != null" >
+        C_Alias,
+      </if>
+      <if test="tCtime != null" >
+        T_CTime,
+      </if>
+      <if test="tUtime != null" >
+        T_UTime,
+      </if>
+      <if test="cTags != null" >
+        C_Tags,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iJpushid != null" >
+        #{iJpushid,jdbcType=BIGINT},
+      </if>
+      <if test="iPadid != null" >
+        #{iPadid,jdbcType=BIGINT},
+      </if>
+      <if test="cRegistrationid != null" >
+        #{cRegistrationid,jdbcType=VARCHAR},
+      </if>
+      <if test="cAlias != null" >
+        #{cAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="tCtime != null" >
+        #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUtime != null" >
+        #{tUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cTags != null" >
+        #{cTags,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tpd.JPush" >
+    update t_pd_jpush
+    <set >
+      <if test="iPadid != null" >
+        I_PadId = #{iPadid,jdbcType=BIGINT},
+      </if>
+      <if test="cRegistrationid != null" >
+        C_RegistrationId = #{cRegistrationid,jdbcType=VARCHAR},
+      </if>
+      <if test="cAlias != null" >
+        C_Alias = #{cAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="tCtime != null" >
+        T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUtime != null" >
+        T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cTags != null" >
+        C_Tags = #{cTags,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where I_JPushId = #{iJpushid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fuhui.entity.tpd.JPush" >
+    update t_pd_jpush
+    set I_PadId = #{iPadid,jdbcType=BIGINT},
+      C_RegistrationId = #{cRegistrationid,jdbcType=VARCHAR},
+      C_Alias = #{cAlias,jdbcType=VARCHAR},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      C_Tags = #{cTags,jdbcType=LONGVARCHAR}
+    where I_JPushId = #{iJpushid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tpd.JPush" >
+    update t_pd_jpush
+    set I_PadId = #{iPadid,jdbcType=BIGINT},
+      C_RegistrationId = #{cRegistrationid,jdbcType=VARCHAR},
+      C_Alias = #{cAlias,jdbcType=VARCHAR},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP}
+    where I_JPushId = #{iJpushid,jdbcType=BIGINT}
+  </update>
+
+  <select id="getPadJPushInfoByPadId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_pd_jpush
+    <if test="padId != -1">
+      where I_PadId = #{padId,jdbcType=BIGINT}
+    </if>
+    ORDER BY T_UTime DESC LIMIT 0,1
+  </select>
+</mapper>

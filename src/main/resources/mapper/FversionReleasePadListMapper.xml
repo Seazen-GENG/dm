@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tcs.FversionReleasePadListMapper" >
+  <resultMap id="BaseResultMap" type="com.fuhui.entity.tcs.FversionReleasePadList" >
+    <id column="I_IDX" property="iIdx" jdbcType="BIGINT" />
+    <result column="I_ReleaseId" property="iReleaseid" jdbcType="BIGINT" />
+    <result column="I_DeviceId" property="iDeviceid" jdbcType="BIGINT" />
+    <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    I_IDX, I_ReleaseId, I_DeviceId, T_CTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_cs_fversionrelease_padList
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_cs_fversionrelease_padList
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuhui.entity.tcs.FversionReleasePadList" >
+    insert into t_cs_fversionrelease_padList (I_IDX, I_ReleaseId, I_DeviceId, 
+      T_CTime)
+    values (#{iIdx,jdbcType=BIGINT}, #{iReleaseid,jdbcType=BIGINT}, #{iDeviceid,jdbcType=BIGINT}, 
+      #{tCtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhui.entity.tcs.FversionReleasePadList" >
+    insert into t_cs_fversionrelease_padList
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iIdx != null" >
+        I_IDX,
+      </if>
+      <if test="iReleaseid != null" >
+        I_ReleaseId,
+      </if>
+      <if test="iDeviceid != null" >
+        I_DeviceId,
+      </if>
+      <if test="tCtime != null" >
+        T_CTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iIdx != null" >
+        #{iIdx,jdbcType=BIGINT},
+      </if>
+      <if test="iReleaseid != null" >
+        #{iReleaseid,jdbcType=BIGINT},
+      </if>
+      <if test="iDeviceid != null" >
+        #{iDeviceid,jdbcType=BIGINT},
+      </if>
+      <if test="tCtime != null" >
+        #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tcs.FversionReleasePadList" >
+    update t_cs_fversionrelease_padList
+    <set >
+      <if test="iReleaseid != null" >
+        I_ReleaseId = #{iReleaseid,jdbcType=BIGINT},
+      </if>
+      <if test="iDeviceid != null" >
+        I_DeviceId = #{iDeviceid,jdbcType=BIGINT},
+      </if>
+      <if test="tCtime != null" >
+        T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tcs.FversionReleasePadList" >
+    update t_cs_fversionrelease_padList
+    set I_ReleaseId = #{iReleaseid,jdbcType=BIGINT},
+      I_DeviceId = #{iDeviceid,jdbcType=BIGINT},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP}
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </update>
+</mapper>

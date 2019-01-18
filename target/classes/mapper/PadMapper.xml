@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tpd.PadMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.tpd.Pad">
+        <id column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+        <result column="C_Mac" property="cMac" jdbcType="VARCHAR"/>
+        <result column="C_Code" property="cCode" jdbcType="VARCHAR"/>
+        <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+        <result column="I_AUZId" property="iAuzid" jdbcType="BIGINT"/>
+        <result column="C_SerialNo" property="cSerialno" jdbcType="VARCHAR"/>
+        <result column="I_FactoryId" property="iFactoryid" jdbcType="BIGINT"/>
+        <result column="I_DeviceId" property="iDeviceid" jdbcType="BIGINT"/>
+        <result column="C_Model" property="cModel" jdbcType="VARCHAR"/>
+        <result column="C_FVersion" property="cFversion" jdbcType="VARCHAR"/>
+        <result column="T_FUTime" property="tFutime" jdbcType="TIMESTAMP"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_GradeId" property="iGradeid" jdbcType="BIGINT"/>
+        <result column="I_UserId" property="iUserid" jdbcType="BIGINT"/>
+        <result column="I_ClassId" property="iClassid" jdbcType="BIGINT"/>
+        <result column="T_STime" property="tStime" jdbcType="TIMESTAMP"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="I_CPlace" property="iCplace" jdbcType="TINYINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="I_UPlace" property="iUplace" jdbcType="TINYINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="I_UType" property="iUtype" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        I_PadId, C_Mac, C_Code, C_Name, I_AUZId, C_SerialNo, I_FactoryId, I_DeviceId, C_Model,
+        C_FVersion, T_FUTime, I_Type, I_SchoolId, I_UserId, I_ClassId, T_STime, T_CTime,
+        I_CUserId, I_CPlace, T_UTime, I_UUserId, I_UPlace, C_Remark, I_Status, I_GradeId
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_pd_pad
+        where I_PadId = #{iPadid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from t_pd_pad
+        where I_PadId = #{iPadid,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.tpd.Pad">
+        insert into t_pd_pad (I_PadId, C_Mac, C_Code,
+        C_Name, I_AUZId, C_SerialNo,
+        I_FactoryId, I_DeviceId, C_Model,
+        C_FVersion, T_FUTime, I_Type,
+        I_SchoolId, I_UserId, I_ClassId,
+        T_STime, T_CTime, I_CUserId,
+        I_CPlace, T_UTime, I_UUserId,
+        I_UPlace, C_Remark, I_Status, I_GradeId ,I_UType
+        )
+        values (#{iPadid,jdbcType=BIGINT}, #{cMac,jdbcType=VARCHAR}, #{cCode,jdbcType=VARCHAR},
+        #{cName,jdbcType=VARCHAR}, #{iAuzid,jdbcType=BIGINT}, #{cSerialno,jdbcType=VARCHAR},
+        #{iFactoryid,jdbcType=BIGINT}, #{iDeviceid,jdbcType=BIGINT}, #{cModel,jdbcType=VARCHAR},
+        #{cFversion,jdbcType=VARCHAR}, #{tFutime,jdbcType=TIMESTAMP}, #{iType,jdbcType=TINYINT},
+        #{iSchoolid,jdbcType=BIGINT}, #{iUserid,jdbcType=BIGINT}, #{iClassid,jdbcType=BIGINT},
+        #{tStime,jdbcType=TIMESTAMP}, #{tCtime,jdbcType=TIMESTAMP}, #{iCuserid,jdbcType=BIGINT},
+        #{iCplace,jdbcType=TINYINT}, #{tUtime,jdbcType=TIMESTAMP}, #{iUuserid,jdbcType=BIGINT},
+        #{iUplace,jdbcType=TINYINT}, #{cRemark,jdbcType=VARCHAR}, #{iStatus,jdbcType=TINYINT}，
+        #{iGradeid,jdbcType=BIGINT} ,
+        #{iUtype,jdbcType=TINYINT}
+        )
+    </insert>
+    <insert id="add" parameterType="com.fuhui.entity.tpd.Pad">
+        insert into t_pd_pad
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iPadid != null">
+                I_PadId,
+            </if>
+            <if test="cMac != null">
+                C_Mac,
+            </if>
+            <if test="cCode != null">
+                C_Code,
+            </if>
+            <if test="cName != null">
+                C_Name,
+            </if>
+            <if test="iAuzid != null">
+                I_AUZId,
+            </if>
+            <if test="cSerialno != null">
+                C_SerialNo,
+            </if>
+            <if test="iFactoryid != null">
+                I_FactoryId,
+            </if>
+            <if test="iDeviceid != null">
+                I_DeviceId,
+            </if>
+            <if test="cModel != null">
+                C_Model,
+            </if>
+            <if test="cFversion != null">
+                C_FVersion,
+            </if>
+            <if test="tFutime != null">
+                T_FUTime,
+            </if>
+            <if test="iType != null">
+                I_Type,
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId,
+            </if>
+            <if test="iGradeid != null">
+                I_GradeId,
+            </if>
+            <if test="iUserid != null">
+                I_UserId,
+            </if>
+            <if test="iClassid != null">
+                I_ClassId,
+            </if>
+            <if test="tStime != null">
+                T_STime,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId,
+            </if>
+            <if test="iCplace != null">
+                I_CPlace,
+            </if>
+            <if test="tUtime != null">
+                T_UTime,
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId,
+            </if>
+            <if test="iUplace != null">
+                I_UPlace,
+            </if>
+            <if test="cRemark != null">
+                C_Remark,
+            </if>
+            <if test="iStatus != null">
+                I_Status,
+            </if>
+            <if test="iUtype != null">
+                I_UType,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iPadid != null">
+                #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="cMac != null">
+                #{cMac,jdbcType=VARCHAR},
+            </if>
+            <if test="cCode != null">
+                #{cCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cName != null">
+                #{cName,jdbcType=VARCHAR},
+            </if>
+            <if test="iAuzid != null">
+                #{iAuzid,jdbcType=BIGINT},
+            </if>
+            <if test="cSerialno != null">
+                #{cSerialno,jdbcType=VARCHAR},
+            </if>
+            <if test="iFactoryid != null">
+                #{iFactoryid,jdbcType=BIGINT},
+            </if>
+            <if test="iDeviceid != null">
+                #{iDeviceid,jdbcType=BIGINT},
+            </if>
+            <if test="cModel != null">
+                #{cModel,jdbcType=VARCHAR},
+            </if>
+            <if test="cFversion != null">
+                #{cFversion,jdbcType=VARCHAR},
+            </if>
+            <if test="tFutime != null">
+                #{tFutime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iType != null">
+                #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="iSchoolid != null">
+                #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iGradeid != null">
+                #{iGradeid,jdbcType=BIGINT},
+            </if>
+            <if test="iUserid != null">
+                #{iUserid,jdbcType=BIGINT},
+            </if>
+            <if test="iClassid != null">
+                #{iClassid,jdbcType=BIGINT},
+            </if>
+            <if test="tStime != null">
+                #{tStime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="iCplace != null">
+                #{iCplace,jdbcType=TINYINT},
+            </if>
+            <if test="tUtime != null">
+                #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                #{iUuserid,jdbcType=BIGINT},
+            </if>
+            <if test="iUplace != null">
+                #{iUplace,jdbcType=TINYINT},
+            </if>
+            <if test="cRemark != null">
+                #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="iUtype != null">
+                #{iUtype,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.fuhui.entity.tpd.Pad">
+        update t_pd_pad
+        <set>
+            <if test="cMac != null">
+                C_Mac = #{cMac,jdbcType=VARCHAR},
+            </if>
+            <if test="cCode != null">
+                C_Code = #{cCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cName != null">
+                C_Name = #{cName,jdbcType=VARCHAR},
+            </if>
+            <if test="iAuzid != null">
+                I_AUZId = #{iAuzid,jdbcType=BIGINT},
+            </if>
+            <if test="cSerialno != null">
+                C_SerialNo = #{cSerialno,jdbcType=VARCHAR},
+            </if>
+            <if test="iFactoryid != null">
+                I_FactoryId = #{iFactoryid,jdbcType=BIGINT},
+            </if>
+            <if test="iDeviceid != null">
+                I_DeviceId = #{iDeviceid,jdbcType=BIGINT},
+            </if>
+            <if test="cModel != null">
+                C_Model = #{cModel,jdbcType=VARCHAR},
+            </if>
+            <if test="cFversion != null">
+                C_FVersion = #{cFversion,jdbcType=VARCHAR},
+            </if>
+            <if test="tFutime != null">
+                T_FUTime = #{tFutime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iType != null">
+                I_Type = #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iGradeid != null">
+                I_GradeId = #{iGradeid,jdbcType=BIGINT},
+            </if>
+            <if test="iUserid != null">
+                I_UserId = #{iUserid,jdbcType=BIGINT},
+            </if>
+            <if test="iClassid != null">
+                I_ClassId = #{iClassid,jdbcType=BIGINT},
+            </if>
+            <if test="tStime != null">
+                T_STime = #{tStime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId = #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="iCplace != null">
+                I_CPlace = #{iCplace,jdbcType=TINYINT},
+            </if>
+            <if test="tUtime != null">
+                T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId = #{iUuserid,jdbcType=BIGINT},
+            </if>
+            <if test="iUplace != null">
+                I_UPlace = #{iUplace,jdbcType=TINYINT},
+            </if>
+            <if test="cRemark != null">
+                C_Remark = #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                I_Status = #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="iUtype != null">
+                I_UType = #{iUtype,jdbcType=TINYINT},
+            </if>
+        </set>
+        where I_PadId = #{iPadid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tpd.Pad">
+        update t_pd_pad
+        set C_Mac = #{cMac,jdbcType=VARCHAR},
+        C_Code = #{cCode,jdbcType=VARCHAR},
+        C_Name = #{cName,jdbcType=VARCHAR},
+        I_AUZId = #{iAuzid,jdbcType=BIGINT},
+        C_SerialNo = #{cSerialno,jdbcType=VARCHAR},
+        I_FactoryId = #{iFactoryid,jdbcType=BIGINT},
+        I_DeviceId = #{iDeviceid,jdbcType=BIGINT},
+        C_Model = #{cModel,jdbcType=VARCHAR},
+        C_FVersion = #{cFversion,jdbcType=VARCHAR},
+        T_FUTime = #{tFutime,jdbcType=TIMESTAMP},
+        I_Type = #{iType,jdbcType=TINYINT},
+        I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+        I_GradeId = #{iGradeid,jdbcType=BIGINT},
+        I_UserId = #{iUserid,jdbcType=BIGINT},
+        I_ClassId = #{iClassid,jdbcType=BIGINT},
+        T_STime = #{tStime,jdbcType=TIMESTAMP},
+        T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+        I_CUserId = #{iCuserid,jdbcType=BIGINT},
+        I_CPlace = #{iCplace,jdbcType=TINYINT},
+        T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+        I_UUserId = #{iUuserid,jdbcType=BIGINT},
+        I_UPlace = #{iUplace,jdbcType=TINYINT},
+        C_Remark = #{cRemark,jdbcType=VARCHAR},
+        I_Status = #{iStatus,jdbcType=TINYINT},
+        I_UType = #{iUtype,jdbcType=TINYINT}
+        where I_PadId = #{iPadid,jdbcType=BIGINT}
+    </update>
+
+    <update id="updatePadBangdingByPrimaryKey" parameterType="com.fuhui.entity.tpd.Pad">
+         update t_pd_pad
+         set I_Type = #{iType,jdbcType=TINYINT},
+        I_GradeId = #{iGradeid,jdbcType=BIGINT},
+        I_UserId = #{iUserid,jdbcType=BIGINT},
+        I_ClassId = #{iClassid,jdbcType=BIGINT},
+        T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+        I_UPlace = #{iUplace,jdbcType=TINYINT}
+        where I_PadId = #{iPadid,jdbcType=BIGINT}
+    </update>
+
+    <select id="getInfoByPadMac" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_pd_pad
+        where 1=1
+        <if test="padMac != null">
+            AND C_Mac = #{padMac}
+        </if>
+    </select>
+
+    <resultMap id="ResultMap" type="com.fuhui.entity.tpd.Pad">
+        <id column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+        <result column="C_Mac" property="cMac" jdbcType="VARCHAR"/>
+        <result column="C_Code" property="cCode" jdbcType="VARCHAR"/>
+        <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+        <result column="I_AUZId" property="iAuzid" jdbcType="BIGINT"/>
+        <result column="C_SerialNo" property="cSerialno" jdbcType="VARCHAR"/>
+        <result column="I_FactoryId" property="iFactoryid" jdbcType="BIGINT"/>
+        <result column="I_DeviceId" property="iDeviceid" jdbcType="BIGINT"/>
+        <result column="C_Model" property="cModel" jdbcType="VARCHAR"/>
+        <result column="C_FVersion" property="cFversion" jdbcType="VARCHAR"/>
+        <result column="T_FUTime" property="tFutime" jdbcType="TIMESTAMP"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_GradeId" property="iGradeid" jdbcType="BIGINT"/>
+        <result column="I_UserId" property="iUserid" jdbcType="BIGINT"/>
+        <result column="I_ClassId" property="iClassid" jdbcType="BIGINT"/>
+        <result column="T_STime" property="tStime" jdbcType="TIMESTAMP"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="I_CPlace" property="iCplace" jdbcType="TINYINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="I_UPlace" property="iUplace" jdbcType="TINYINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="aName" property="aName"/>
+        <result column="gName" property="gName"/>
+        <result column="clName" property="clName"/>
+        <result column="sName" property="sName"/>
+        <collection property="jPush" ofType="com.fuhui.entity.tpd.JPush">
+            <result column="C_Tags" property="cTags" jdbcType="LONGVARCHAR"/>
+            <result column="C_RegistrationId" property="cRegistrationid" jdbcType="VARCHAR"/>
+            <result column="C_Alias" property="cAlias" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="appconfig" ofType="com.fuhui.entity.txm.Appconfig">
+            <id column="I_ConfigId" property="iConfigid" jdbcType="BIGINT"/>
+            <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+            <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+            <association property="appConfigconPadList" javaType="com.fuhui.entity.txm.AppConfigconPadList">
+                <result column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+            </association>
+        </collection>
+    </resultMap>
+
+    <select id="getNewInfoByPadMac" resultMap="ResultMap">
+        SELECT a.I_PadId,a.I_SchoolId,a.I_GradeId,a.I_ClassId,a.I_UserId,a.I_AuzId
+        ,c.C_RegistrationId,c.C_Alias,c.C_Tags, a.C_Name
+        ,IFNULL(b.I_ConfigId,d.I_ConfigId) I_ConfigId
+        ,IF(ISNULL(b.I_ConfigId),d.T_UTime,b.T_UTime) T_UTime
+        ,IF(ISNULL(b.I_ConfigId),d.C_Name,b.C_Name) aName
+        ,e.C_Name gName
+        ,f.C_Name clName
+        ,g.C_Name sName
+        FROM t_pd_pad a
+        LEFT JOIN (
+        SELECT t1.I_ConfigId,t1.T_UTime,t1.I_SchoolId,t2.I_PadId ,t1.C_Name
+        FROM t_xm_appconfig t1,t_xm_appconfig_padlist t2,t_pd_pad t3
+        WHERE t1.I_Range<![CDATA[<>]]>0 AND t1.I_Status=1
+        AND t3.C_Mac='${padMac}'
+        AND t1.I_ConfigId=t2.I_ConfigId
+        AND t2.I_PadId=t3.I_PadId
+        ORDER BY t1.T_UTime DESC LIMIT 0,1
+        ) b
+        ON a.I_PadId=b.I_PadId AND a.I_SchoolId=b.I_SchoolId
+        LEFT JOIN t_pd_jpush c ON a.I_PadId=c.I_PadId
+        LEFT JOIN (
+        SELECT t1.I_ConfigId,t1.T_UTime,t1.I_SchoolId,t1.C_Name
+        FROM t_xm_appconfig t1
+        WHERE t1.I_Range=0 AND t1.I_Status=1
+        ORDER BY t1.T_UTime DESC LIMIT 0,1
+        ) d
+        ON a.I_SchoolId=d.I_SchoolId
+        LEFT JOIN t_xu_grade e ON a.I_GradeId = e.I_GradeId
+        LEFT JOIN t_xu_class f ON a.I_ClassId = f.I_ClassId
+        LEFT JOIN t_xu_school g ON a.I_SchoolId = g.I_SchoolId
+        WHERE a.c_mac='${padMac}'
+        GROUP BY a.I_PadId
+    </select>
+
+    <resultMap id="padIdMap" type="com.fuhui.entity.tpd.Pad">
+        <id column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+        <result column="C_Mac" property="cMac" jdbcType="VARCHAR"/>
+        <result column="I_UserId" property="iUserid" jdbcType="BIGINT"/>
+        <result column="I_ClassId" property="iClassid" jdbcType="BIGINT"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="C_Tags" property="Tags" jdbcType="BIGINT"/>
+        <collection property="aClass" ofType="com.fuhui.entity.txu.Class">
+            <id column="I_ClassId" property="iClassid" jdbcType="BIGINT"/>
+            <result column="C_Alias" property="cAlias" jdbcType="VARCHAR"/>
+            <result column="I_GradeId" property="iGradeid" jdbcType="BIGINT"/>
+            <result column="I_XGradeId" property="iXgradeid" jdbcType="BIGINT"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectByPadId" resultMap="padIdMap">
+        SELECT I_PadId,C_Mac,SUBSTRING(C_Tags,1,LENGTH(C_Tags)-1) C_Tags,NOW() T_CTime, NOW() T_UTime
+        FROM(
+        SELECT a.I_PadId, a.C_Mac C_Mac
+        ,CONCAT(
+        IF(IFNULL(a.I_SchoolId,'')='','',CONCAT(a.I_SchoolId,','))
+        ,IF(IFNULL(b.I_XGradeId,'')='','',CONCAT(b.I_XGradeId,','))
+        ,IF(IFNULL(b.I_GradeId,'')='','',CONCAT(b.I_GradeId,','))
+        ,IF(IFNULL(a.I_ClassId,'')='','',CONCAT(a.I_ClassId,','))
+        ,IF(IFNULL(a.I_UserId,'')='','',CONCAT(a.I_UserId,','))
+        ,IF(IFNULL(a.I_PadId,'')='','',CONCAT(a.I_PadId,','))
+        ) C_Tags
+        FROM t_pd_pad a
+        LEFT JOIN t_xu_class b ON a.I_ClassId=b.I_ClassId
+        WHERE 1=1
+        <if test=" padId != -1 ">
+            AND a.I_PadId=#{padId}
+        </if>
+        )t
+    </select>
+
+
+    <resultMap id="AuthorizeMap" type="com.fuhui.entity.tpd.Pad">
+        <id column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+        <result column="C_Mac" property="cMac" jdbcType="VARCHAR"/>
+        <result column="I_UserId" property="iUserid" jdbcType="BIGINT"/>
+        <result column="I_ClassId" property="iClassid" jdbcType="BIGINT"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="C_Tags" property="Tags" jdbcType="BIGINT"/>
+        <collection property="padauthorizePadlist" ofType="com.fuhui.entity.taz.PadauthorizePadlist">
+            <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+            <result column="I_AUZId" property="iAuzid" jdbcType="BIGINT"/>
+            <result column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+            <result column="T_FTime" property="tFtime" jdbcType="TIMESTAMP"/>
+            <result column="C_Mac" property="cMac" jdbcType="VARCHAR"/>
+            <result column="C_Ip" property="cIp" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="padauthorize" ofType="com.fuhui.entity.taz.Padauthorize">
+            <id column="I_AUZId" property="iAuzid" jdbcType="BIGINT"/>
+            <result column="C_SerialNo" property="cSerialno" jdbcType="VARCHAR"/>
+            <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+            <result column="I_Total" property="iTotal" jdbcType="INTEGER"/>
+            <result column="I_ACount" property="iAcount" jdbcType="INTEGER"/>
+            <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+            <result column="D_SDate" property="dSdate" jdbcType="TIMESTAMP"/>
+            <result column="D_EDate" property="dEdate" jdbcType="TIMESTAMP"/>
+            <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+            <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+            <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+            <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+            <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+            <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+            <result column="iAType" property="I_AType" jdbcType="TINYINT"/>
+            <result column="iAppId" property="I_AppId" jdbcType="BIGINT"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAuthorizeByPadMac" resultMap="AuthorizeMap">
+        SELECT * FROM t_pd_pad a
+        INNER JOIN t_az_authorize_padlist b
+        ON a.I_PadId = b.I_PadId
+        INNER JOIN t_az_authorize c
+        ON a.I_AUZId = c.I_AUZId
+        WHERE 1=1
+        <if test=" padMac != null">
+            AND a.C_Mac='${padMac}'
+        </if>
+        ORDER BY b.T_FTime DESC
+        LIMIT 0,1
+    </select>
+
+    <select id="getPadList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_pd_pad
+        WHERE 1=1
+        <if test="schoolIds != null">
+            AND I_SchoolId = #{schoolIds}
+        </if>
+        <if test="classId != null">
+            AND FIND_IN_SET(I_ClassId,'${classId}')
+        </if>
+        <if test="padMac != null">
+            AND C_Mac = #{padMac}
+        </if>
+        <if test="factoryId != -1">
+            AND I_FactoryId =#{factoryId}
+        </if>
+        <if test="deviceId != -1">
+            AND I_DeviceId =#{deviceId}
+        </if>
+        <if test="model != null">
+            AND C_Model =#{model}
+        </if>
+        <if test="fVersion != null">
+            AND C_FVersion =#{fVersion}
+        </if>
+        <if test="type != -1">
+            AND I_Type =#{type}
+        </if>
+        <if test="status != -1">
+            AND I_Status =#{status}
+        </if>
+            ORDER BY T_FUTime DESC
+        <if test="isPage == 1">
+            LIMIT #{pNum},#{pLine}
+        </if>
+    </select>
+
+    <resultMap id="ResultMaps" type="com.fuhui.entity.tpd.Pad">
+        <result column="countAll" property="countAll"/>
+    </resultMap>
+
+    <select id="getPadCount" resultMap="ResultMaps">
+        select COUNT(I_PadId) countAll from t_pd_pad
+        WHERE 1=1
+        <if test="schoolIds != null">
+            AND I_SchoolId = #{schoolIds}
+        </if>
+        <if test="classId != null">
+            AND FIND_IN_SET(I_ClassId,'${classId}')
+        </if>
+        <if test="padMac != null">
+            AND C_Mac = #{padMac}
+        </if>
+        <if test="factoryId != -1">
+            AND I_FactoryId =#{factoryId}
+        </if>
+        <if test="deviceId != -1">
+            AND I_DeviceId =#{deviceId}
+        </if>
+        <if test="model != null">
+            AND C_Model =#{model}
+        </if>
+        <if test="fVersion != null">
+            AND C_FVersion =#{fVersion}
+        </if>
+        <if test="type != -1">
+            AND I_Type =#{type}
+        </if>
+        <if test="status != -1">
+            AND I_Status =#{status}
+        </if>
+    </select>
+
+
+    <update id="updatePadauz" parameterType="com.fuhui.entity.tpd.Pad">
+        update t_pd_pad
+        <set>
+            <if test="cMac != null">
+                C_Mac = #{cMac,jdbcType=VARCHAR},
+            </if>
+            <if test="cCode != null">
+                C_Code = #{cCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cName != null">
+                C_Name = #{cName,jdbcType=VARCHAR},
+            </if>
+            <if test="iAuzid != null">
+                I_AUZId = #{iAuzid,jdbcType=BIGINT},
+            </if>
+            <if test="cSerialno != null">
+                C_SerialNo = #{cSerialno,jdbcType=VARCHAR},
+            </if>
+            <if test="iFactoryid != null">
+                I_FactoryId = #{iFactoryid,jdbcType=BIGINT},
+            </if>
+            <if test="iDeviceid != null">
+                I_DeviceId = #{iDeviceid,jdbcType=BIGINT},
+            </if>
+            <if test="cModel != null">
+                C_Model = #{cModel,jdbcType=VARCHAR},
+            </if>
+            <if test="cFversion != null">
+                C_FVersion = #{cFversion,jdbcType=VARCHAR},
+            </if>
+            <if test="tFutime != null">
+                T_FUTime = #{tFutime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iType != null">
+                I_Type = #{iType,jdbcType=TINYINT},
+            </if>
+            I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+            <if test="iUserid != null">
+                I_UserId = #{iUserid,jdbcType=BIGINT},
+            </if>
+            <if test="iClassid != null">
+                I_ClassId = #{iClassid,jdbcType=BIGINT},
+            </if>
+            <if test="tStime != null">
+                T_STime = #{tStime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId = #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="iCplace != null">
+                I_CPlace = #{iCplace,jdbcType=TINYINT},
+            </if>
+            <if test="tUtime != null">
+                T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId = #{iUuserid,jdbcType=BIGINT},
+            </if>
+            <if test="iUplace != null">
+                I_UPlace = #{iUplace,jdbcType=TINYINT},
+            </if>
+            <if test="cRemark != null">
+                C_Remark = #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                I_Status = #{iStatus,jdbcType=TINYINT},
+            </if>
+        </set>
+        where C_Mac = #{cMac,jdbcType=BIGINT}
+    </update>
+
+    <select id="getPadNumBySchool" resultType="java.lang.String">
+        SELECT COUNT(I_PadId) FROM t_pd_pad WHERE I_SchoolId = #{schoolId}
+    </select>
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.txu.PlatformMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.txu.Platform">
+        <id column="I_Idx" property="iIdx" jdbcType="BIGINT"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="C_Path" property="cPath" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_Idx, I_SchoolId, I_Type, C_Path
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_xu_school_platform
+        where I_Idx = #{iIdx,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_xu_school_platform
+    where I_Idx = #{iIdx,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.txu.Platform">
+    insert into t_xu_school_platform (I_Idx, I_SchoolId, I_Type, 
+      C_Path)
+    values (#{iIdx,jdbcType=BIGINT}, #{iSchoolid,jdbcType=BIGINT}, #{iType,jdbcType=TINYINT}, 
+      #{cPath,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.txu.Platform">
+        insert into t_xu_school_platform
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                I_Idx,
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId,
+            </if>
+            <if test="iType != null">
+                I_Type,
+            </if>
+            <if test="cPath != null">
+                C_Path,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                #{iIdx,jdbcType=BIGINT},
+            </if>
+            <if test="iSchoolid != null">
+                #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="cPath != null">
+                #{cPath,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.txu.Platform">
+        update t_xu_school_platform
+        <set>
+            <if test="iSchoolid != null">
+                I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                I_Type = #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="cPath != null">
+                C_Path = #{cPath,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where I_Idx = #{iIdx,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.txu.Platform">
+    update t_xu_school_platform
+    set I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+      I_Type = #{iType,jdbcType=TINYINT},
+      C_Path = #{cPath,jdbcType=VARCHAR}
+    where I_Idx = #{iIdx,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectBySchoolIdAndType" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_xu_school_platform
+        WHERE I_SchoolId = #{schoolId}
+        <if test="type != null">
+            AND I_Type = #{type}
+        </if>
+    </select>
+</mapper>

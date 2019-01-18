@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>知会设备管控平台</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../dist/css/responsive.dataTables.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!--<style>
+        .table > tbody > tr > td {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .content {
+            padding-bottom: 0px;
+        }
+    </style>-->
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header" id="headerDiv">
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" id="leftMenu">
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                路由管理
+                <small>管理学校的路由</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+                <li><a href="#">路由管理</a></li>
+                <li class="active">路由管理</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header" style="padding-bottom: 0px;">
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th data-priority="1">设备MAC</th>
+                                    <th data-priority="2">设备名称</th>
+                                    <th>学校名称</th>
+                                    <th>安装位置</th>
+                                    <th>更新时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>序号</th>
+                                    <th data-priority="1">设备MAC</th>
+                                    <th data-priority="2">设备名称</th>
+                                    <th>学校名称</th>
+                                    <th>安装位置</th>
+                                    <th>更新时间</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" id="footerDiv">
+    </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<script src="../dist/js/dataTables.responsive.min.js"></script>
+<!-- page script -->
+<script>
+    $(function () {
+        $('#leftMenu').load("leftMenu.html", function () {
+            $("#luyou").addClass("active");
+        });
+        $('#headerDiv').load("header.html");
+        $('#footerDiv').load("footer.html");
+        var cookie = getCookie("schoolId");
+        var searchUrl = "";
+        if(cookie.valueOf() == "255052442830647296"){
+            searchUrl = "../testData/data.json";
+        }else {
+            searchUrl = "../testData/lunxian.json";
+        }
+        searchdata(searchUrl);
+    });
+
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            $("#zanshi").hide();
+            c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1) c_end = document.cookie.length
+                return unescape(document.cookie.substring(c_start, c_end))
+            }
+        }
+        return ""
+    }
+
+    //搜索列表
+    function searchdata(searchUrl) {
+        var pageLen = 10;
+        var t = $('#example2').DataTable({
+            'responsive': true, //是否自适应
+            'paging': true,
+            'pageLength': pageLen,
+            'lengthChange': false,
+            "processing": false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+            // AJAX请求
+            , "ajax": searchUrl
+            // 定义显示的列
+            , "columns": [
+                {"data": "id"},
+                {"data": "mac"},
+                {"data": "name"},
+                {"data": "schoolName"},
+                {"data": "address"},
+                {"data": "uTime"},
+            ]
+            // 定义最后一列显示
+            , "columnDefs": [
+                {responsivePriority: 1, targets: 1},
+                {responsivePriority: 2, targets: -1},
+                {
+                    "data": null,
+                    "targets": 0
+                }
+            ]
+            // 汉化
+            , "oLanguage": {
+                //"sLoadingRecords": "载入中...",
+                "sSearch": "搜索",
+                "sLengthMenu": "每页显示 _MENU_ 条记录",
+                "sZeroRecords": "抱歉， 没有找到",
+                "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+                "sInfoEmpty": "没有数据",
+                "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",
+                    "sLast": "尾页"
+                }
+            }
+            , "fnDrawCallback": function () {
+                var api = this.api();
+                var startIndex = api.context[0]._iDisplayStart;//获取到本页开始的条数
+                api.column(0).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

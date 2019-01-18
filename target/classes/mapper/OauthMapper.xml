@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.trj.OauthMapper" >
+  <resultMap id="BaseResultMap" type="com.fuhui.entity.trj.Oauth" >
+    <id column="I_AppId" property="iAppid" jdbcType="BIGINT" />
+    <result column="C_Key" property="cKey" jdbcType="VARCHAR" />
+    <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP" />
+    <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT" />
+    <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP" />
+    <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT" />
+    <result column="I_IsReview" property="iIsreview" jdbcType="TINYINT" />
+    <result column="T_RTime" property="tRtime" jdbcType="TIMESTAMP" />
+    <result column="I_RUserId" property="iRuserid" jdbcType="BIGINT" />
+    <result column="C_Remark" property="cRemark" jdbcType="VARCHAR" />
+    <result column="I_Status" property="iStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    I_AppId, C_Key, T_CTime, I_CUserId, T_UTime, I_UUserId, I_IsReview, T_RTime, I_RUserId, 
+    C_Remark, I_Status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_rj_app_oauth
+    where I_AppId = #{iAppid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_rj_app_oauth
+    where I_AppId = #{iAppid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuhui.entity.trj.Oauth" >
+    insert into t_rj_app_oauth (I_AppId, C_Key, T_CTime, 
+      I_CUserId, T_UTime, I_UUserId, 
+      I_IsReview, T_RTime, I_RUserId, 
+      C_Remark, I_Status)
+    values (#{iAppid,jdbcType=BIGINT}, #{cKey,jdbcType=VARCHAR}, #{tCtime,jdbcType=TIMESTAMP}, 
+      #{iCuserid,jdbcType=BIGINT}, #{tUtime,jdbcType=TIMESTAMP}, #{iUuserid,jdbcType=BIGINT}, 
+      #{iIsreview,jdbcType=TINYINT}, #{tRtime,jdbcType=TIMESTAMP}, #{iRuserid,jdbcType=BIGINT}, 
+      #{cRemark,jdbcType=VARCHAR}, #{iStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhui.entity.trj.Oauth" >
+    insert into t_rj_app_oauth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iAppid != null" >
+        I_AppId,
+      </if>
+      <if test="cKey != null" >
+        C_Key,
+      </if>
+      <if test="tCtime != null" >
+        T_CTime,
+      </if>
+      <if test="iCuserid != null" >
+        I_CUserId,
+      </if>
+      <if test="tUtime != null" >
+        T_UTime,
+      </if>
+      <if test="iUuserid != null" >
+        I_UUserId,
+      </if>
+      <if test="iIsreview != null" >
+        I_IsReview,
+      </if>
+      <if test="tRtime != null" >
+        T_RTime,
+      </if>
+      <if test="iRuserid != null" >
+        I_RUserId,
+      </if>
+      <if test="cRemark != null" >
+        C_Remark,
+      </if>
+      <if test="iStatus != null" >
+        I_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iAppid != null" >
+        #{iAppid,jdbcType=BIGINT},
+      </if>
+      <if test="cKey != null" >
+        #{cKey,jdbcType=VARCHAR},
+      </if>
+      <if test="tCtime != null" >
+        #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iCuserid != null" >
+        #{iCuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tUtime != null" >
+        #{tUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iUuserid != null" >
+        #{iUuserid,jdbcType=BIGINT},
+      </if>
+      <if test="iIsreview != null" >
+        #{iIsreview,jdbcType=TINYINT},
+      </if>
+      <if test="tRtime != null" >
+        #{tRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iRuserid != null" >
+        #{iRuserid,jdbcType=BIGINT},
+      </if>
+      <if test="cRemark != null" >
+        #{cRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="iStatus != null" >
+        #{iStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.trj.Oauth" >
+    update t_rj_app_oauth
+    <set >
+      <if test="cKey != null" >
+        C_Key = #{cKey,jdbcType=VARCHAR},
+      </if>
+      <if test="tCtime != null" >
+        T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iCuserid != null" >
+        I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tUtime != null" >
+        T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iUuserid != null" >
+        I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      </if>
+      <if test="iIsreview != null" >
+        I_IsReview = #{iIsreview,jdbcType=TINYINT},
+      </if>
+      <if test="tRtime != null" >
+        T_RTime = #{tRtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iRuserid != null" >
+        I_RUserId = #{iRuserid,jdbcType=BIGINT},
+      </if>
+      <if test="cRemark != null" >
+        C_Remark = #{cRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="iStatus != null" >
+        I_Status = #{iStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where I_AppId = #{iAppid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.trj.Oauth" >
+    update t_rj_app_oauth
+    set C_Key = #{cKey,jdbcType=VARCHAR},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      I_IsReview = #{iIsreview,jdbcType=TINYINT},
+      T_RTime = #{tRtime,jdbcType=TIMESTAMP},
+      I_RUserId = #{iRuserid,jdbcType=BIGINT},
+      C_Remark = #{cRemark,jdbcType=VARCHAR},
+      I_Status = #{iStatus,jdbcType=TINYINT}
+    where I_AppId = #{iAppid,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectByIdAndKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_rj_app_oauth
+    where I_AppId = #{iAppid,jdbcType=BIGINT}
+    AND C_Key = #{key,jdbcType=VARCHAR}
+  </select>
+</mapper>

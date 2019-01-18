@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tms.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.fuhui.entity.tms.Message" >
+    <id column="I_MsgId" property="iMsgid" jdbcType="BIGINT" />
+    <result column="C_Platform" property="cPlatform" jdbcType="VARCHAR" />
+    <result column="C_Audience" property="cAudience" jdbcType="VARCHAR" />
+    <result column="I_Type" property="iType" jdbcType="INTEGER" />
+    <result column="C_Title" property="cTitle" jdbcType="VARCHAR" />
+    <result column="C_Message" property="cMessage" jdbcType="VARCHAR" />
+    <result column="T_STime" property="tStime" jdbcType="TIMESTAMP" />
+    <result column="I_SUserId" property="iSuserid" jdbcType="BIGINT" />
+    <result column="I_Status" property="iStatus" jdbcType="TINYINT" />
+    <result column="I_JPushMsgId" property="iJpushmsgid" jdbcType="VARCHAR" />
+    <result column="I_JStatus" property="iJstatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    I_MsgId, C_Platform, C_Audience, I_Type, C_Title, C_Message, T_STime, I_SUserId, 
+    I_Status, I_JPushMsgId, I_JStatus
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ms_message
+    where I_MsgId = #{iMsgid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_ms_message
+    where I_MsgId = #{iMsgid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuhui.entity.tms.Message" >
+    insert into t_ms_message (I_MsgId, C_Platform, C_Audience, 
+      I_Type, C_Title, C_Message, 
+      T_STime, I_SUserId, I_Status, 
+      I_JPushMsgId, I_JStatus)
+    values (#{iMsgid,jdbcType=BIGINT}, #{cPlatform,jdbcType=VARCHAR}, #{cAudience,jdbcType=VARCHAR}, 
+      #{iType,jdbcType=INTEGER}, #{cTitle,jdbcType=VARCHAR}, #{cMessage,jdbcType=VARCHAR}, 
+      #{tStime,jdbcType=TIMESTAMP}, #{iSuserid,jdbcType=BIGINT}, #{iStatus,jdbcType=TINYINT}, 
+      #{iJpushmsgid,jdbcType=VARCHAR}, #{iJstatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhui.entity.tms.Message" >
+    insert into t_ms_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iMsgid != null" >
+        I_MsgId,
+      </if>
+      <if test="cPlatform != null" >
+        C_Platform,
+      </if>
+      <if test="cAudience != null" >
+        C_Audience,
+      </if>
+      <if test="iType != null" >
+        I_Type,
+      </if>
+      <if test="cTitle != null" >
+        C_Title,
+      </if>
+      <if test="cMessage != null" >
+        C_Message,
+      </if>
+      <if test="tStime != null" >
+        T_STime,
+      </if>
+      <if test="iSuserid != null" >
+        I_SUserId,
+      </if>
+      <if test="iStatus != null" >
+        I_Status,
+      </if>
+      <if test="iJpushmsgid != null" >
+        I_JPushMsgId,
+      </if>
+      <if test="iJstatus != null" >
+        I_JStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iMsgid != null" >
+        #{iMsgid,jdbcType=BIGINT},
+      </if>
+      <if test="cPlatform != null" >
+        #{cPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="cAudience != null" >
+        #{cAudience,jdbcType=VARCHAR},
+      </if>
+      <if test="iType != null" >
+        #{iType,jdbcType=INTEGER},
+      </if>
+      <if test="cTitle != null" >
+        #{cTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cMessage != null" >
+        #{cMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="tStime != null" >
+        #{tStime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iSuserid != null" >
+        #{iSuserid,jdbcType=BIGINT},
+      </if>
+      <if test="iStatus != null" >
+        #{iStatus,jdbcType=TINYINT},
+      </if>
+      <if test="iJpushmsgid != null" >
+        #{iJpushmsgid,jdbcType=VARCHAR},
+      </if>
+      <if test="iJstatus != null" >
+        #{iJstatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tms.Message" >
+    update t_ms_message
+    <set >
+      <if test="cPlatform != null" >
+        C_Platform = #{cPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="cAudience != null" >
+        C_Audience = #{cAudience,jdbcType=VARCHAR},
+      </if>
+      <if test="iType != null" >
+        I_Type = #{iType,jdbcType=INTEGER},
+      </if>
+      <if test="cTitle != null" >
+        C_Title = #{cTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cMessage != null" >
+        C_Message = #{cMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="tStime != null" >
+        T_STime = #{tStime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iSuserid != null" >
+        I_SUserId = #{iSuserid,jdbcType=BIGINT},
+      </if>
+      <if test="iStatus != null" >
+        I_Status = #{iStatus,jdbcType=TINYINT},
+      </if>
+      <if test="iJpushmsgid != null" >
+        I_JPushMsgId = #{iJpushmsgid,jdbcType=VARCHAR},
+      </if>
+      <if test="iJstatus != null" >
+        I_JStatus = #{iJstatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where I_MsgId = #{iMsgid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tms.Message" >
+    update t_ms_message
+    set C_Platform = #{cPlatform,jdbcType=VARCHAR},
+      C_Audience = #{cAudience,jdbcType=VARCHAR},
+      I_Type = #{iType,jdbcType=INTEGER},
+      C_Title = #{cTitle,jdbcType=VARCHAR},
+      C_Message = #{cMessage,jdbcType=VARCHAR},
+      T_STime = #{tStime,jdbcType=TIMESTAMP},
+      I_SUserId = #{iSuserid,jdbcType=BIGINT},
+      I_Status = #{iStatus,jdbcType=TINYINT},
+      I_JPushMsgId = #{iJpushmsgid,jdbcType=VARCHAR},
+      I_JStatus = #{iJstatus,jdbcType=TINYINT}
+    where I_MsgId = #{iMsgid,jdbcType=BIGINT}
+  </update>
+</mapper>

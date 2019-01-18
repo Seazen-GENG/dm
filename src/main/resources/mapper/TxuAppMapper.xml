@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.txu.AppMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.txu.App">
+        <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+        <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+        <result column="I_IsCompel" property="iIscompel" jdbcType="TINYINT"/>
+        <result column="N_Price" property="nPrice" jdbcType="DECIMAL"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="I_UWay" property="iUway" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_IDX, I_AppId, I_SchoolId, I_Type, I_VersionId, C_DownUrl, I_IsCompel, N_Price, 
+    T_CTime, I_CUserId, T_UTime, I_UUserId, I_Status, I_UWay
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_xu_app
+        where I_IDX = #{iIdx,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_xu_app
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.txu.App">
+    insert into t_xu_app (I_IDX, I_AppId, I_SchoolId, 
+      I_Type, I_VersionId, C_DownUrl, 
+      I_IsCompel, N_Price, T_CTime, 
+      I_CUserId, T_UTime, I_UUserId, 
+      I_Status, I_UWay)
+    values (#{iIdx,jdbcType=BIGINT}, #{iAppid,jdbcType=BIGINT}, #{iSchoolid,jdbcType=BIGINT}, 
+      #{iType,jdbcType=TINYINT}, #{iVersionid,jdbcType=BIGINT}, #{cDownurl,jdbcType=VARCHAR}, 
+      #{iIscompel,jdbcType=TINYINT}, #{nPrice,jdbcType=DECIMAL}, #{tCtime,jdbcType=TIMESTAMP}, 
+      #{iCuserid,jdbcType=BIGINT}, #{tUtime,jdbcType=TIMESTAMP}, #{iUuserid,jdbcType=BIGINT}, 
+      #{iStatus,jdbcType=TINYINT}, #{iUway,jdbcType=TINYINT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.txu.App">
+        insert into t_xu_app
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                I_IDX,
+            </if>
+            <if test="iAppid != null">
+                I_AppId,
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId,
+            </if>
+            <if test="iType != null">
+                I_Type,
+            </if>
+            <if test="iVersionid != null">
+                I_VersionId,
+            </if>
+            <if test="cDownurl != null">
+                C_DownUrl,
+            </if>
+            <if test="iIscompel != null">
+                I_IsCompel,
+            </if>
+            <if test="nPrice != null">
+                N_Price,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId,
+            </if>
+            <if test="tUtime != null">
+                T_UTime,
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId,
+            </if>
+            <if test="iStatus != null">
+                I_Status,
+            </if>
+            <if test="iUway != null">
+                I_UWay,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                #{iIdx,jdbcType=BIGINT},
+            </if>
+            <if test="iAppid != null">
+                #{iAppid,jdbcType=BIGINT},
+            </if>
+            <if test="iSchoolid != null">
+                #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="iVersionid != null">
+                #{iVersionid,jdbcType=BIGINT},
+            </if>
+            <if test="cDownurl != null">
+                #{cDownurl,jdbcType=VARCHAR},
+            </if>
+            <if test="iIscompel != null">
+                #{iIscompel,jdbcType=TINYINT},
+            </if>
+            <if test="nPrice != null">
+                #{nPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="tUtime != null">
+                #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                #{iUuserid,jdbcType=BIGINT},
+            </if>
+            <if test="iStatus != null">
+                #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="iUway != null">
+                #{iUway,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.txu.App">
+        update t_xu_app
+        <set>
+            <if test="iAppid != null">
+                I_AppId = #{iAppid,jdbcType=BIGINT},
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                I_Type = #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="iVersionid != null">
+                I_VersionId = #{iVersionid,jdbcType=BIGINT},
+            </if>
+            <if test="cDownurl != null">
+                C_DownUrl = #{cDownurl,jdbcType=VARCHAR},
+            </if>
+            <if test="iIscompel != null">
+                I_IsCompel = #{iIscompel,jdbcType=TINYINT},
+            </if>
+            <if test="nPrice != null">
+                N_Price = #{nPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId = #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="tUtime != null">
+                T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId = #{iUuserid,jdbcType=BIGINT},
+            </if>
+            <if test="iStatus != null">
+                I_Status = #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="iUway != null">
+                I_UWay = #{iUway,jdbcType=TINYINT},
+            </if>
+        </set>
+        where I_IDX = #{iIdx,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.txu.App">
+    update t_xu_app
+    set I_AppId = #{iAppid,jdbcType=BIGINT},
+      I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+      I_Type = #{iType,jdbcType=TINYINT},
+      I_VersionId = #{iVersionid,jdbcType=BIGINT},
+      C_DownUrl = #{cDownurl,jdbcType=VARCHAR},
+      I_IsCompel = #{iIscompel,jdbcType=TINYINT},
+      N_Price = #{nPrice,jdbcType=DECIMAL},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      I_Status = #{iStatus,jdbcType=TINYINT},
+      I_UWay = #{iUway,jdbcType=TINYINT}
+    where I_IDX = #{iIdx,jdbcType=BIGINT}
+  </update>
+
+
+    <resultMap type="com.fuhui.entity.txu.App" id="clubBean" autoMapping="true">
+        <!--column指向数据库列名   property指向pojo对象中字段名-->
+        <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+        <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+        <result column="I_IsCompel" property="iIscompel" jdbcType="TINYINT"/>
+        <result column="N_Price" property="nPrice" jdbcType="DECIMAL"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="I_UWay" property="iUway" jdbcType="TINYINT"/>
+        <!-- property指的是在bean中字段名 ofType类的全定向名 -->
+        <collection property="appRj" ofType="com.fuhui.entity.trj.AppRj">
+            <id column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+            <result column="I_ProductId" property="iProductid" jdbcType="BIGINT"/>
+            <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+            <result column="C_Package" property="cPackage" jdbcType="VARCHAR"/>
+            <result column="I_Place" property="iPlace" jdbcType="TINYINT"/>
+            <result column="C_PlaceRemark" property="cPlaceremark" jdbcType="VARCHAR"/>
+            <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+            <result column="I_IsFree" property="iIsfree" jdbcType="TINYINT"/>
+            <result column="N_Price" property="nPrice" jdbcType="DECIMAL"/>
+            <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+            <result column="T_FRTime" property="tFrtime" jdbcType="TIMESTAMP"/>
+            <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+            <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+            <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+            <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+            <result column="C_Desc" property="cDesc" jdbcType="VARCHAR"/>
+            <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+            <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        </collection>
+        <collection property="appVersion" ofType="com.fuhui.entity.trj.AppVersion">
+            <id column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+            <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+            <result column="C_Version" property="cVersion" jdbcType="VARCHAR"/>
+            <result column="C_VersionRemark" property="cVersionremark" jdbcType="VARCHAR"/>
+            <result column="I_IsCompel" property="iIscompel" jdbcType="TINYINT"/>
+            <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+            <result column="T_ReleaseTime" property="tReleasetime" jdbcType="TIMESTAMP"/>
+            <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+            <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+            <result column="T_RTime" property="tRtime" jdbcType="TIMESTAMP"/>
+            <result column="I_RUserId" property="iRuserid" jdbcType="BIGINT"/>
+            <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+            <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAppListBySchoolId" resultMap="clubBean">
+        SELECT b.I_AppId
+        ,b.C_Name
+        ,b.C_Package
+        ,a.I_Type
+        ,a.I_UWay
+        ,c.C_Version
+        ,IFNULL(a.C_DownUrl,c.C_DownUrl) C_DownUrl
+        ,b.C_Desc
+        FROM
+        t_rj_app b,t_xu_app a
+        LEFT JOIN t_rj_app_version c ON a.I_AppId=c.I_AppId AND a.I_VersionId=c.I_VersionId
+        WHERE 1=1
+        AND b.I_Status = 1
+        <if test="iSchoolid != -1">
+            AND a.I_SchoolId=#{iSchoolid}
+        </if>
+        <if test="iPlace != null">
+            AND FIND_IN_SET(b.I_Place,#{iPlace})
+        </if>
+        <if test="iStatus != null">
+            AND FIND_IN_SET(a.I_Status,#{iStatus})
+        </if>
+        AND a.I_AppId=b.I_AppId
+        <if test="isPage == 1">
+            LIMIT #{pNum},#{pLine}
+        </if>
+    </select>
+
+
+    <resultMap type="com.fuhui.entity.txu.App" id="configMap" autoMapping="true">
+        <!--column指向数据库列名   property指向pojo对象中字段名-->
+        <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+        <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+        <result column="I_IsCompel" property="iIscompel" jdbcType="TINYINT"/>
+        <result column="N_Price" property="nPrice" jdbcType="DECIMAL"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="I_UWay" property="iUway" jdbcType="TINYINT"/>
+        <!-- property指的是在bean中字段名 ofType类的全定向名 -->
+        <collection property="appRj" ofType="com.fuhui.entity.trj.AppRj">
+            <id column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+            <result column="I_ProductId" property="iProductid" jdbcType="BIGINT"/>
+            <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+            <result column="C_Package" property="cPackage" jdbcType="VARCHAR"/>
+            <result column="I_Place" property="iPlace" jdbcType="TINYINT"/>
+            <result column="C_PlaceRemark" property="cPlaceremark" jdbcType="VARCHAR"/>
+            <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+            <result column="I_IsFree" property="iIsfree" jdbcType="TINYINT"/>
+            <result column="N_Price" property="nPrice" jdbcType="DECIMAL"/>
+            <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+            <result column="T_FRTime" property="tFrtime" jdbcType="TIMESTAMP"/>
+            <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+            <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+            <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+            <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+            <result column="C_Desc" property="cDesc" jdbcType="VARCHAR"/>
+            <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+            <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+            <result column="C_ImgPath" property="cImgPath" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="appVersion" ofType="com.fuhui.entity.trj.AppVersion">
+            <id column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+            <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+            <result column="C_Version" property="cVersion" jdbcType="VARCHAR"/>
+            <result column="C_VersionRemark" property="cVersionremark" jdbcType="VARCHAR"/>
+            <result column="I_IsCompel" property="iIscompel" jdbcType="TINYINT"/>
+            <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+            <result column="T_ReleaseTime" property="tReleasetime" jdbcType="TIMESTAMP"/>
+            <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+            <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+            <result column="T_RTime" property="tRtime" jdbcType="TIMESTAMP"/>
+            <result column="I_RUserId" property="iRuserid" jdbcType="BIGINT"/>
+            <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+            <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+            <result column="C_VersionCode" property="cVersionCode" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <select id="getNewConfigInfo" resultMap="configMap">
+        SELECT c.I_AppId,c.C_Package,IF(IFNULL(d.C_DownUrl,'')='',e.C_DownUrl,d.C_DownUrl) C_DownUrl
+        ,d.I_Type,d.I_UWay,d.I_VersionId,e.C_Version,c.C_Name,c.C_Desc,c.C_ImgPath,e.C_VersionCode
+        FROM t_xm_appconfig a,t_xm_appconfig_applist b,t_rj_app c,t_xu_app d,t_rj_app_version e
+        WHERE 1=1
+        <if test="iSchoolid != -1 ">
+            AND a.I_SchoolId = #{iSchoolid}
+        </if>
+        <if test="appConfigId != -1 ">
+            AND a.I_ConfigId = #{appConfigId}
+        </if>
+        <if test="appConfigId == -1 ">
+            AND a.I_Range=0
+        </if>
+        AND a.I_Status=1
+        AND a.I_ConfigId=b.I_ConfigId
+        AND b.I_AppId=c.I_AppId
+        AND c.I_AppId=d.I_AppId
+        AND d.I_VersionId=e.I_VersionId
+        AND a.I_SchoolId = d.I_SchoolId
+        ORDER BY a.T_UTime
+    </select>
+
+    <select id="selectBySchoolId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_xu_app
+        where I_SchoolId = #{schoolId}
+    </select>
+
+    <delete id="deleteBySchoolId" parameterType="java.lang.Long">
+    delete from t_xu_app
+    where I_SchoolId = #{schoolId}
+  </delete>
+
+    <select id="selectByAppIdAndVersionId" resultMap="BaseResultMap">
+        select
+        a0.I_SchoolId
+        from t_xu_school a0,t_xu_app a
+        left join t_rj_app_version b
+        on a.I_AppId=b.I_AppId
+        and a.I_VersionId=b.I_VersionId
+        where a0.I_Status=1
+        and a.I_UWay=1
+        and a0.I_SchoolId=a.I_SchoolId
+        and a.I_AppId=#{appId}
+        and a.I_VersionId<![CDATA[<>]]>#{versionId}
+    </select>
+
+    <update id="setAppVersionBySchoolId" parameterType="com.fuhui.entity.txu.App">
+        update t_xu_app
+        <set>
+            <if test="iVersionid != null">
+                I_VersionId = #{iVersionid,jdbcType=BIGINT},
+            </if>
+            <if test="tUtime != null">
+                T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId = #{iUuserid,jdbcType=BIGINT},
+            </if>
+        </set>
+        where 1=1
+        AND I_SchoolId = #{iSchoolid,jdbcType=BIGINT}
+        AND I_AppId = #{iAppid,jdbcType=BIGINT}
+    </update>
+
+
+    <resultMap type="com.fuhui.entity.txu.App" id="queryBean" autoMapping="true">
+        <!--column指向数据库列名   property指向pojo对象中字段名-->
+        <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+        <result column="C_DownUrl" property="cDownurl" jdbcType="VARCHAR"/>
+        <result column="I_IsCompel" property="iIscompel" jdbcType="TINYINT"/>
+        <result column="N_Price" property="nPrice" jdbcType="DECIMAL"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="I_UWay" property="iUway" jdbcType="TINYINT"/>
+        <!-- property指的是在bean中字段名 ofType类的全定向名 -->
+        <collection property="appRj" ofType="com.fuhui.entity.trj.AppRj">
+            <id column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+            <result column="I_ProductId" property="iProductid" jdbcType="BIGINT"/>
+            <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+            <result column="C_Package" property="cPackage" jdbcType="VARCHAR"/>
+            <result column="I_Place" property="iPlace" jdbcType="TINYINT"/>
+            <result column="C_PlaceRemark" property="cPlaceremark" jdbcType="VARCHAR"/>
+            <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+            <result column="I_IsFree" property="iIsfree" jdbcType="TINYINT"/>
+            <result column="N_Price" property="nPrice" jdbcType="DECIMAL"/>
+            <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+            <result column="T_FRTime" property="tFrtime" jdbcType="TIMESTAMP"/>
+            <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+            <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+            <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+            <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+            <result column="C_Desc" property="cDesc" jdbcType="VARCHAR"/>
+            <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+            <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        </collection>
+    </resultMap>
+
+    <sql id="query">
+        a.I_AppId,a.C_Name,a.C_Package,a.I_Place,a.I_Type,a.C_Desc,a.I_ProductId,a.C_Remark,a.T_CTime,a.T_UTime,
+        a.I_UUserId,a.I_Status,b.I_SchoolId,b.C_DownUrl
+    </sql>
+
+    <select id="queryAppList" resultMap="queryBean">
+        select
+        <include refid="query"/>
+        FROM t_xu_app b LEFT JOIN t_rj_app a ON a.I_AppId = b.I_AppId WHERE 1=1
+        <if test="appIds != null">
+            AND a.I_AppId = #{appIds}
+        </if>
+        <if test="name != null">
+            AND a.C_Name LIKE '%${name}%'
+        </if>
+        <if test="type != null">
+            AND a.I_Type = #{type}
+        </if>
+        <if test="place != null">
+            AND a.I_Place = #{place}
+        </if>
+        <if test="schoolId != null">
+            AND b.I_SchoolId = #{schoolId}
+        </if>
+        <if test="productId != null">
+            AND a.I_ProductId = #{productId}
+        </if>
+        <if test="sort != null">
+            AND a.I_Sort = #{sort}
+        </if>
+        <if test="sCTime != null">
+            AND a.T_CTime BETWEEN #{sCTime}
+        </if>
+        <if test="eCTime != null">
+            AND #{eCTime}
+        </if>
+        <if test="isPage == 1">
+            LIMIT #{pNum},#{pLine}
+        </if>
+    </select>
+
+    <update id="updateByAppIdAndSchoolId">
+            update t_xu_app
+        set
+          I_VersionId = #{versionId},
+          T_UTime = #{date}
+        where I_AppId = #{appId} AND  I_SchoolId = #{schoolId}
+    </update>
+</mapper>

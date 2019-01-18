@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>知会设备管控平台</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../plugins/iCheck/all.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        .col-md-3 {
+            width: 230px;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header" id="headerDiv">
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" id="leftMenu">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                编辑应用配置
+                <small>编辑保存应用信息</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+                <li><a href="#">平板管理</a></li>
+                <li class="active">应用管理</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Horizontal Form -->
+            <div class="" id="bodyBox">
+                <div class="box-header with-border">
+                    <button type="button" class="btn btn-default" id="butClose" onclick="cancelSave();">取消</button>
+                    <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;" onclick="submit()"
+                            id="butts">
+                        启用
+                    </button>
+                    <button type="button" class="btn btn-default pull-right" onclick="addVersion()" id="butts1">添加新版本
+                    </button>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" id="form">
+                    <div class="box-body">
+                        <!--<div class="form-group" id="schoolId">
+                            <label class="col-sm-2 control-label">学校名称</label>
+                            <div class="col-sm-10">
+                                <select id="nation" class="form-control" name="schoolId" style="height: 46px;"></select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="schoolName">
+                            <label class="col-sm-2 control-label">学校名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control  input-lg" id="schName"
+                                       readonly>
+                            </div>
+                        </div>-->
+                        <!--//应用类别-->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">应用类别</label>
+                            <div class="col-sm-10" style="margin-top: 7px;">
+                                <label style="margin-right: 10px;">
+                                    <input name="sort" type="radio" class="flat-red" checked value="0">
+                                    <span>其他</span>
+                                </label>
+                                <label style="margin-right: 10px;">
+                                    <input name="sort" type="radio" class="flat-red" value="1">
+                                    <span>课堂互动</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">应用类型</label>
+                            <div class="col-sm-10" style="margin-top: 7px;" id="radios">
+                                <label style="margin-right: 10px;">
+                                    <input name="type" type="radio" class="flat-red" checked value="1">
+                                    <span>自主研发</span>
+                                </label>
+                                <label style="margin-right: 10px;">
+                                    <input name="type" type="radio" class="flat-red" value="2">
+                                    <span>第三方合作</span>
+                                </label>
+                                <label style="margin-right: 10px;">
+                                    <input name="type" type="radio" class="flat-red" value="3">
+                                    <span>校方上传</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">是否共享</label>
+                            <div class="col-sm-10" style="margin-top: 7px;">
+                                <label style="margin-right: 10px;">
+                                    <input name="isShare" type="radio" class="flat-red" checked value="0">
+                                    <span>不共享</span>
+                                </label>
+                                <label style="margin-right: 10px;">
+                                    <input name="isShare" type="radio" class="flat-red" value="1">
+                                    <span>共享</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">应用价格</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="isFree"
+                                        style="height: 47px;display: inline-block;width: 10%;margin-top: -2px;">
+                                    <option value="1">免费</option>
+                                    <option value="0">收费</option>
+                                </select>
+                                <input type="text" class="form-control  input-lg" name="price"
+                                       style="display: inline-block;width: 15%;" placeholder="应用价格" value="0.00">元
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">应用名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control  input-lg" name="name" id="appName"
+                                       placeholder="应用名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">应用包名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control  input-lg" name="code" id="code"
+                                       placeholder="应用包名">
+                            </div>
+                        </div>
+                        <!--newAdd-->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">应用图标</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control  input-lg" placeholder="应用图标">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">一句简述</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control  input-lg" placeholder="一句简述" name="shortDesc">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">应用描述</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control  input-lg" name="desc"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">应用环境</label>
+                            <div class="col-sm-10" style="margin-top: 7px;">
+                                <label style="margin-right: 10px;">
+                                    <input name="place" type="radio" class="flat-red" value="2" checked>
+                                    <span>安卓</span>
+                                </label>
+                                <label>
+                                    <input name="place" type="radio" class="flat-red" value="1">
+                                    <span>WINDOWS</span>
+                                </label>
+                                <label>
+                                    <input name="place" type="radio" class="flat-red" value="3">
+                                    <span>IOS</span>
+                                </label>
+                                <label style="margin-right: 10px;">
+                                    <input name="place" type="radio" class="flat-red" value="0">
+                                    <span>其他</span>
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">应用环境
+                                <br/>详细描述</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control  input-lg" name="placeRemark"></textarea>
+                            </div>
+                        </div>
+                        <!--endAdd-->
+                        <div class="form-group" id="schoolTable">
+                            <label class="col-sm-2 control-label">使用学校列表</label>
+                            <div class="col-sm-10" style="margin-top: 7px;" id="searchTable"></div>
+                        </div>
+                        <input name="appId" id="appId" type="hidden"><!--//隐藏列-->
+                        <input name="appVersion" id="appJsonVersion" type="hidden">
+                    </div>
+                    <!-- /.box-body -->
+                </form>
+            </div>
+            <!-- /.box -->
+            <div id="appVersion" class="form-horizontal" style="margin-top: 30px;">
+                <div class="box-header with-border">
+                    <button type="button" class="btn btn-default" onclick="cancelVersionSave();">取消</button>
+                    <button type="button" class="btn btn-default pull-right" onclick="announce()" id="butts3">保存
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">版本号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control  input-lg" name="version" id="version"
+                               placeholder="版本号">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">版本编号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control  input-lg" name="versionCode" id="versionCode"
+                               placeholder="版本编号">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">版本说明</label>
+                    <div class="col-sm-10">
+                        <!--<input type="text" class="form-control  input-lg" name="versionRemark" id="versionRemark"
+                               placeholder="版本说明">-->
+                        <textarea class="form-control  input-lg" name="versionRemark" id="versionRemark" placeholder="版本说明"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">下载地址</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control  input-lg" name="downUrl" id="downUrl"
+                               placeholder="下载地址">
+                    </div>
+                </div>
+                <input type="hidden" class="form-control  input-lg" name="releaseTime" id="releaseTime"
+                       placeholder="发布时间">
+                <!--<div class="form-group">
+                    <label class="col-sm-2 control-label">发布时间</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control  input-lg" name="releaseTime" id="releaseTime"
+                               placeholder="发布时间">
+                    </div>
+                </div>-->
+                <input type="hidden" class="form-control  input-lg" name="remark" id="remark"
+                       placeholder="备注">
+                <!--<div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control  input-lg" name="remark" id="remark"
+                               placeholder="备注">
+                    </div>
+                </div>-->
+                <!--//是否强制升级-->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">是否强制升级</label>
+                    <div class="col-sm-10" style="margin-top: 7px;">
+                        <label style="margin-right: 10px;">
+                            <input name="isCompel" type="radio" class="flat-red" checked value="1">
+                            <span>强制</span>
+                        </label>
+                        <label style="margin-right: 10px;">
+                            <input name="isCompel" type="radio" class="flat-red" value="2">
+                            <span>忽略</span>
+                        </label>
+                        <label style="margin-right: 10px;">
+                            <input name="isCompel" type="radio" class="flat-red" value="3">
+                            <span>指定忽略</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-header" style="padding-bottom: 0px;" id="buttss">
+                <div class="box-header with-border">
+                    <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;"
+                            onclick="uploadFile()" >
+                        开始上传
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <form id="from" class="form-horizontal"><!--method="POST" enctype="multipart/form-data"-->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">上传应用</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="file" id="file" onchange="fileSelected()"/>
+                        <div id="fileName"></div>
+                        <div id="fileSize"></div>
+                        <div id="fileType"></div>
+                        <div>上传进度：<span id="progressNumber">未开始</span></div>
+                    </div>
+                </div>
+            </form>
+            <!-- /.box-body -->
+        </section>
+        <input type="hidden" id="ifParam" value="0">
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" id="footerDiv">
+    </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<!-- iCheck -->
+<script src="../plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(function () {
+        $("#appVersion").hide();
+        $("#from").hide();
+        $("#buttss").hide();
+        $('#leftMenu').load("leftMenu.html", function () {
+            $("#appList").addClass("active");
+        });
+        $('#headerDiv').load("header.html");
+        $('#footerDiv').load("footer.html");
+        $('input[type="checkbox"].flat-red,input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+        });
+        getParam();
+        //createSelect('------请选择------');
+    });
+
+    ////根据appId获取使用学校列表
+    function getSchoolList(appId) {
+        var searchUrl = "/schService/getSchoolListByAppId?appId=" + appId;
+        console.log(searchUrl);
+        var str = "<table>";
+        $.ajax({
+            type: "Post",
+            url: searchUrl,
+            dataType: "json",
+            success: function (data) {
+                var str = "";
+                var res = data['data']['list'];
+                for (var i = 0; i < res.length; i++) {
+                    str += "<tr><td>" + res[i].name + "</td></tr>";
+                }
+                ////</td><td>" + res[i].address + "
+                str += "</table>";
+                $("#searchTable").html(str);
+            }
+        });
+    }
+
+    function addVersion() {
+        var appName = $("#appName").val().replace(/(^\s*)|(\s*$)/g, "");
+        var code = $("#code").val().replace(/(^\s*)|(\s*$)/g, "");
+        console.log('appName' + appName);
+        if (appName == '' || code == '') {
+            alert("应用信息不能为空!");
+        } else {
+            $("#appVersion").show();
+            $("#from").show();
+            $("#buttss").show();
+            $("#butts").hide();
+            $("#butts1").hide();
+            $("#butClose").hide();
+            $("#ifParam").val("1");
+        }
+    }
+
+    function cancelVersionSave() {
+        var url = location.search;
+        var Request = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1)　//去掉?号
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                Request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+        }
+        var query = Request["query"];
+        if (query.valueOf() == "2") {
+            window.location.href = "appList.html";
+        } else {
+            $("#appVersion").hide();
+            $("#from").hide();
+            $("#buttss").hide();
+            $("#butts").show();
+            $("#butts1").show();
+            $("#butClose").show();
+            $("#ifParam").val("0");
+            $("#appJsonVersion").val("");
+        }
+    }
+
+    function getParam() {
+        var url = location.search;
+        var Request = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1)　//去掉?号
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                Request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+        }
+        var appName = Request["name"];
+        var appId = Request["id"];
+        var schoolName = Request["schoolName"];
+        var code = Request["code"];
+        //赋值
+        if (appId.valueOf() != "null") {
+            $("#appId").val(appId);
+            var query = Request["query"];
+            if (query.valueOf() == "1") {
+                $("#schoolId").hide();
+                $("#schoolName").hide();
+                $("#butts").hide();
+                $("#butts1").hide();
+                $("#appName").attr("readonly", "readonly");
+                $("#code").attr("readonly", "readonly");
+                getSchoolList(appId);
+                $("#schoolTable").show();
+            } else if (query.valueOf() == "2") {
+                $("#bodyBox").hide();
+                $("#appVersion").show();
+                $("#from").show();
+                $("#buttss").show();
+                $("#ifParam").val("1");
+            } else {
+                $("#schoolId").hide();
+                $("#schoolName").hide();
+                $("#schoolTable").hide();
+            }
+        } else {
+            $("#schoolId").show();
+            $("#schoolName").hide();
+            $("#schoolTable").hide();
+        }
+        if (appName.valueOf() != "undefined") {
+            $("#appName").val(Request["name"]);
+        }
+        if (code.valueOf() != "undefined") {
+            $("#code").val(code);
+        }
+    }
+
+    function cancelSave() {
+        window.location.href = "appList.html";
+    }
+
+    function submit() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/appService/saveApp",//url
+            data: $('#form').serialize(),
+            success: function (result) {
+                if (result.status == true) {
+                    window.location.href = "appList.html";
+                } else {
+                    alert(result.errorInfo);
+                }
+            },
+            error: function () {
+                alert("提交异常！");
+            }
+        });
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function announce() {
+        var a = new Object();
+        a.appId = $("#appId").val();
+        a.versionCode = $("#versionCode").val();
+        a.version = $("#version").val();
+        a.downUrl = $("#downUrl").val();
+        a.status = $('input[name="status"]:checked ').val();
+        a.isCompel = $('input[name="isCompel"]:checked ').val();
+        a.versionRemark = $("#versionRemark").val();
+        a.releaseTime = $("#releaseTime").val();
+        a.remark = $("#remark").val();
+        var b = JSON.stringify(a);
+        var ifParam = $("#ifParam").val();
+        if (ifParam == 1) {
+            $("#appJsonVersion").val(b);
+        } else {
+            $("#appJsonVersion").val("");
+        }
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/appService/saveApp",//url
+            data: $('#form').serialize(),
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                if (result.status == true) {
+                    window.location.href = "appList.html";
+                } else {
+                    alert(result.errorInfo);
+                }
+            },
+            error: function () {
+                alert("提交异常！");
+            }
+        });
+    }
+    /////////////////////////////////文件上传/////////////////////////////////////////////////////////////////////////////////////
+    function fileSelected() {
+        var file = document.getElementById('file').files[0];
+        if (file) {
+            var fileSize = 0;
+            if (file.size > 1024 * 1024) {
+                fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+            } else {
+                fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+            }
+            document.getElementById('fileName').innerHTML = 'Name: ' + file.name;
+            document.getElementById('fileSize').innerHTML = 'Size: ' + fileSize;
+            document.getElementById('fileType').innerHTML = 'Type: ' + file.type;
+        }
+    }
+
+    function uploadFile() {
+        var fd = new FormData();
+        fd.append("file", document.getElementById('file').files[0]);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", uploadProgress, false);
+        xhr.addEventListener("load", uploadComplete, false);
+        xhr.addEventListener("error", uploadFailed, false);
+        xhr.addEventListener("abort", uploadCanceled, false);
+        xhr.open("POST", "/file/upload");
+        xhr.send(fd);
+    }
+
+    function uploadProgress(evt) {
+        if (evt.lengthComputable) {
+            var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+            document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
+        }
+        else {
+            document.getElementById('progressNumber').innerHTML = '无法计算';
+        }
+    }
+
+    function uploadComplete(evt) {
+        /* 当服务器响应后，这个事件就会被触发 */
+        //alert(evt.target.responseText);
+        console.log("回调==" + evt.target.responseText);
+        var result = JSON.parse(evt.target.responseText);
+        if (result.status == 1) {
+            $("#package").val(result.data.package);
+            $("#version").val(result.data.versionName);
+            $("#versionCode").val(result.data.versionCode);
+            $("#downUrl").val(result.data.filePath);
+            alert("上传成功!");
+            document.getElementById('progressNumber').innerHTML = "已完成！";
+        } else {
+            alert(result.errorInfo);
+            document.getElementById('progressNumber').innerHTML = "上传失败！";
+        }
+    }
+
+    function uploadFailed(evt) {
+        alert("上传文件发生了错误尝试");
+    }
+
+    function uploadCanceled(evt) {
+        alert("上传被用户取消或者浏览器断开连接");
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tjc.StageMapper" >
+  <resultMap id="BaseResultMap" type="com.fuhui.entity.tjc.Stage" >
+    <id column="I_StageId" property="iStageid" jdbcType="BIGINT" />
+    <result column="C_Name" property="cName" jdbcType="VARCHAR" />
+    <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT" />
+    <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP" />
+    <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT" />
+    <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP" />
+    <result column="C_Remark" property="cRemark" jdbcType="VARCHAR" />
+    <result column="I_Status" property="iStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    I_StageId, C_Name, I_CUserId, T_CTime, I_UUserId, T_UTime, C_Remark, I_Status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_jc_stage
+    where I_StageId = #{iStageid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_jc_stage
+    where I_StageId = #{iStageid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuhui.entity.tjc.Stage" >
+    insert into t_jc_stage (I_StageId, C_Name, I_CUserId, 
+      T_CTime, I_UUserId, T_UTime, 
+      C_Remark, I_Status)
+    values (#{iStageid,jdbcType=BIGINT}, #{cName,jdbcType=VARCHAR}, #{iCuserid,jdbcType=BIGINT}, 
+      #{tCtime,jdbcType=TIMESTAMP}, #{iUuserid,jdbcType=BIGINT}, #{tUtime,jdbcType=TIMESTAMP}, 
+      #{cRemark,jdbcType=VARCHAR}, #{iStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhui.entity.tjc.Stage" >
+    insert into t_jc_stage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iStageid != null" >
+        I_StageId,
+      </if>
+      <if test="cName != null" >
+        C_Name,
+      </if>
+      <if test="iCuserid != null" >
+        I_CUserId,
+      </if>
+      <if test="tCtime != null" >
+        T_CTime,
+      </if>
+      <if test="iUuserid != null" >
+        I_UUserId,
+      </if>
+      <if test="tUtime != null" >
+        T_UTime,
+      </if>
+      <if test="cRemark != null" >
+        C_Remark,
+      </if>
+      <if test="iStatus != null" >
+        I_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iStageid != null" >
+        #{iStageid,jdbcType=BIGINT},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="iCuserid != null" >
+        #{iCuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tCtime != null" >
+        #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iUuserid != null" >
+        #{iUuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tUtime != null" >
+        #{tUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cRemark != null" >
+        #{cRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="iStatus != null" >
+        #{iStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tjc.Stage" >
+    update t_jc_stage
+    <set >
+      <if test="cName != null" >
+        C_Name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="iCuserid != null" >
+        I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tCtime != null" >
+        T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iUuserid != null" >
+        I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tUtime != null" >
+        T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cRemark != null" >
+        C_Remark = #{cRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="iStatus != null" >
+        I_Status = #{iStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where I_StageId = #{iStageid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tjc.Stage" >
+    update t_jc_stage
+    set C_Name = #{cName,jdbcType=VARCHAR},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      C_Remark = #{cRemark,jdbcType=VARCHAR},
+      I_Status = #{iStatus,jdbcType=TINYINT}
+    where I_StageId = #{iStageid,jdbcType=BIGINT}
+  </update>
+</mapper>

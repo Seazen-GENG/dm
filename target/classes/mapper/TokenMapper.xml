@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.tqx.TokenMapper" >
+  <resultMap id="BaseResultMap" type="com.fuhui.entity.tqx.Token" >
+    <id column="I_TokenId" property="iTokenid" jdbcType="BIGINT" />
+    <result column="I_ConfigId" property="iConfigid" jdbcType="BIGINT" />
+    <result column="I_PadId" property="iPadid" jdbcType="BIGINT" />
+    <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT" />
+    <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP" />
+    <result column="T_OTime" property="tOtime" jdbcType="TIMESTAMP" />
+    <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP" />
+    <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT" />
+    <result column="C_Token" property="token"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    I_TokenId, I_ConfigId, I_PadId, I_CUserId, T_CTime, T_OTime, T_UTime, I_UUserId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_qx_token
+    where I_TokenId = #{iTokenid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_qx_token
+    where I_TokenId = #{iTokenid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fuhui.entity.tqx.Token" >
+    insert into t_qx_token (I_TokenId, I_ConfigId, I_PadId, 
+      I_CUserId, T_CTime, T_OTime, 
+      T_UTime, I_UUserId)
+    values (#{iTokenid,jdbcType=BIGINT}, #{iConfigid,jdbcType=BIGINT}, #{iPadid,jdbcType=BIGINT}, 
+      #{iCuserid,jdbcType=BIGINT}, #{tCtime,jdbcType=TIMESTAMP}, #{tOtime,jdbcType=TIMESTAMP}, 
+      #{tUtime,jdbcType=TIMESTAMP}, #{iUuserid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuhui.entity.tqx.Token" >
+    insert into t_qx_token
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iTokenid != null" >
+        I_TokenId,
+      </if>
+      <if test="iConfigid != null" >
+        I_ConfigId,
+      </if>
+      <if test="iPadid != null" >
+        I_PadId,
+      </if>
+      <if test="iCuserid != null" >
+        I_CUserId,
+      </if>
+      <if test="tCtime != null" >
+        T_CTime,
+      </if>
+      <if test="tOtime != null" >
+        T_OTime,
+      </if>
+      <if test="tUtime != null" >
+        T_UTime,
+      </if>
+      <if test="iUuserid != null" >
+        I_UUserId,
+      </if>
+      <if test="token != null" >
+        C_Token,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iTokenid != null" >
+        #{iTokenid,jdbcType=BIGINT},
+      </if>
+      <if test="iConfigid != null" >
+        #{iConfigid,jdbcType=BIGINT},
+      </if>
+      <if test="iPadid != null" >
+        #{iPadid,jdbcType=BIGINT},
+      </if>
+      <if test="iCuserid != null" >
+        #{iCuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tCtime != null" >
+        #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tOtime != null" >
+        #{tOtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUtime != null" >
+        #{tUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iUuserid != null" >
+        #{iUuserid,jdbcType=BIGINT},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.tqx.Token" >
+    update t_qx_token
+    <set >
+      <if test="iConfigid != null" >
+        I_ConfigId = #{iConfigid,jdbcType=BIGINT},
+      </if>
+      <if test="iPadid != null" >
+        I_PadId = #{iPadid,jdbcType=BIGINT},
+      </if>
+      <if test="iCuserid != null" >
+        I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      </if>
+      <if test="tCtime != null" >
+        T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tOtime != null" >
+        T_OTime = #{tOtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tUtime != null" >
+        T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="iUuserid != null" >
+        I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      </if>
+      <if test="token != null" >
+        C_Token = #{token,jdbcType=BIGINT},
+      </if>
+    </set>
+    where I_TokenId = #{iTokenid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.tqx.Token" >
+    update t_qx_token
+    set I_ConfigId = #{iConfigid,jdbcType=BIGINT},
+      I_PadId = #{iPadid,jdbcType=BIGINT},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      T_OTime = #{tOtime,jdbcType=TIMESTAMP},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      I_UUserId = #{iUuserid,jdbcType=BIGINT}
+    where I_TokenId = #{iTokenid,jdbcType=BIGINT}
+  </update>
+</mapper>

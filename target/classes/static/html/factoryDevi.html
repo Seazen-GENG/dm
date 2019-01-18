@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>知会设备管控平台</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../dist/css/responsive.dataTables.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        .table > tbody > tr > td {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .content {
+            padding-bottom: 0px;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header" id="headerDiv">
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" id="leftMenu">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                厂商设备管理
+                <small>管理厂商设备</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+                <li><a href="#">厂商设备管理</a></li>
+                <li class="active">设备管理</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header" style="padding-bottom: 0px;">
+                            <div style="float: left;">
+                                <a class="btn btn-block btn-social btn-bitbucket" onclick="editConfig()">
+                                    <i class="fa fa-plus"></i> 新增设备
+                                </a>
+                            </div>
+                            <div class="form-group" style="float: right;width: 20%" id="zanshi">
+                                <div class="col-sm-10">
+                                    <select id="nation" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th data-priority="1">设备名称</th>
+                                    <th>厂商名称</th>
+                                    <th>设备类型</th>
+                                    <th>设备型号</th>
+                                    <th>最新固件版本</th>
+                                    <th>固件发布时间</th>
+                                    <th>状态</th>
+                                    <th data-priority="2">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>序号</th>
+                                    <th data-priority="1">设备名称</th>
+                                    <th>厂商名称</th>
+                                    <th>设备类型</th>
+                                    <th>设备型号</th>
+                                    <th>最新固件版本</th>
+                                    <th>固件发布时间</th>
+                                    <th>状态</th>
+                                    <th data-priority="2">操作</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" id="footerDiv">
+    </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<script src="../dist/js/dataTables.responsive.min.js"></script>
+<!--<script type="text/javascript" src="http://172.16.1.100/teacher_resourse/js/jquery-jtemplates.js"></script>-->
+<!-- page script -->
+<script>
+    $(function () {
+        $('#leftMenu').load("leftMenu.html", function () {
+            $("#factoryDevi").addClass("active");
+        });
+        $('#headerDiv').load("header.html");
+        $('#footerDiv').load("footer.html");
+        $("#nation").change(function () {
+            //要触发的事件
+            var schoolId = $('#nation option:selected').val();
+            getDeviceList(schoolId);
+        });
+        getDeviceList();
+        createSelect('------请选择------');
+        queryParam();
+    });
+
+    function editConfig(jsonObj) {
+        // location.href = "deviceSave.html";
+        localStorage.removeItem(fDInfo);
+        if (window.localStorage) {
+            if(jsonObj != null){
+                var fDInfo = JSON.stringify(jsonObj);
+                //存储变量的值
+                localStorage.fDInfo = fDInfo;
+                location.href = 'deviceSave.html?query=1';
+            }else {
+                location.href = 'deviceSave.html';
+            }
+        } else {
+            alert("NOT SUPPORT");
+        }
+    }
+
+    function queryParam() {
+        var url = location.search;
+        var Request = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1)　//去掉?号
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                Request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+        }
+        if(url.indexOf("factoryId") >= 0 ){
+            var factoryId = Request["factoryId"];
+            if (factoryId.valueOf() != "undefined") {
+                getDeviceList('',factoryId);
+            }
+        }
+    }
+
+
+    function createSelect(name) {
+        var _select = document.getElementById("nation");
+        var firstOption = document.createElement("option");
+        firstOption.value = "";
+        firstOption.text = "------请选择------";
+        _select.appendChild(firstOption);
+        var searchUrl = "/schService/getSchoolList";
+        $.ajax({
+            type: "Post",
+            url: searchUrl,
+            dataType: "json",
+            success: function (data) {
+                var res = data['data']['schoolList'];
+                //console.log(res)
+                for (i = 0; i < res.length; i++) {
+                    var _option = document.createElement("option");
+                    _option.value = res[i].schoolId;
+                    _option.text = res[i].name;
+                    if (name == res[i].name) {
+                        _option.selected = "true";
+                    }
+                    _select.appendChild(_option);
+                }
+            }
+        });
+        return _select;
+    }
+
+    function queryPadListByMacandSchool() {
+        var schoolId = $('#nation option:selected').val();
+        getDeviceList(schoolId);
+    }
+
+    function getDeviceList(schoolIds, factoryId) {
+        var lang = {
+            "sProcessing": "处理中...",
+            "sLengthMenu": "每页 _MENU_ 项",
+            "sZeroRecords": "没有匹配结果",
+            "sInfo": "当前显示第 _START_ 至 _END_ 项，共 _TOTAL_ 项。",
+            "sInfoEmpty": "当前显示第 0 至 0 项，共 0 项",
+            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索:",
+            "sUrl": "",
+            "sEmptyTable": "表中数据为空",
+            "sLoadingRecords": "载入中...",
+            "sInfoThousands": ",",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上页",
+                "sNext": "下页",
+                "sLast": "末页",
+                "sJump": "跳转"
+            },
+            "oAria": {
+                "sSortAscending": ": 以升序排列此列",
+                "sSortDescending": ": 以降序排列此列"
+            }
+        };
+        $('#example2').dataTable().fnDestroy();
+        //初始化表格
+        var table = $("#example2").DataTable({
+                "language": lang,  //提示信息
+                "autoWidth": false,  //禁用自动调整列宽
+                "responsive": true,
+                "stripeClasses": ["odd", "even"],  //为奇偶行加上样式，兼容不支持CSS伪类的场合
+                "processing": false,  //隐藏加载提示,自行处理
+                "serverSide": true,  //启用服务器端分页
+                "searching": false,  //禁用原生搜索
+                "orderMulti": false,  //启用多列排序
+                "order": [],  //取消默认排序查询,否则复选框一列会出现小箭头
+                "renderer": "bootstrap",  //渲染样式：Bootstrap和jquery-ui
+                "bLengthChange": false,
+                "pagingType": "simple_numbers",  //分页样式：simple,simple_numbers,full,full_numbers
+                "columnDefs": [
+                    {responsivePriority: 1, targets: 1},
+                    {responsivePriority: 2, targets: -1},
+                    {
+                        // 定义操作列,######以下是重点########
+                        "targets": 8,//操作按钮目标列
+                        "data": null,
+                        "render": function (data, type, row) {
+                            var jsonObj = JSON.stringify(row);
+                            var html = "<a href='javascript:void(0);'  class='delete btn btn-default btn-xs' style='margin-right: 10px;' onclick='setParam(" + jsonObj + ")'> 查看详情</a>";
+                            html += "<a href='javascript:void(0);'  class='delete btn btn-default btn-xs' style='margin-right: 10px;' onclick='editConfig(" + jsonObj + ")'> 编辑</a>";
+                            return html;
+                        }
+                    }, {
+                        "data": "type",
+                        "targets": 3,
+                        "render": function (data, type, full, meta) {
+                            if (data == 1) {
+                                data = "路由";
+                            } else if (data == 2) {
+                                data = "平板";
+                            } else if (data == 3) {
+                                data = "手写板";
+                            } else {
+                                data = "其他";
+                            }
+                            return data;
+                        }
+                    }, {
+                        "data": "status",
+                        "targets": 7,
+                        "render": function (data, type, full, meta) {
+                            if (data == 1) {
+                                data = "启用";
+                            } else {
+                                data = "停用";
+                            }
+                            return data;
+                        }
+                    }, {
+                        "data": null,
+                        "targets": 0
+                    },
+                ],
+                "fnDrawCallback": function () {
+                    var api = this.api();
+                    var startIndex = api.context[0]._iDisplayStart;//获取到本页开始的条数
+                    api.column(0).nodes().each(function (cell, i) {
+                        cell.innerHTML = startIndex + i + 1;
+                    });
+                },
+                "ajax": function (data, callback, settings) {
+                    //封装请求参数
+                    var param = {};
+                    param.pLine = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
+                    param.start = data.start;//开始的记录序号
+                    param.pNum = (data.start / data.length) + 1;//当前页码
+                    param.isPage = 1;
+                    param.schoolId = schoolIds;
+                    param.factoryIds = factoryId;
+                    // console.log(param);
+                    //ajax请求数据
+                    $.ajax({
+                        type: "GET",
+                        url: "/deviceService/getConfigList",
+                        cache: false,  //禁用缓存
+                        data: param,  //传入组装的参数
+                        dataType: "json",
+                        success: function (result) {
+                            setTimeout(function () {
+                                //封装返回数据
+                                var returnData = {};
+                                returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                                returnData.recordsTotal = result.data.page.countAll;//返回数据全部记录
+                                returnData.recordsFiltered = result.data.page.countAll;//后台不实现过滤功能，每次查询均视作全部结果
+                                returnData.data = result.data.list;//返回的数据列表
+                                //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
+                                callback(returnData);
+                            }, 200);
+                        }
+                    });
+                },
+                "columns": [
+                    {"data": "devId"},
+                    {"data": "name"},
+                    {"data": "verName"},
+                    {"data": "type"},
+                    {"data": "model"},
+                    {"data": "version"},
+                    {"data": "releaseTime"},
+                    {"data": "status"}
+                ]
+            }
+        );
+    }
+
+    function setParam(obj) {
+        var deviceInfo = JSON.stringify(obj);
+        if (window.localStorage) {
+            //存储变量的值
+            localStorage.deviceInfo = deviceInfo;
+            location.href = 'deviceInfo.html';
+        } else {
+            alert("NOT SUPPORT");
+        }
+    }
+
+</script>
+</body>
+</html>

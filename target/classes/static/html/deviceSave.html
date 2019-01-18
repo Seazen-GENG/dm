@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>知会设备管控平台</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../plugins/iCheck/all.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        .col-md-3 {
+            width: 270px;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header" id="headerDiv">
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" id="leftMenu">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                编辑厂商设备
+                <small>编辑、新增厂商设备信息</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+                <li><a href="#">厂商管理</a></li>
+                <li class="active">编辑厂商设备</li>
+            </ol>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Horizontal Form -->
+            <div class="" id="bodyBox">
+                <div class="box-header with-border">
+                    <button type="button" class="btn btn-default" onclick="cancelSave();">取消</button>
+                    <button type="submit" class="btn btn-info pull-right" style="margin-left: 10px;" onclick="submit()">
+                        保存
+                    </button>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" id="form">
+                    <div class="box-body">
+                        <div class="form-group" id="factoryId">
+                            <label class="col-sm-2 control-label">厂商名称</label>
+                            <div class="col-sm-10">
+                                <select id="nation" class="form-control" name="factoryId"
+                                        style="height: 46px;"></select>
+                            </div>
+                        </div>
+                        <div id="editFactoryId"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">设备名称<span style="color: red;">&nbsp;*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control  input-lg" name="name" id="name"
+                                       placeholder="设备名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">设备型号<span style="color: red;">&nbsp;*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control  input-lg" name="model" id="model"
+                                       placeholder="设备型号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">型号说明</label>
+                            <div class="col-sm-10">
+                                <textarea style="width: 100%;height: 200px;border: 1px solid #D2D6DE;font-size: 14px;"
+                                          id="spec" name="spec"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">设备类型</label>
+                            <div class="col-sm-10" style="margin-top: 7px;">
+                                <label style="margin-right: 10px;">
+                                    <input name="deviceType" type="radio" class="flat-red" checked value="1">
+                                    <span>路由器</span>
+                                </label>
+                                <label style="margin-right: 10px;">
+                                    <input name="deviceType" type="radio" class="flat-red" value="2">
+                                    <span>平板</span>
+                                </label>
+                                <label style="margin-right: 10px;">
+                                    <input name="deviceType" type="radio" class="flat-red" value="3">
+                                    <span>手写板</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">设备状态<span style="color: red;">&nbsp;*</span></label>
+                            <div class="col-sm-10" style="margin-top: 7px;">
+                                <label style="margin-right: 10px;">
+                                    <input name="status" type="radio" class="flat-red" checked value="1">
+                                    <span>启用</span>
+                                </label>
+                                <label style="margin-right: 10px;">
+                                    <input name="status" type="radio" class="flat-red" value="2">
+                                    <span>关闭</span>
+                                </label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="deviceId" id="devId">
+                    </div>
+                    <!-- /.box-body -->
+                </form>
+            </div>
+            <!-- /.box -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" id="footerDiv">
+    </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="../bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+<!-- iCheck -->
+<script src="../plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(function () {
+        $('#leftMenu').load("leftMenu.html", function () {
+            $("#factoryDevi").addClass("active");
+        });
+        $('#headerDiv').load("header.html");
+        $('#footerDiv').load("footer.html");
+        $('input[type="checkbox"].flat-red,input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-blue',
+            radioClass: 'iradio_flat-blue'
+        });
+        getParam();
+    });
+
+    function getParam() {
+        var url = location.search;
+        var Request = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1)　//去掉?号
+            strs = str.split("&");
+            for (var i = 0; i < strs.length; i++) {
+                Request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+            }
+            var faInfo = localStorage["fDInfo"];
+            var faObj = JSON.parse(faInfo);
+            console.log("json==" + faInfo);
+            {
+                //数据加载进表单
+                $("#name").val(faObj.name);
+                createSelect(faObj.verName);
+                // $("#factoryIds").readOnly = true;
+                $("#nation").attr("disabled", "disabled").css("background-color", "#EEEEEE;");
+                var str = "<input type='hidden' name='factoryId' value='" + faObj.factoryId + "'>"
+                $("#editFactoryId").html(str)
+                $("#model").val(faObj.model);
+                $("#spec").val(faObj.spec);
+                $("#devId").val(faObj.devId);
+                $("input:radio[name=deviceType][value='" + faObj.type + "']").attr('checked', 'true');
+                $("input:radio[name=status][value='" + faObj.status + "']").attr('checked', 'true');
+
+                $('input[type="radio"].flat-red').iCheck({
+                    checkboxClass: 'icheckbox_flat-blue',
+                    radioClass: 'iradio_flat-blue'
+                });
+            }
+        } else {
+            createSelect('------请选择------');
+        }
+    }
+
+    function createSelect(name) {
+        var _select = document.getElementById("nation");
+        var firstOption = document.createElement("option");
+        firstOption.value = "";
+        firstOption.text = "------请选择------";
+        _select.appendChild(firstOption);
+        var searchUrl = "/deviceService/getFactoryList";
+        $.ajax({
+            type: "Post",
+            url: searchUrl,
+            dataType: "json",
+            success: function (data) {
+                var res = data['data']['list'];
+                // console.log(res)
+                for (i = 0; i < res.length; i++) {
+                    var _option = document.createElement("option");
+                    _option.text = res[i].name;
+                    if (name == res[i].name) {
+                        _option.selected = "true";
+                    }
+                    _option.value = res[i].factoryId;
+                    _select.appendChild(_option);
+                }
+            }
+        });
+        return _select;
+    }
+
+    function submit() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/deviceService/saveDevice",//url
+            data: $('#form').serialize(),
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                if (result.status == true) {
+                    window.location.href = "factoryDevi.html";
+                } else {
+                    alert(result.errorInfo);
+                }
+            },
+            error: function () {
+                alert("提交异常！");
+            }
+        });
+    }
+
+    function cancelSave() {
+        window.location.href = "factoryDevi.html";
+    }
+</script>
+</body>
+</html>

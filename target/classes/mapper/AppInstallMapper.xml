@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.trj.AppInstallMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.trj.AppInstall">
+        <id column="I_Idx" property="iIdx" jdbcType="BIGINT"/>
+        <result column="C_Mac" property="cMac" jdbcType="VARCHAR"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+        <result column="T_FTime" property="tFtime" jdbcType="TIMESTAMP"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_Way" property="iWay" jdbcType="TINYINT"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <result column="T_ETime" property="tEtime" jdbcType="TIMESTAMP"/>
+        <result column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+        <result column="I_IsSys" property="iIssys" jdbcType="TINYINT"/>
+        <result column="C_Package" property="pName" jdbcType="VARCHAR"/>
+        <result column="C_AppName" property="cAppname" jdbcType="VARCHAR"/>
+        <result column="C_VersionCode" property="cVersioncode" jdbcType="VARCHAR"/>
+        <result column="C_Version" property="cVersion" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_Idx, C_Mac, I_AppId, I_VersionId, T_FTime, T_UTime, I_Way, I_Status, T_ETime, I_PadId, 
+    I_IsSys, C_Package, C_AppName, C_VersionCode, C_Version
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_rj_app_install
+        where I_Idx = #{iIdx,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_rj_app_install
+    where I_Idx = #{iIdx,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.trj.AppInstall">
+    insert into t_rj_app_install (I_Idx, C_Mac, I_AppId, 
+      I_VersionId, T_FTime, T_UTime, 
+      I_Way, I_Status, T_ETime, 
+      I_PadId, I_IsSys, C_Package, 
+      C_AppName, C_VersionCode, C_Version
+      )
+    values (#{iIdx,jdbcType=BIGINT}, #{cMac,jdbcType=VARCHAR}, #{iAppid,jdbcType=BIGINT}, 
+      #{iVersionid,jdbcType=BIGINT}, #{tFtime,jdbcType=TIMESTAMP}, #{tUtime,jdbcType=TIMESTAMP}, 
+      #{iWay,jdbcType=TINYINT}, #{iStatus,jdbcType=TINYINT}, #{tEtime,jdbcType=TIMESTAMP}, 
+      #{iPadid,jdbcType=BIGINT}, #{iIssys,jdbcType=TINYINT}, #{pName,jdbcType=VARCHAR}, 
+      #{cAppname,jdbcType=VARCHAR}, #{cVersioncode,jdbcType=VARCHAR}, #{cVersion,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.trj.AppInstall">
+        insert into t_rj_app_install
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                I_Idx,
+            </if>
+            <if test="cMac != null">
+                C_Mac,
+            </if>
+            <if test="iAppid != null">
+                I_AppId,
+            </if>
+            <if test="iVersionid != null">
+                I_VersionId,
+            </if>
+            <if test="tFtime != null">
+                T_FTime,
+            </if>
+            <if test="tUtime != null">
+                T_UTime,
+            </if>
+            <if test="iWay != null">
+                I_Way,
+            </if>
+            <if test="iStatus != null">
+                I_Status,
+            </if>
+            <if test="tEtime != null">
+                T_ETime,
+            </if>
+            <if test="iPadid != null">
+                I_PadId,
+            </if>
+            <if test="iIssys != null">
+                I_IsSys,
+            </if>
+            <if test="pName != null">
+                C_Package,
+            </if>
+            <if test="cAppname != null">
+                C_AppName,
+            </if>
+            <if test="cVersioncode != null">
+                C_VersionCode,
+            </if>
+            <if test="cVersion != null">
+                C_Version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iIdx != null">
+                #{iIdx,jdbcType=BIGINT},
+            </if>
+            <if test="cMac != null">
+                #{cMac,jdbcType=VARCHAR},
+            </if>
+            <if test="iAppid != null">
+                #{iAppid,jdbcType=BIGINT},
+            </if>
+            <if test="iVersionid != null">
+                #{iVersionid,jdbcType=BIGINT},
+            </if>
+            <if test="tFtime != null">
+                #{tFtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tUtime != null">
+                #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iWay != null">
+                #{iWay,jdbcType=TINYINT},
+            </if>
+            <if test="iStatus != null">
+                #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="tEtime != null">
+                #{tEtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iPadid != null">
+                #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="iIssys != null">
+                #{iIssys,jdbcType=TINYINT},
+            </if>
+            <if test="pName != null">
+                #{pName,jdbcType=VARCHAR},
+            </if>
+            <if test="cAppname != null">
+                #{cAppname,jdbcType=VARCHAR},
+            </if>
+            <if test="cVersioncode != null">
+                #{cVersioncode,jdbcType=VARCHAR},
+            </if>
+            <if test="cVersion != null">
+                #{cVersion,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.trj.AppInstall">
+        update t_rj_app_install
+        <set>
+            <if test="cMac != null">
+                C_Mac = #{cMac,jdbcType=VARCHAR},
+            </if>
+            <if test="iAppid != null">
+                I_AppId = #{iAppid,jdbcType=BIGINT},
+            </if>
+            <if test="iVersionid != null">
+                I_VersionId = #{iVersionid,jdbcType=BIGINT},
+            </if>
+            <if test="tFtime != null">
+                T_FTime = #{tFtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tUtime != null">
+                T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iWay != null">
+                I_Way = #{iWay,jdbcType=TINYINT},
+            </if>
+            <if test="iStatus != null">
+                I_Status = #{iStatus,jdbcType=TINYINT},
+            </if>
+            <if test="tEtime != null">
+                T_ETime = #{tEtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iPadid != null">
+                I_PadId = #{iPadid,jdbcType=BIGINT},
+            </if>
+            <if test="iIssys != null">
+                I_IsSys = #{iIssys,jdbcType=TINYINT},
+            </if>
+            <if test="pName != null">
+                C_Package = #{pName,jdbcType=VARCHAR},
+            </if>
+            <if test="cAppname != null">
+                C_AppName = #{cAppname,jdbcType=VARCHAR},
+            </if>
+            <if test="cVersioncode != null">
+                C_VersionCode = #{cVersioncode,jdbcType=VARCHAR},
+            </if>
+            <if test="cVersion != null">
+                C_Version = #{cVersion,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where I_Idx = #{iIdx,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.trj.AppInstall">
+    update t_rj_app_install
+    set C_Mac = #{cMac,jdbcType=VARCHAR},
+      I_AppId = #{iAppid,jdbcType=BIGINT},
+      I_VersionId = #{iVersionid,jdbcType=BIGINT},
+      T_FTime = #{tFtime,jdbcType=TIMESTAMP},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      I_Way = #{iWay,jdbcType=TINYINT},
+      I_Status = #{iStatus,jdbcType=TINYINT},
+      T_ETime = #{tEtime,jdbcType=TIMESTAMP},
+      I_PadId = #{iPadid,jdbcType=BIGINT},
+      I_IsSys = #{iIssys,jdbcType=TINYINT},
+      C_Package = #{pName,jdbcType=VARCHAR},
+      C_AppName = #{cAppname,jdbcType=VARCHAR},
+      C_VersionCode = #{cVersioncode,jdbcType=VARCHAR},
+      C_Version = #{cVersion,jdbcType=VARCHAR}
+    where I_Idx = #{iIdx,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByMac" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_rj_app_install
+        where C_Mac = #{mac}
+        <if test="appId != -1">
+            AND I_AppId = #{appId}
+        </if>
+        <if test="packName != null">
+            AND C_Package = #{packName}
+        </if>
+    </select>
+
+    <select id="selectByAppId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_rj_app_install
+        WHERE C_Package=#{pName}
+        ORDER BY T_FTime DESC
+        <if test="isPage == 1">
+            LIMIT #{pNum},#{pLine}
+        </if>
+
+    </select>
+
+    <select id="selectByAppIdCount" resultType="String">
+        select
+        COUNT(I_Idx)
+        from t_rj_app_install
+        WHERE  C_Package=#{pName}
+    </select>
+
+    <resultMap id="selectAppUsersMap" type="com.fuhui.entity.trj.AppInstall">
+        <id column="I_Idx" property="iIdx" jdbcType="BIGINT"/>
+        <result column="C_Mac" property="cMac" jdbcType="VARCHAR"/>
+        <result column="I_AppId" property="iAppid" jdbcType="BIGINT"/>
+        <result column="I_VersionId" property="iVersionid" jdbcType="BIGINT"/>
+        <result column="T_FTime" property="tFtime" jdbcType="TIMESTAMP"/>
+        <result column="C_Package" property="pName" jdbcType="VARCHAR"/>
+        <result column="C_AppName" property="cAppname" jdbcType="VARCHAR"/>
+        <result column="C_VersionCode" property="cVersioncode" jdbcType="VARCHAR"/>
+        <result column="C_Version" property="cVersion" jdbcType="VARCHAR"/>
+        <result column="allUsers" property="allUsers" jdbcType="VARCHAR"/>
+        <result column="versionUsers" property="versionUsers" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectAppUsers" resultMap="selectAppUsersMap">
+        select count(C_Mac) 'allUsers'
+        <if test="versionId != null">,sum(IF(I_VersionId=#{versionId},1,0)) 'versionUsers'</if>
+        from (
+        select t1.C_Mac,t2.I_VersionId,t1.C_Version,t1.C_VersionCode from(
+        select * from (
+        select b.C_Mac,a.I_AppId,b.C_Version,b.C_VersionCode,b.I_VersionId from t_rj_app a,t_rj_app_install b
+        where 1=1
+        and a.I_AppId=#{appId}
+        and a.C_Package=b.C_Package
+        order by b.C_Mac,b.T_UTime desc
+        )t
+        group by C_Mac
+        )t1
+        left join t_rj_app_version t2
+        on (t1.I_AppId=t2.I_AppId and
+        (IF(ISNULL(t1.I_VersionId),t1.C_VersionCode=t2.C_VersionCode,t1.I_VersionId=t2.I_VersionId)))
+        )t
+    </select>
+
+</mapper>

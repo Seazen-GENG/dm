@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuhui.dao.txm.PadConfigMapper">
+    <resultMap id="BaseResultMap" type="com.fuhui.entity.txm.PadConfig">
+        <id column="I_ConfigId" property="iConfigid" jdbcType="BIGINT"/>
+        <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_Range" property="iRange" jdbcType="TINYINT"/>
+        <result column="C_RangeIds" property="cRangeids" jdbcType="VARCHAR"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    I_ConfigId, C_Name, I_SchoolId, I_Type, I_Range, C_RangeIds, T_CTime, I_CUserId,
+    T_UTime, I_UUserId, C_Remark, I_Status
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_xm_padconfig
+        where I_ConfigId = #{iConfigid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_xm_padconfig
+    where I_ConfigId = #{iConfigid,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fuhui.entity.txm.PadConfig">
+    insert into t_xm_padconfig (I_ConfigId, C_Name, I_SchoolId,
+      I_Type, I_Range, C_RangeIds,
+      T_CTime, I_CUserId, T_UTime,
+      I_UUserId, C_Remark, I_Status
+      )
+    values (#{iConfigid,jdbcType=BIGINT}, #{cName,jdbcType=VARCHAR}, #{iSchoolid,jdbcType=BIGINT},
+      #{iType,jdbcType=TINYINT}, #{iRange,jdbcType=TINYINT}, #{cRangeids,jdbcType=VARCHAR},
+      #{tCtime,jdbcType=TIMESTAMP}, #{iCuserid,jdbcType=BIGINT}, #{tUtime,jdbcType=TIMESTAMP},
+      #{iUuserid,jdbcType=BIGINT}, #{cRemark,jdbcType=VARCHAR}, #{iStatus,jdbcType=TINYINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.fuhui.entity.txm.PadConfig">
+        insert into t_xm_padconfig
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iConfigid != null">
+                I_ConfigId,
+            </if>
+            <if test="cName != null">
+                C_Name,
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId,
+            </if>
+            <if test="iType != null">
+                I_Type,
+            </if>
+            <if test="iRange != null">
+                I_Range,
+            </if>
+            <if test="cRangeids != null">
+                C_RangeIds,
+            </if>
+            <if test="tCtime != null">
+                T_CTime,
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId,
+            </if>
+            <if test="tUtime != null">
+                T_UTime,
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId,
+            </if>
+            <if test="cRemark != null">
+                C_Remark,
+            </if>
+            <if test="iStatus != null">
+                I_Status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iConfigid != null">
+                #{iConfigid,jdbcType=BIGINT},
+            </if>
+            <if test="cName != null">
+                #{cName,jdbcType=VARCHAR},
+            </if>
+            <if test="iSchoolid != null">
+                #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="iRange != null">
+                #{iRange,jdbcType=TINYINT},
+            </if>
+            <if test="cRangeids != null">
+                #{cRangeids,jdbcType=VARCHAR},
+            </if>
+            <if test="tCtime != null">
+                #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="tUtime != null">
+                #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                #{iUuserid,jdbcType=BIGINT},
+            </if>
+            <if test="cRemark != null">
+                #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                #{iStatus,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fuhui.entity.txm.PadConfig">
+        update t_xm_padconfig
+        <set>
+            <if test="cName != null">
+                C_Name = #{cName,jdbcType=VARCHAR},
+            </if>
+            <if test="iSchoolid != null">
+                I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+            </if>
+            <if test="iType != null">
+                I_Type = #{iType,jdbcType=TINYINT},
+            </if>
+            <if test="iRange != null">
+                I_Range = #{iRange,jdbcType=TINYINT},
+            </if>
+            <if test="cRangeids != null">
+                C_RangeIds = #{cRangeids,jdbcType=VARCHAR},
+            </if>
+            <if test="tCtime != null">
+                T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iCuserid != null">
+                I_CUserId = #{iCuserid,jdbcType=BIGINT},
+            </if>
+            <if test="tUtime != null">
+                T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iUuserid != null">
+                I_UUserId = #{iUuserid,jdbcType=BIGINT},
+            </if>
+            <if test="cRemark != null">
+                C_Remark = #{cRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="iStatus != null">
+                I_Status = #{iStatus,jdbcType=TINYINT},
+            </if>
+        </set>
+        where I_ConfigId = #{iConfigid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fuhui.entity.txm.PadConfig">
+    update t_xm_padconfig
+    set C_Name = #{cName,jdbcType=VARCHAR},
+      I_SchoolId = #{iSchoolid,jdbcType=BIGINT},
+      I_Type = #{iType,jdbcType=TINYINT},
+      I_Range = #{iRange,jdbcType=TINYINT},
+      C_RangeIds = #{cRangeids,jdbcType=VARCHAR},
+      T_CTime = #{tCtime,jdbcType=TIMESTAMP},
+      I_CUserId = #{iCuserid,jdbcType=BIGINT},
+      T_UTime = #{tUtime,jdbcType=TIMESTAMP},
+      I_UUserId = #{iUuserid,jdbcType=BIGINT},
+      C_Remark = #{cRemark,jdbcType=VARCHAR},
+      I_Status = #{iStatus,jdbcType=TINYINT}
+    where I_ConfigId = #{iConfigid,jdbcType=BIGINT}
+  </update>
+
+
+    <resultMap id="Map" type="com.fuhui.entity.txm.PadConfig">
+        <id column="I_ConfigId" property="iConfigid" jdbcType="BIGINT"/>
+        <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_Range" property="iRange" jdbcType="TINYINT"/>
+        <result column="C_RangeIds" property="cRangeids" jdbcType="VARCHAR"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <collection property="padConfigconfigLists" ofType="com.fuhui.entity.txm.PadConfigconfigList">
+            <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+            <result column="I_ConfigId" property="iConfigid" jdbcType="BIGINT"/>
+            <result column="C_Extend1" property="cExtend1" jdbcType="VARCHAR"/>
+            <result column="C_Config" property="cConfig" jdbcType="LONGVARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <select id="getList" resultMap="Map">
+        SELECT a.*,b.C_Config,b.C_Extend1
+        FROM t_xm_padconfig a,t_xm_padconfig_configlist b
+        WHERE 1=1
+        AND a.I_ConfigId=b.I_ConfigId
+        <if test="schoolIds != -1">
+            AND I_SchoolId = #{schoolIds}
+        </if>
+        <if test="name != null">
+            AND a.C_Name LIKE '%${name}%'
+        </if>
+        <if test="type != -1">
+            AND FIND_IN_SET(a.I_Type,'${type}')
+        </if>
+        GROUP BY a.I_ConfigId
+        <if test="isPage == 1">
+            LIMIT #{pNum},#{pLine}
+        </if>
+    </select>
+
+    <resultMap id="macMap" type="com.fuhui.entity.txm.PadConfig">
+        <id column="I_ConfigId" property="iConfigid" jdbcType="BIGINT"/>
+        <result column="C_Name" property="cName" jdbcType="VARCHAR"/>
+        <result column="I_SchoolId" property="iSchoolid" jdbcType="BIGINT"/>
+        <result column="I_Type" property="iType" jdbcType="TINYINT"/>
+        <result column="I_Range" property="iRange" jdbcType="TINYINT"/>
+        <result column="C_RangeIds" property="cRangeids" jdbcType="VARCHAR"/>
+        <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        <result column="I_CUserId" property="iCuserid" jdbcType="BIGINT"/>
+        <result column="T_UTime" property="tUtime" jdbcType="TIMESTAMP"/>
+        <result column="I_UUserId" property="iUuserid" jdbcType="BIGINT"/>
+        <result column="C_Remark" property="cRemark" jdbcType="VARCHAR"/>
+        <result column="I_Status" property="iStatus" jdbcType="TINYINT"/>
+        <collection property="padConfigList" ofType="com.fuhui.entity.txm.PadConfigList">
+            <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+            <result column="C_Config" property="cConfig" jdbcType="LONGVARCHAR"/>
+            <result column="C_Extend1" property="cExtend1" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="padlist" ofType="com.fuhui.entity.txm.PadconfigPadlist">
+            <id column="I_IDX" property="iIdx" jdbcType="BIGINT"/>
+            <result column="I_ConfigId" property="iConfigid" jdbcType="BIGINT"/>
+            <result column="I_PadId" property="iPadid" jdbcType="BIGINT"/>
+            <result column="T_CTime" property="tCtime" jdbcType="TIMESTAMP"/>
+        </collection>
+    </resultMap>
+
+    <select id="getNewInfoByPadMac" resultMap="macMap">
+        SELECT * FROM (
+        SELECT * FROM (
+        SELECT * FROM (
+        SELECT a.C_Name,a.T_UTime,a.I_Type,b.* ,1 isUp
+        FROM t_xm_padconfig a,t_xm_padconfig_configlist b,t_xm_padconfig_padlist c
+        WHERE 1=1
+        <if test="SchoolId != -1">
+            AND a.I_SchoolId=#{SchoolId}
+        </if>
+        <if test="PadId != -1">
+            AND c.I_PadId=#{PadId}
+        </if>
+        AND a.I_Range<![CDATA[<>]]>0 AND a.I_Status=1
+        AND a.I_ConfigId=b.I_ConfigId
+        AND a.I_ConfigId=c.I_ConfigId
+        )t1
+        UNION ALL
+        SELECT * FROM
+        (
+        SELECT a.C_Name,a.T_UTime,a.I_Type,b.*,0 isUp
+        FROM t_xm_padconfig a,t_xm_padconfig_configlist b
+        WHERE 1=1
+        <if test="SchoolId != -1">
+            AND a.I_SchoolId=#{SchoolId}
+        </if>
+        AND a.I_Range=0 AND a.I_Status=1
+        AND a.I_ConfigId=b.I_ConfigId
+        )t2
+        )t
+        WHERE 1=1
+        <if test="configTime != null">
+            AND t.T_UTime > #{configTime}
+        </if>
+        <if test="Type != -1">
+            AND t.I_Type=#{Type}
+        </if>
+        ORDER BY t.I_Type,t.isUp DESC,t.T_UTime DESC
+        )tt
+        GROUP BY I_Type
+    </select>
+
+    <sql id="queryPadConfig">
+        t1.I_ConfigId,t1.C_Name,t1.I_Type,t3.C_Config,t3.C_Extend1
+    </sql>
+
+    <select id="getPadConfigListByPad" resultMap="macMap">
+        SELECT <include refid="queryPadConfig" />
+        FROM t_xm_padconfig t1,t_xm_padconfig_padlist t2,t_xm_padconfig_configlist t3
+        WHERE t1.I_Range<![CDATA[<>]]>0 AND t1.I_Status = 1
+        AND t1.I_ConfigId = t2.I_ConfigId
+        AND t1.I_ConfigId = t3.I_ConfigId
+        <if test="padId != null">
+            AND t2.I_PadId=#{padId}
+        </if>
+        <if test="schoolId != null">
+            AND t1.I_SchoolId = #{schoolId}
+        </if>
+    </select>
+
+    <select id="getPadConfigListBySchool" resultMap="macMap">
+        SELECT <include refid="queryPadConfig" />
+        FROM t_xm_padconfig t1,t_xm_padconfig_configlist t3
+        WHERE t1.I_Range=0 AND t1.I_Status = 1
+        AND t1.I_ConfigId = t3.I_ConfigId
+        <if test="schoolId != null">
+            AND t1.I_SchoolId = #{schoolId}
+        </if>
+    </select>
+
+</mapper>

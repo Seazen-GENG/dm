@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>智慧</title>
+</head>
+<body>
+<span id="user" th:text="${userName}" style="display: none"></span>
+</body>
+</html>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.cookie.js"></script>
+<script>
+    $(function () {
+        setCookie();
+        window.location.href = "html/appConfigList.html";
+    });
+
+    function setCookie() {
+        var userName = $("#user").html();
+        console.log("user==" + userName)
+        $.cookie('userName',userName);
+    }
+</script>
